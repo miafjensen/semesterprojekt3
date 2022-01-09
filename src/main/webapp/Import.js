@@ -1,5 +1,5 @@
 
-if (!localStorage.getItem("token")){window.location.href="LoginSide.html"}
+//if (!localStorage.getItem("token")){window.location.href="LoginSide.html"} //nægter adgang uden login
 
 /*viser dropdown menu*/
 function myFunction() {
