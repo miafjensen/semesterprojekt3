@@ -16,8 +16,9 @@ public class SQL {
     static public SQL getSqlOBJ() {
         return SQLOBJ;
     }
-
-    private final String url = "jdbc:mysql://130.225.170.176:3306/listedb2";
+    static String Schema="s190600";
+    static String password="Qd5UiHM09iNxfubw7OWnC";
+    private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk/"+Schema;
     private final String DatabaseUser = "test2";
     private final String DatabasePassword = System.getenv("dbpass"); //tomcat system startups
 
