@@ -17,12 +17,30 @@ public class SQL {
         return SQLOBJ;
     }
 
-    private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s205487?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s190600?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String DatabaseUser = "s190600";
-    private final String DatabasePassword = System.getenv("Qd5UiHM09iNxfubw7OWnC"); //tomcat system startups
+    private final String DatabasePassword = "Qd5UiHM09iNxfubw7OWnC"; //tomcat system startups
 
     private Connection myConn;
     public Statement myStatement;
+
+    public static Connection getConnection(){
+
+        Connection con = null;
+        String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s190600?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String DatabaseUser = "s190600";
+        String DatabasePassword = "Qd5UiHM09iNxfubw7OWnC"; //tomcat system startups
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url, DatabaseUser, DatabasePassword);
+            System.out.println("forbindelse til db oprette");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Fejl i forbindelse til db");
+        }
+        return con;
+    }
 
     public void makeConnectionSQL() throws SQLException {
         try {
@@ -51,7 +69,7 @@ public class SQL {
         SQL.getSqlOBJ().makeConnectionSQL();
         AftaleListe aftaleListe = new AftaleListe();
         try {
-            PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb2.aftaler WHERE TimeStart BETWEEN ? and ?;");
+            PreparedStatement pp = myConn.prepareStatement("SELECT * FROM aftaler WHERE TimeStart BETWEEN ? and ?;");
             pp.setString(1, fra);
             pp.setString(2, til);
 
@@ -128,7 +146,7 @@ public class SQL {
 
     public String hentBrugerListe(String bruger) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        PreparedStatement preparedStatement = myConn.prepareStatement("SELECT * FROM listedb2.LoginOplysninger WHERE USERNAME = ?;");
+        PreparedStatement preparedStatement = myConn.prepareStatement("SELECT * FROM LoginOplysninger WHERE username = ?;");
         preparedStatement.setString(1, bruger);
         String svar = "";
         try {
@@ -137,9 +155,11 @@ public class SQL {
                 svar = svar + rs.getString(1);
                 svar = svar + "|" + rs.getString(2);
                 svar = svar + "|" + rs.getString(3);
+                System.out.println("succes login!");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.out.println("fejl i login");
         }
         SQL.getSqlOBJ().removeConnectionSQL();
         return svar;
