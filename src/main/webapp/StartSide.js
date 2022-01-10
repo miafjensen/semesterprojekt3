@@ -4,7 +4,7 @@
 function hentAftaleFecth(from, to) {
     let fra = from;
     let til = to;
-    fetch("/data/aftaler/aftalerSQL?" + new URLSearchParams({
+    fetch("data/aftaler/aftalerSQL?" + new URLSearchParams({
         from: fra,
         to: til,
 
