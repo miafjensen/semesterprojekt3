@@ -17,9 +17,9 @@ public class SQL {
         return SQLOBJ;
     }
 
-    private final String url = "jdbc:mysql://130.225.170.176:3306/listedb2";
-    private final String DatabaseUser = "test2";
-    private final String DatabasePassword = System.getenv("dbpass"); //tomcat system startups
+    private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s205487?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private final String DatabaseUser = "s190600";
+    private final String DatabasePassword = System.getenv("Qd5UiHM09iNxfubw7OWnC"); //tomcat system startups
 
     private Connection myConn;
     public Statement myStatement;
@@ -27,11 +27,14 @@ public class SQL {
     public void makeConnectionSQL() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("forbindelse til db oprette");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Fejl i forbindelse til db");
         }
         myConn = DriverManager.getConnection(url, DatabaseUser, DatabasePassword);
         myStatement = myConn.createStatement();
+
     }
 
     public void removeConnectionSQL() {
@@ -78,7 +81,7 @@ public class SQL {
 
         try {
             makeConnectionSQL();
-            PreparedStatement pp = myConn.prepareStatement("INSERT INTO listedb2.aftaler (CPR, TimeStart, TimeEnd, Notat, KlinikId) values(?,?,?,?,?);");
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO aftaler (CPR, TimeStart, TimeEnd, Notat, KlinikId) values(?,?,?,?,?);");
 
             pp.setString(1, aftale.getCPR());  //CPR
             pp.setString(2, aftale.getTimeStart());  //starttime
@@ -144,7 +147,7 @@ public class SQL {
 
     public AftaleListe cprSearch(String cpr) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM listedb2.aftaler WHERE CPR = ?;");
+        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM aftaler WHERE CPR = ?;");
         AftaleListe aftaleListe = new AftaleListe();
         try {
             pp.setString(1, cpr);
