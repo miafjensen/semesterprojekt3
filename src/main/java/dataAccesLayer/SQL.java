@@ -77,7 +77,7 @@ public class SQL {
 
             while (rs.next()) {
                 Aftale aftale = new Aftale();
-                aftale.setCPR(String.valueOf(rs.getInt(1)));
+                aftale.setCPR(String.valueOf(rs.getString(1)));
                 aftale.setTimeStart(rs.getString(2));
                 aftale.setTimeEnd(rs.getString(3));
                 aftale.setNotat(rs.getString(4));
