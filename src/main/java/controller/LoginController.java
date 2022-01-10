@@ -70,7 +70,7 @@ public class LoginController {
         int saltint = salt[4];
         return saltint;
     }
-
+ // metode til at hashe kodeord
     public static void main(String[] args) {
         System.out.println(generateHash("1234", 1));
     }

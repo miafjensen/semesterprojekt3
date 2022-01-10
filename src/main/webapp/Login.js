@@ -41,6 +41,7 @@ async function login() {
     //const object = Object.fromEntries(formData);
     console.log(user + pass)
     //Bruger fetch-API til at sende data - POST. JSON.stringify for at serialisere objekt til string.
+    //tilpasset vores url
     const res = await fetch("data/login?" + new URLSearchParams({
         username: user,
         password: pass,

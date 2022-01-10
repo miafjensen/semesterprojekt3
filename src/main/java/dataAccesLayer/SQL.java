@@ -25,7 +25,7 @@ public class SQL {
     public Statement myStatement;
 
     public static Connection getConnection(){
-
+// nu med vores server
         Connection con = null;
         String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s190600?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         String DatabaseUser = "s190600";
