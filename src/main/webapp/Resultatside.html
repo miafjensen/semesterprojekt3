@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Herunder angives der hvilken stylesheets der skal bruges.
+    Den nedenstående  er css-filen, som er lavet til selve Resultater-siden. -->
+    <link rel="stylesheet"type="text/css" href="Resultatside.css">
+    <link rel="stylesheet" type="text/css" href="Startside.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Nedenunder angives stylesheet der skal bruges til at lave bla. menu-baren, som skal være på alle sider -->
+
+
+
+    <div class="main">
+            <!-- Menu-barens indhold, i form af en unordered list -->
+            <!-- List items er de forskellige sider, som er forbundet via. et href link. -->
+
+            <div class="hotbar">
+                <button class="button1" onclick="window.location.replace('Importside.html')"> Import</button>
+                <button class="button1" onclick="window.location.replace('Resultatside.html')">resultater</button>
+                <button class="button1" onclick="logud()">Log ud</button>
+            </div>
+
+
+
+            </div>
+
+
+
+    <!-- Her begynder selve Resultat- siden, hvor man ville kunne vælge dato samt resultat.   -->
+
+    <title> Lab Resultater</title>
+
+</head>
+
+
+<body>
+
+
+<h1>Prøve Resultater </h1>
+
+<div style="margin-top:50px;">
+
+</div>
+
+<!-- 2 labels, som et eksemple, hvis man vil vise resultat i et bestemt periode, så ville man kunne vælge dato fra og til   -->
+<div>
+<p>
+    <label for="start">Dato fra:</label>
+
+    <input type="date" id="start" name="resultat-start"
+           value="2022-01-01"
+           min="2018-01-01" max="2023-12-31">
+
+
+    <label for="start">Dato til:</label>
+
+    <input type="date" id="slut" name="resultat-slut"
+           value="2022-01-01"
+           min="2018-01-01" max="2023-12-31">
+</p>
+</div>
+
+<!-- et eksempel for at vise resultatet i boksen efter man har valgt de relevante datoer samt undersøgelse  -->
+
+<form action="//www.html.am/html-codes/forms/html-form-tag-action.cfm" target="result" method="get">
+
+    <div style="margin-top:50px;"> </div>
+
+    <!-- Nedenstående <option> kan repræsentere menupunkter med de relevante undersøgelse -->
+    <p>Vælg Resultat</p>
+    <select name="Resultater"> <option value ="vælg"></option>
+        <option value ="Blodprøver">Blodprøver</option>
+        <option value ="EKG">EKG</option>
+
+    </select>
+    <p><input type="submit" value="Submit"></p>
+
+</form>
+<h3>Resultat:</h3>
+<iframe
+        name="result" style="height:500px;width:1000px;">
+</iframe>
+
+
+<!-- Herunder kan de valgte undersøgelser/sider printes -->
+
+</div>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style type="text/css">
+    .fa_custom {
+        color: #0099CC
+    }
+</style>
+
+<div style="margin-top:50px;"> </div>
+
+<i class="fa fa-print fa_custom"></i> <a href="#" onclick="window.print();return false;">Print</a>
+
+</body>
+</html>
