@@ -137,7 +137,7 @@ function setdates(year, month, day) {
 
 //Pop-up journal
 function formfetch() {
-    fetch("/data/aftaler/aftalerSQL?" + new URLSearchParams({
+    fetch("data/aftaler/aftalerSQL?" + new URLSearchParams({
         cpr: document.getElementById("cpr").value,
         //name: document.getElementById("navn").value,
         timestart: document.getElementById("timeStart").value,
@@ -227,7 +227,7 @@ function noWeekend() {
     start.value = (day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getUTCDate() + " " + day.getHours() + ":" + day.getMinutes());
     end.value = (endDay.getFullYear() + "-" + (endDay.getMonth() + 1) + "-" + endDay.getUTCDate() + " " + endDay.getHours() + ":" + endDay.getMinutes());
     timefree.value = (day.getHours() + ":" + day.getMinutes() + " til " + endDay.getHours() + ":" + endDay.getMinutes() + "    d." + day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getUTCDate())
-
+    /*
     if (day.getDay() === 6 || day.getDay() === 0) {
         alert('Weekends not allowed');
         datetime.value = "";
@@ -241,7 +241,7 @@ function noWeekend() {
         start.value = "";
         end.value = "";
         timefree.value = "";
-    }
+    } */
 }
 
 window.onload = function () {
