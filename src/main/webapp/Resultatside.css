@@ -28,4 +28,18 @@ h3{
 
 }
 
+.chartWrap{
+    position: relative;
+}
+.chartWrap > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
 
+.chartArea{
+    width: 1500px;
+    height: 400px;
+    overflow-x: scroll;
+}

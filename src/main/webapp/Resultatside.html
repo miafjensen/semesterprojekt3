@@ -5,28 +5,27 @@
 
     <!-- Herunder angives der hvilken stylesheets der skal bruges.
     Den nedenstående  er css-filen, som er lavet til selve Resultater-siden. -->
-    <link rel="stylesheet"type="text/css" href="Resultatside.css">
+    <link rel="stylesheet" type="text/css" href="Resultatside.css">
     <link rel="stylesheet" type="text/css" href="Startside.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
     <!-- Nedenunder angives stylesheet der skal bruges til at lave bla. menu-baren, som skal være på alle sider -->
 
 
-
     <div class="main">
-            <!-- Menu-barens indhold, i form af en unordered list -->
-            <!-- List items er de forskellige sider, som er forbundet via. et href link. -->
+        <!-- Menu-barens indhold, i form af en unordered list -->
+        <!-- List items er de forskellige sider, som er forbundet via. et href link. -->
 
-            <div class="hotbar">
-                <button class="button1" onclick="window.location.replace('Importside.html')"> Import</button>
-                <button class="button1" onclick="window.location.replace('Resultatside.html')">resultater</button>
-                <button class="button1" onclick="logud()">Log ud</button>
-            </div>
+        <div class="hotbar">
+            <button class="button1" onclick="window.location.replace('Importside.html')"> Import</button>
+            <button class="button1" onclick="window.location.replace('Resultatside.html')">resultater</button>
+            <button class="button1" onclick="logud()">Log ud</button>
+        </div>
 
 
-
-            </div>
-
+    </div>
 
 
     <!-- Her begynder selve Resultat- siden, hvor man ville kunne vælge dato samt resultat.   -->
@@ -47,42 +46,50 @@
 
 <!-- 2 labels, som et eksemple, hvis man vil vise resultat i et bestemt periode, så ville man kunne vælge dato fra og til   -->
 <div>
-<p>
-    <label for="start">Dato fra:</label>
+    <p>
+        <label for="start">Dato fra:</label>
 
-    <input type="date" id="start" name="resultat-start"
-           value="2022-01-01"
-           min="2018-01-01" max="2023-12-31">
+        <input type="date" id="start" name="resultat-start"
+               value="2022-01-01"
+               min="2018-01-01" max="2023-12-31">
 
 
-    <label for="start">Dato til:</label>
+        <label for="start">Dato til:</label>
 
-    <input type="date" id="slut" name="resultat-slut"
-           value="2022-01-01"
-           min="2018-01-01" max="2023-12-31">
-</p>
+        <input type="date" id="slut" name="resultat-slut"
+               value="2022-01-01"
+               min="2018-01-01" max="2023-12-31">
+    </p>
 </div>
 
 <!-- et eksempel for at vise resultatet i boksen efter man har valgt de relevante datoer samt undersøgelse  -->
 
 <form action="//www.html.am/html-codes/forms/html-form-tag-action.cfm" target="result" method="get">
 
-    <div style="margin-top:50px;"> </div>
+    <div style="margin-top:50px;"></div>
 
     <!-- Nedenstående <option> kan repræsentere menupunkter med de relevante undersøgelse -->
     <p>Vælg Resultat</p>
-    <select name="Resultater"> <option value ="vælg"></option>
-        <option value ="Blodprøver">Blodprøver</option>
-        <option value ="EKG">EKG</option>
+    <select name="Resultater">
+        <option value="vælg"></option>
+        <option value="Blodprøver">Blodprøver</option>
+        <option value="EKG">EKG</option>
 
     </select>
     <p><input type="submit" value="Submit"></p>
 
 </form>
 <h3>Resultat:</h3>
-<iframe
+<div class="chartWrap">
+    <div class="chartArea">
+        <canvas id="myChart" height="300">
+        </canvas>
+    </div>
+</div>
+
+<!--<iframe
         name="result" style="height:500px;width:1000px;">
-</iframe>
+</iframe> -->
 
 
 <!-- Herunder kan de valgte undersøgelser/sider printes -->
@@ -96,7 +103,7 @@
     }
 </style>
 
-<div style="margin-top:50px;"> </div>
+<div style="margin-top:50px;"></div>
 
 <i class="fa fa-print fa_custom"></i> <a href="#" onclick="window.print();return false;">Print</a>
 

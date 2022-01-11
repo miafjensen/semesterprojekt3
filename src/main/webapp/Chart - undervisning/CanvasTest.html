@@ -5,16 +5,23 @@
     <title>EKG-visualisering</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="CanvasTest.js"></script>
+    <link rel="stylesheet" type="text/css" href="CanvasTest.css">
+
+
 </head>
 <body>
 
 EKG visualisering
-<canvas id="mycanvas" height="600" width="800">
 
-</canvas>
-<canvas id="myChart">
+<div class="chartWrapper" style="width: 100%; overflow-x: auto; overflow-y: hidden">
+    <div class="chartAreaWrapper">
+        <canvas id="myChart"></canvas>
+    </div>
+    <!--<canvas id="axis-Test" height="300" width="0"></canvas> -->
+</div>
+<!--<canvas id="mycanvas" >
+</canvas> -->
 
-</canvas>
 
 </body>
 </html>
