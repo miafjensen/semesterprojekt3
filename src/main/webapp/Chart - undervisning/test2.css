@@ -1,10 +1,8 @@
-
 section.range-slider {
     position: relative;
-    width: 700px;
-    height: 300px;
     float: left;
     text-align: center;
+    width: 100%;
 }
 section.range-slider input[type="range"] {
     pointer-events: none;
@@ -64,7 +62,7 @@ section.range-slider input[type="range"]::-ms-thumb {
     pointer-events: all;
     position: relative;
     z-index: 10;
-    -ms-appearance: none;
+    /*-ms-appearance: none; */
     width: 20px;
     height: 20px;
     border-radius: 14px;
@@ -85,4 +83,26 @@ section.range-slider input[type="range"]:last-of-type::-moz-range-track {
 }
 section.range-slider input[type="range"]::-moz-focus-outer {
     border: 0;
+}
+
+/*
+Chart tilpasning
+
+ */
+.chartWrap{
+    position: relative;
+    border-left: 200px;
+    border-right: 200px;
+    height: 500px;
+}
+.chartWrap > canvas {
+    position: relative;
+    left: 0;
+    top: 0;
+
+}
+
+.chartArea{
+    border-left: 200px;
+    border-right: 200px;
 }

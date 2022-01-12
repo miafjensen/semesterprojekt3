@@ -16,11 +16,9 @@
 const config = {
     type: 'line',
     data: data,
-    options: {responsive: true,
-        maintainAspectRatio: false}
+    options: {}
 };
 
-/*
 window.onload = (function () {
     let canvas = document.getElementById("mycanvas");
     let context = canvas.getContext("2d");
@@ -33,18 +31,4 @@ window.onload = (function () {
         document.getElementById('myChart'),
         config
     );
-}) */
-
-const xAxisLabelMinWidth = 300; // Replace this with whatever value you like
-const myChart = new Chart(
-    document.getElementById('myChart').getContext('2d'),
-    config
-    );
-
-function fitChart(){
-    let chartCanvas = document.getElementById('myChart');
-    let maxWidth = chartCanvas.parentElement.parentElement.clientWidth;
-    let width = Math.max(mayChart.data.labels.length * xAxisLabelMinWidth, maxWidth);
-
-    chartCanvas.parentElement.style.width = width +'px';
-}
+})

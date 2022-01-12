@@ -16,18 +16,7 @@
 const config = {
     type: 'line',
     data: data,
-    options: {
-        plugins: {
-            zoom: {
-                pan: {
-                    enabled: true
-                },
-                zoom: {
-                    enabled: true
-                }
-            }
-        }
-    }
+    options: {}
 };
 
 window.onload = (function () {

@@ -117,7 +117,7 @@ public class SQL {
     public AftaleListe getAftalerListe() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
         AftaleListe aftaleListe = new AftaleListe();
-        String query = "SELECT * FROM aftaler";
+        String query = "SELECT * FROM Aftaler";
         try {
             ResultSet rs = SQL.getSqlOBJ().myStatement.executeQuery(query);
 
