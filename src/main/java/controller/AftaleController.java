@@ -69,5 +69,30 @@ public class AftaleController {
 
     }
 
+    public String insertEKGdataIDatabase(String cpr, String note) throws OurException {
+        Aftale aftale = new Aftale();
+        if (cprCheck(cpr)) {
+            if (note.length() < 20000000) {
+                aftale.setCPR(cpr);
+                aftale.setEKGdata(note);
+
+                SQL.getSqlOBJ().EKGdataInsert(aftale);
+                return "added patient" + aftale;
+            } else {
+                //forkert note
+                OurException ex = new OurException();
+                ex.setMessage("For lang note, skal være under 255 tegn.");
+                throw ex;
+            }
+        } else {
+            // forkert cpr
+            OurException ex = new OurException();
+            ex.setMessage("CPR skal være 10 cifre, yyyymmddxxxx");
+            throw ex;
+        }
+
+
+    }
+
 
 }

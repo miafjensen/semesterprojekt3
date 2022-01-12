@@ -33,4 +33,7 @@ public class AftaleService {
     public String selectFromTime(@QueryParam("from") String from, @QueryParam("to") String to) throws SQLException {
         return new Gson().toJson(SQL.getSqlOBJ().getAftaleListeDateTime(from, to));
     }
+
+
+
 }

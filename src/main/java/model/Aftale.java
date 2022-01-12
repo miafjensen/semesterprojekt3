@@ -12,6 +12,15 @@ public class Aftale {
     private String timeStart;
     private String timeEnd;
     private String notat;
+    private String EKGdata;
+
+    public String getEKGdata() {
+        return EKGdata;
+    }
+
+    public void setEKGdata(String EKGdata) {
+        this.EKGdata = EKGdata;
+    }
 
     @Override
     public String toString() {

@@ -95,6 +95,25 @@ public class SQL {
         }
     }
 
+
+    public void EKGdataInsert(Aftale aftale) throws OurException {
+        try {
+            makeConnectionSQL();
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO NyEKGData (CPR, EKGData) values(?,?);");
+
+            pp.setString(1, aftale.getCPR());  //CPR
+            pp.setString(2, aftale.getEKGdata());  //starttime
+            pp.execute();
+
+            removeConnectionSQL();
+        } catch (SQLException throwables) {
+            OurException ex = new OurException();
+            ex.setMessage("Tiden er allerede optaget.");
+            throw ex;
+        }
+    }
+
+
     public AftaleListe getAftalerListe() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
         AftaleListe aftaleListe = new AftaleListe();
