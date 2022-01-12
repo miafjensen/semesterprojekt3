@@ -20,7 +20,8 @@
 
         <div class="hotbar">
             <button class="button1" onclick="window.location.replace('Importside.html')"> Import</button>
-            <button class="button1" onclick="window.location.replace('Resultatside.html')">resultater</button>
+            <button class="button1" onclick="window.location.replace('Resultatside.html')">Resultater</button>
+            <button class="button1" onclick="window.location.replace('StartSide.html')">Startside</button>
             <button class="button1" onclick="logud()">Log ud</button>
         </div>
 
@@ -45,9 +46,12 @@
 </div>
 
 <!--   Skrive CPR-nummer       -->
-<div class="CPR-nummerChoose", na>
+<div class="CPR-nummerChoose">
     <input type="text" id="CPRnummer" required name="cprNummerVælger" >
     <label for="CPRnummer">CPR</label>
+
+    <button onclick="findEKG()" type="button">Hent EKG-data</button>
+
 </div>
 
 

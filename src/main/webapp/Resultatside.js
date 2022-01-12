@@ -1,7 +1,7 @@
+
+
+
 // create dummy data
-
-
-
 
 var labels = [];
 
@@ -91,6 +91,11 @@ for (var x = 0; x < sliderSections.length; x++) {
             sliders[y].oninput();
         }
     }
+}
+
+function findEKG() {
+
+
 }
 
 
