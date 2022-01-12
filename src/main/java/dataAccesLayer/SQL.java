@@ -123,11 +123,11 @@ public class SQL {
 
             while (rs.next()) {
                 Aftale aftale = new Aftale();
-                aftale.setCPR(String.valueOf(rs.getInt(1)));
-                aftale.setTimeStart(rs.getString(2));
-                aftale.setTimeEnd(rs.getString(3));
-                aftale.setNotat(rs.getString(4));
-                aftale.setID(rs.getString(5));
+                aftale.setCPR(String.valueOf(rs.getInt(2)));
+                aftale.setTimeStart(rs.getString(3));
+                aftale.setTimeEnd(rs.getString(4));
+                aftale.setNotat(rs.getString(5));
+                aftale.setID(rs.getString(1));
                 aftale.setKlinikID(rs.getString(6));
 
                 aftaleListe.addAftaler(aftale);

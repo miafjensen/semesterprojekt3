@@ -33,7 +33,7 @@ public class LoginService {
         for (int i = 0; i < split.length; i++) {
             double str1= Double.parseDouble(split[i]);
 
-           AftaleController.getAftaleControllerOBJ().insertEKGdataIDatabase("1111561112", String.valueOf(Float.parseFloat(split[i])));
+           AftaleController.getAftaleControllerOBJ().insertEKGdataIDatabase("4444444444", String.valueOf(Float.parseFloat(split[i])));
             //System.out.println(split[i]);
             // System.out.println("Done");
 
