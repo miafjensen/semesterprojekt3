@@ -1,9 +1,11 @@
 package dataAccesLayer;
 
+import controller.AftaleController;
 import exceptions.OurException;
 import model.Aftale;
 import model.AftaleListe;
 
+import javax.ws.rs.POST;
 import java.sql.*;
 
 public class SQL {
@@ -185,5 +187,35 @@ public class SQL {
         SQL.getSqlOBJ().removeConnectionSQL();
         return aftaleListe;
     }
+
+
+
+
+  /*  public AftaleListe getEkgMeasurements() throws SQLException {
+        SQL.getSqlOBJ().makeConnectionSQL();
+        AftaleListe aftaleListe = new AftaleListe();
+        String query = "SELECT * FROM NyEKGData";
+        try {
+            ResultSet rs = SQL.getSqlOBJ().myStatement.executeQuery(query);
+
+            while (rs.next()) {
+                Aftale aftale = new Aftale();
+                aftale.setCPR(String.valueOf(rs.getInt(2)));
+                System.out.println("lelele1");
+                aftale.setTimeStart(rs.getString(3));
+                System.out.println("lelele2");
+                aftaleListe.addAftaler(aftale);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        SQL.getSqlOBJ().removeConnectionSQL();
+
+
+        return aftaleListe;
+    }
+*/
+
 }
 

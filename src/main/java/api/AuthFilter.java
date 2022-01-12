@@ -12,7 +12,6 @@ import java.io.IOException;
 @Provider
 public class AuthFilter implements ContainerRequestFilter {
 
-
     @Override
     public void filter(ContainerRequestContext containerRequestContext) {
         /* Kontrol af private key på aftaler endpoint */

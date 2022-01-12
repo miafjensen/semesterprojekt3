@@ -75,13 +75,12 @@ public class AftaleController {
             if (note.length() < 20000000) {
                 aftale.setCPR(cpr);
                 aftale.setEKGdata(note);
-
                 SQL.getSqlOBJ().EKGdataInsert(aftale);
                 return "added patient" + aftale;
             } else {
                 //forkert note
                 OurException ex = new OurException();
-                ex.setMessage("For lang note, skal være under 255 tegn.");
+                ex.setMessage("Noten overskrider den maksimale grænse for anslag");
                 throw ex;
             }
         } else {
