@@ -10,9 +10,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 
-
-
-
 @Path("login")
 @Produces({MediaType.TEXT_PLAIN})
 public class LoginService {

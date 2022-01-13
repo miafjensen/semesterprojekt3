@@ -29,19 +29,40 @@ public class EKGController {
     }
 
 
-    public String insertEKGdataIDatabase(Integer id, double datapoint) throws OurException {
+    public String insertEKGdataIDatabase(Integer id, double [] datapoint) throws OurException {
 
-        SQL.getSqlOBJ().EKGdataInsert(id, datapoint);
+        SQL.getSqlOBJ().EKGdataInsertBatch(id, datapoint);
         return "Indsat i EKGData";
 
-
     }
-    public String insertEKGdataBatch(Integer id, double[] datapointBatch) throws OurException {
+   /* public String insertEKGdataBatch(Integer id, double[] datapointBatch) throws OurException {
 
         SQL.getSqlOBJ().EKGdataInsertBatch(id, datapointBatch);
         return "Indsat batch i EKGData";
+    } */
 
 
-    }
+  /*  public String insertwhatintoDatabase(String EKGdata) throws OurException {
+        //System.out.println(EKGdata);
+        String[] a=EKGdata.split(" : ");
+        String cpr = a[0];
+        System.out.println(cpr); //Sådan gør man yeees
+        String ekgString = a[1];
+        String[] ekgData = ekgString.split(",");
+        int id = SQL.getSqlOBJ().createEKGSession(cpr);
+        double datapointBatch[]=new double[ekgData.length];
+        //EKGController.getEkgControllerObj().InsertSessionID(a[0]);
+        for (int i = 0; i < ekgData.length; i++) {
+            double datapoint= Double.parseDouble(ekgData[i]);
+            datapointBatch[i]=datapoint;
+        }
+        //System.out.println(ekgData[i]);
+        EKGController.getEkgControllerObj().insertEKGdataIDatabase(id,datapointBatch);
+        //AftaleController.getAftaleControllerOBJ().insertEKGdataIDatabase(id ,String.valueOf(Float.parseFloat(ekgData[i])));
+
+        System.out.println("DONE");
+        return EKGdata;
+
+    } */
 
 }

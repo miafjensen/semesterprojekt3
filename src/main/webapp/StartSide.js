@@ -40,7 +40,6 @@ function udfyldskema(data) {
 
         container += Tider + CPR + Notat;
     }
-
     document.getElementById("autotider").innerHTML = container;
 }
 

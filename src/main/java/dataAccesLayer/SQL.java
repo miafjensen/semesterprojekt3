@@ -130,6 +130,7 @@ public class SQL {
             System.out.println(System.currentTimeMillis());
             pp.executeLargeBatch();
             myConn.commit();
+            myConn.setAutoCommit(true);
             System.out.println(System.currentTimeMillis());
             removeConnectionSQL();
             System.out.println("Batch sendt til EKGData");
