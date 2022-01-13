@@ -118,15 +118,19 @@ public class SQL {
     public void EKGdataInsertBatch(int id, double[] datapointBatch) throws OurException {
         try {
             makeConnectionSQL();
+            System.out.println(System.currentTimeMillis());
+            myConn.setAutoCommit(false);
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
             for (int i = 0; i < datapointBatch.length; i++) {
                 pp.setInt(1, id);  //CPR
                 pp.setDouble(2, datapointBatch[i]);  //starttime
                 pp.addBatch();
-
             }
-            pp.executeBatch();
+            System.out.println(System.currentTimeMillis());
+            pp.executeLargeBatch();
+            myConn.commit();
+            System.out.println(System.currentTimeMillis());
             removeConnectionSQL();
             System.out.println("Batch sendt til EKGData");
         } catch (SQLException throwables) {
