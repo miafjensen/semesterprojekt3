@@ -3,7 +3,6 @@ package dataAccesLayer;
 import exceptions.OurException;
 import model.Aftale;
 import model.AftaleListe;
-import model.EKG;
 
 import java.sql.*;
 
@@ -14,9 +13,11 @@ public class SQL {
 
     static private final SQL SQLOBJ = new SQL();
 
+
     static public SQL getSqlOBJ() {
         return SQLOBJ;
     }
+
     private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s190600?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String DatabaseUser = "s190600";
     private final String DatabasePassword = "Qd5UiHM09iNxfubw7OWnC"; //tomcat system startups
@@ -74,6 +75,7 @@ public class SQL {
         return aftaleListe;
     }
 
+
     public void insertAftaleSQL(Aftale aftale) throws OurException {
 
         try {
@@ -118,7 +120,7 @@ public class SQL {
             makeConnectionSQL();
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
-            for (int i = 0; i<datapointBatch.length; i++) {
+            for (int i = 0; i < datapointBatch.length; i++) {
                 pp.setInt(1, id);  //CPR
                 pp.setDouble(2, datapointBatch[i]);  //starttime
                 pp.addBatch();
@@ -135,13 +137,13 @@ public class SQL {
     public Integer createEKGSession(String cpr) throws OurException {
         try {
             makeConnectionSQL();
-            PreparedStatement pp = myConn.prepareStatement("INSERT INTO SessionData (CPR) values(?);",Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO SessionData (CPR) values(?);", Statement.RETURN_GENERATED_KEYS);
 
-            pp.setString(1,cpr);  //CPR
+            pp.setString(1, cpr);  //CPR
             pp.executeUpdate();
-            ResultSet a= pp.getGeneratedKeys();
+            ResultSet a = pp.getGeneratedKeys();
             a.next();
-           Integer id= a.getInt(1);
+            Integer id = a.getInt(1);
             System.out.println(id);
 
             removeConnectionSQL();
@@ -151,6 +153,43 @@ public class SQL {
 
         }
         return null;
+    }
+
+    public String getSessionID(String cpr) throws SQLException {
+        SQL.getSqlOBJ().makeConnectionSQL();
+
+        PreparedStatement pp = myConn.prepareStatement("SELECT start, SessionID FROM SessionsData WHERE CPR = ?");
+        pp.setString(1, cpr);
+        String dato = "";
+        try {
+            ResultSet rs = pp.executeQuery();
+            while (rs.next()) {
+                dato = dato + rs.getString(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        SQL.getSqlOBJ().removeConnectionSQL();
+        return dato;
+    }
+
+    public void getEKGData(int sesID) throws SQLException{
+        SQL.getSqlOBJ().makeConnectionSQL();
+        PreparedStatement pp = myConn.prepareStatement("SELECT Value FROM EKGData WHERE SessionID = ?");
+        pp.setInt(1, sesID);
+
+        try{
+            ResultSet rs = pp.executeQuery();
+            while (rs.next()){
+                // hvordan tager man ud i batch?
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+
+        SQL.getSqlOBJ().removeConnectionSQL();
     }
 
 
