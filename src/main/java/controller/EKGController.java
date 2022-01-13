@@ -36,5 +36,12 @@ public class EKGController {
 
 
     }
+    public String insertEKGdataBatch(Integer id, double[] datapointBatch) throws OurException {
+
+        SQL.getSqlOBJ().EKGdataInsertBatch(id, datapointBatch);
+        return "Indsat batch i EKGData";
+
+
+    }
 
 }

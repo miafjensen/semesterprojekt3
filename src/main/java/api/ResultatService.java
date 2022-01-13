@@ -19,24 +19,22 @@ public class ResultatService {
     @POST
     public String postEKGData(String EKGdata) throws OurException {
         //System.out.println(EKGdata);
-        String[] a=EKGdata.split(" : ");
+        String[] a = EKGdata.split(" : ");
         String cpr = a[0];
         System.out.println(cpr); //Sådan gør man yeees
         String ekgString = a[1];
         String[] ekgData = ekgString.split(",");
         int id = SQL.getSqlOBJ().createEKGSession(cpr);
-                //EKGController.getEkgControllerObj().InsertSessionID(a[0]);
+        double datapointBatch[] = new double[ekgData.length];
         for (int i = 0; i < ekgData.length; i++) {
-            double datapoint= Double.parseDouble(ekgData[i]);
+            double datapoint = Double.parseDouble(ekgData[i]);
+            datapointBatch[i] = datapoint;
             //System.out.println(ekgData[i]);
-            EKGController.getEkgControllerObj().insertEKGdataIDatabase(id,datapoint);
-            //AftaleController.getAftaleControllerOBJ().insertEKGdataIDatabase(id ,String.valueOf(Float.parseFloat(ekgData[i])));
-
-            System.out.println("Done");
+            //EKGController.getEkgControllerObj().insertEKGdataIDatabase(id, datapoint);
         }
+        EKGController.getEkgControllerObj().insertEKGdataBatch(id, datapointBatch);
         System.out.println("DONE");
         return EKGdata;
-
     }
 
 }

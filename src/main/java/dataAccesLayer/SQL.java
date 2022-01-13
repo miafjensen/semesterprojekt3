@@ -113,14 +113,14 @@ public class SQL {
 
     }
 
-    public void EKGdataInsertBatch(int id, double[] datapoint) throws OurException {
+    public void EKGdataInsertBatch(int id, double[] datapointBatch) throws OurException {
         try {
             makeConnectionSQL();
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
-            for (int i = 0; i<datapoint.length; i++) {
+            for (int i = 0; i<datapointBatch.length; i++) {
                 pp.setInt(1, id);  //CPR
-                pp.setDouble(2, datapoint[i]);  //starttime
+                pp.setDouble(2, datapointBatch[i]);  //starttime
                 pp.addBatch();
 
             }
@@ -152,6 +152,7 @@ public class SQL {
         }
         return null;
     }
+
 
     public AftaleListe getAftalerListe() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
@@ -225,34 +226,6 @@ public class SQL {
         return aftaleListe;
     }
 
-
-
-
-  /*  public AftaleListe getEkgMeasurements() throws SQLException {
-        SQL.getSqlOBJ().makeConnectionSQL();
-        AftaleListe aftaleListe = new AftaleListe();
-        String query = "SELECT * FROM NyEKGData";
-        try {
-            ResultSet rs = SQL.getSqlOBJ().myStatement.executeQuery(query);
-
-            while (rs.next()) {
-                Aftale aftale = new Aftale();
-                aftale.setCPR(String.valueOf(rs.getInt(2)));
-                System.out.println("lelele1");
-                aftale.setTimeStart(rs.getString(3));
-                System.out.println("lelele2");
-                aftaleListe.addAftaler(aftale);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        SQL.getSqlOBJ().removeConnectionSQL();
-
-
-        return aftaleListe;
-    }
-*/
 
 }
 
