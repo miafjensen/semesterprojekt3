@@ -97,29 +97,47 @@ public class SQL {
     }
 
 
-    public void EKGdataInsert(EKG ekg) throws OurException {
+    public void EKGdataInsert(int id, double datapoint) throws OurException {
         try {
             makeConnectionSQL();
-            PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (ID, Value) values(?,?);");
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
-            pp.setInt(1, ekg.getSessionId());  //CPR
-            pp.setFloat(2, ekg.getEKGdata());  //starttime
+            pp.setInt(1, id);  //CPR
+            pp.setDouble(2, datapoint);  //starttime
             pp.execute();
 
             removeConnectionSQL();
         } catch (SQLException throwables) {
-            OurException ex = new OurException();
-            ex.setMessage("Tiden er allerede optaget.");
-            throw ex;
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public void EKGdataInsertBatch(int id, double[] datapoint) throws OurException {
+        try {
+            makeConnectionSQL();
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
+
+            for (int i = 0; i<datapoint.length; i++) {
+                pp.setInt(1, id);  //CPR
+                pp.setDouble(2, datapoint[i]);  //starttime
+                pp.addBatch();
+
+            }
+            pp.executeBatch();
+            removeConnectionSQL();
+            System.out.println("Batch sendt til EKGData");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
-    public Integer insertSessionIDogCPR(EKG ekg) throws OurException {
+    public Integer createEKGSession(String cpr) throws OurException {
         try {
             makeConnectionSQL();
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO SessionData (CPR) values(?);",Statement.RETURN_GENERATED_KEYS);
 
-            pp.setString(1, ekg.getCPR());  //CPR
+            pp.setString(1,cpr);  //CPR
             pp.executeUpdate();
             ResultSet a= pp.getGeneratedKeys();
             a.next();
@@ -131,9 +149,6 @@ public class SQL {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-           /* OurException ex = new OurException();
-            ex.setMessage("Tiden er allerede optaget.");
-            throw ex; */
         }
         return null;
     }

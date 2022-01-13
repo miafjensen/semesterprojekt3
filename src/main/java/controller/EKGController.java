@@ -3,8 +3,6 @@ package controller;
 
 import dataAccesLayer.SQL;
 import exceptions.OurException;
-import model.Aftale;
-import model.AftaleListe;
 import model.EKG;
 
 import java.sql.SQLException;
@@ -30,46 +28,13 @@ public class EKGController {
         }
     }
 
-    public AftaleListe cprSearch(String cpr) throws SQLException, OurException {
-        if (cpr == null) {
-            return SQL.getSqlOBJ().getAftalerListe();
-        }
-        if (cprCheck(cpr)) {
-            return SQL.getSqlOBJ().cprSearch(cpr);
-        }
-       return new AftaleListe();
-    }
 
-    public String insertEKGdataIDatabase(Integer id, String note) throws OurException {
-        Aftale aftale = new Aftale();
+    public String insertEKGdataIDatabase(Integer id, double datapoint) throws OurException {
 
-            if (note.length() < 20000000) {
-                EKG.(id);
-                EKG.setEKGdata(note);
-                SQL.getSqlOBJ().EKGdataInsert(aftale);
-                return "added patient" + aftale;
-            } else {
-                //forkert note
-                OurException ex = new OurException();
-                ex.setMessage("Noten overskrider den maksimale grænse for anslag");
-                throw ex;
-            }
+        SQL.getSqlOBJ().EKGdataInsert(id, datapoint);
+        return "Indsat i EKGData";
+
 
     }
 
-    public Integer InsertSessionID(String cpr) throws OurException {
-        Aftale aftale = new Aftale();
-
-            if (cpr.length() == 10) {
-                aftale.setCPR(cpr);
-                return
-                        SQL.getSqlOBJ().insertSessionIDogCPR(cpr);
-
-            } else {
-                //forkert note
-                OurException ex = new OurException();
-                ex.setMessage("Noten overskrider den maksimale grænse for anslag");
-                throw ex;
-            }
-        }
 }
