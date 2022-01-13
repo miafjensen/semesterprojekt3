@@ -18,12 +18,15 @@ public class ResultatService {
     @POST
     public String postEKGData(String EKGdata) throws OurException {
         //System.out.println(EKGdata);
-        String[] split = EKGdata.split(",");
-
+        String[] a=EKGdata.split(" : ");
+        System.out.println(a[0]); //Sådan gør man yeees
+        String[] split = a[1].split(",");
+        Integer id= AftaleController.getAftaleControllerOBJ().InsertSessionID(a[0]);
         for (int i = 0; i < split.length; i++) {
-            //double str1= Double.parseDouble(split[i]);
+            double str1= Double.parseDouble(split[i]);
             System.out.println(split[i]);
-            AftaleController.getAftaleControllerOBJ().insertEKGdataIDatabase("1111111112", String.valueOf(Float.parseFloat(split[i])));
+            AftaleController.getAftaleControllerOBJ().insertEKGdataIDatabase(id, String.valueOf(Float.parseFloat(split[i])));
+
             System.out.println("Done");
         }
         System.out.println("DONE");

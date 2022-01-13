@@ -1,11 +1,10 @@
 package dataAccesLayer;
 
-import controller.AftaleController;
 import exceptions.OurException;
 import model.Aftale;
 import model.AftaleListe;
+import model.EKG;
 
-import javax.ws.rs.POST;
 import java.sql.*;
 
 public class SQL {
@@ -98,13 +97,13 @@ public class SQL {
     }
 
 
-    public void EKGdataInsert(Aftale aftale) throws OurException {
+    public void EKGdataInsert(EKG ekg) throws OurException {
         try {
             makeConnectionSQL();
-            PreparedStatement pp = myConn.prepareStatement("INSERT INTO NyEKGData (CPR, EKGData) values(?,?);");
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (ID, Value) values(?,?);");
 
-            pp.setString(1, aftale.getCPR());  //CPR
-            pp.setString(2, aftale.getEKGdata());  //starttime
+            pp.setInt(1, ekg.getSessionId());  //CPR
+            pp.setFloat(2, ekg.getEKGdata());  //starttime
             pp.execute();
 
             removeConnectionSQL();
@@ -115,6 +114,29 @@ public class SQL {
         }
     }
 
+    public Integer insertSessionIDogCPR(EKG ekg) throws OurException {
+        try {
+            makeConnectionSQL();
+            PreparedStatement pp = myConn.prepareStatement("INSERT INTO SessionData (CPR) values(?);",Statement.RETURN_GENERATED_KEYS);
+
+            pp.setString(1, ekg.getCPR());  //CPR
+            pp.executeUpdate();
+            ResultSet a= pp.getGeneratedKeys();
+            a.next();
+           Integer id= a.getInt(1);
+            System.out.println(id);
+
+            removeConnectionSQL();
+            return id;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+           /* OurException ex = new OurException();
+            ex.setMessage("Tiden er allerede optaget.");
+            throw ex; */
+        }
+        return null;
+    }
 
     public AftaleListe getAftalerListe() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();

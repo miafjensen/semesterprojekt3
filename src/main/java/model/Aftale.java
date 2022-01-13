@@ -1,8 +1,5 @@
 package model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 public class Aftale {
 
 
@@ -12,15 +9,9 @@ public class Aftale {
     private String timeStart;
     private String timeEnd;
     private String notat;
-    private String EKGdata;
 
-    public String getEKGdata() {
-        return EKGdata;
-    }
 
-    public void setEKGdata(String EKGdata) {
-        this.EKGdata = EKGdata;
-    }
+
 
     @Override
     public String toString() {
@@ -81,4 +72,6 @@ public class Aftale {
     public void setNotat(String notat) {
         this.notat = notat;
     }
+
+
 }
