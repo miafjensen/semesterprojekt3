@@ -8,6 +8,7 @@ import model.EKGListe;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EKGController {
 
@@ -46,10 +47,10 @@ public class EKGController {
         return new EKGListe();
     }
 
-    public ArrayList<EKG> showEKGdataToChart(int sessionID) throws SQLException {
+    public List<Double> showEKGdataToChart(int sessionID) throws SQLException {
 
 
-        ArrayList<EKG> ekgData = SQL.getSqlOBJ().getEKGData(sessionID);
+        List<Double> ekgData = SQL.getSqlOBJ().getEKGData(sessionID);
 
         return ekgData;
     }

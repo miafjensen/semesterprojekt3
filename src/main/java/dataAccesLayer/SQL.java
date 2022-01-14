@@ -8,6 +8,7 @@ import model.EKGListe;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SQL {
 
@@ -60,7 +61,7 @@ public class SQL {
 
             while (rs.next()) {
                 Aftale aftale = new Aftale();
-                aftale.setCPR(String.valueOf(rs.getInt(1)));
+                aftale.setCPR(rs.getString("CPR"));
                 aftale.setTimeStart(rs.getString(2));
                 aftale.setTimeEnd(rs.getString(3));
                 aftale.setNotat(rs.getString(4));
@@ -190,15 +191,18 @@ public class SQL {
         return ekgListe;
     }
 
-    public ArrayList<EKG> getEKGData(int sesID) throws SQLException {
-        SQL.getSqlOBJ().makeConnectionSQL();
-        PreparedStatement pp = myConn.prepareStatement("SELECT Value FROM EKGData WHERE SessionID = ?");
-        pp.setInt(1, sesID);
-        ArrayList ekgData = new ArrayList();
+    public List<Double> getEKGData(int sesID) throws SQLException {
+
+        List<Double> ekgData = new ArrayList<>();
         try {
+            SQL.getSqlOBJ().makeConnectionSQL();
+            PreparedStatement pp = myConn.prepareStatement("SELECT Value FROM EKGData WHERE SessionID = ?");
+            pp.setInt(1, sesID);
+
             ResultSet rs = pp.executeQuery();
             while (rs.next()) {
-                double data = rs.getDouble("Value");
+                Double data = rs.getDouble("Value");
+                ekgData.add(data);
                 // hvordan tager man ud i batch?
             }
         } catch (SQLException throwables) {

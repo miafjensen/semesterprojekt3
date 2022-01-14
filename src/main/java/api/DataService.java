@@ -16,40 +16,13 @@ public class DataService {
     private String[] EKGdata;
     private String input = "";
     private String[] splitData;
-    //ArrayList<SensorObserver> observers = new ArrayList<>();
+
 
     @POST
     public String postEKGData(String EKGdata) {
 
-        //System.out.println(EKGdata);
-
-/*
-        String[] split = EKGdata.split(",");
-
-        for (int i = 0; i < split.length; i++) {
-
-
-
-            System.out.println(split[i]);
-            // System.out.println("Done");
-        } */
         return EKGdata;
-
     }
-    /*
-    public String[] getSplitData() {
-
-        String material = postEKGData();
-
-        String[] splittet = material.split(",");
-        //bruges til at undgå whitespaces.
-        //https://stackoverflow.com/questions/13750716/what-does-regular-expression-s-s-do
-
-
-        splitData = splittet;
-
-        return splitData;
-    } */
 
 
     public ArrayList<Integer> getDataArrayList() {

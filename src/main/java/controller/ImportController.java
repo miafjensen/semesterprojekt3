@@ -1,6 +1,6 @@
 package controller;
 
-import com.google.gson.Gson;
+
 import model.Aftale;
 import model.AftaleListe;
 import dataAccesLayer.apiDAO;
@@ -25,7 +25,7 @@ public class ImportController {
         JSONArray p = apiDAO.getApiDAOOBJ().getJsonOBJ(http).getJSONObject(liste).getJSONArray(listearray);
 
         for (int i = 0; i < p.length(); i++) {
-            aftaleListe.addAftaler(new Gson().fromJson(String.valueOf(p.getJSONObject(i)), Aftale.class));
+            //aftaleListe.addAftaler(new Gson().fromJson(String.valueOf(p.getJSONObject(i)), Aftale.class));
         }
 
         return aftaleListe;

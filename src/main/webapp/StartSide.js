@@ -12,7 +12,10 @@ function hentAftaleFecth(from, to) {
         headers: {
             "Authorization": localStorage.getItem("token")
         }
-    }).then(resp => resp.json()).then(data => udfyldskema(data));
+    }).then(resp => resp.json()).then(data => {
+        console.log(data)
+        udfyldskema(data)
+    } );
 }
 
 function udfyldskema(data) {
@@ -23,12 +26,12 @@ function udfyldskema(data) {
     let container = "";
     let note = "";
 
-    for (let i = 0; i < data.aftaleListe.length; i++) {
-        timestart = data.aftaleListe[i].timeStart.substring(11, 16) + "\t-\t";
-        timeend = data.aftaleListe[i].timeEnd.substring(11, 16)
-        klinikId = ("klinikId: " + data.aftaleListe[i].klinikID);
-        cpr = "CPR: " + data.aftaleListe[i].CPR + "\t";
-        note = "Notat: " + data.aftaleListe[i].notat;
+    for (let i = 0; i < data.aftale.length; i++) {
+        timestart = data.aftale[i].timeStart.substring(11, 16) + "\t-\t";
+        timeend = data.aftale[i].timeEnd.substring(11, 16)
+        klinikId = ("klinikId: " + data.aftale[i].klinikID);
+        cpr = "CPR: " + data.aftale[i].cpr + "\t";
+        note = "Notat: " + data.aftale[i].notat;
 
 
         let Tider = '<span class="autotider">' + timestart + timeend + '</span>';

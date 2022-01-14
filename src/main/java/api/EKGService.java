@@ -1,7 +1,7 @@
 package api;
 
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import controller.EKGController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
+import java.util.List;
 
 @Path("EKGService")
 @Produces({MediaType.TEXT_PLAIN})
@@ -43,16 +44,17 @@ public class EKGService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public void visEKGOversigt(@QueryParam("CPRnummer") String CPR) throws SQLException {
+    public List<Double> visEKGOversigt(@QueryParam("cpr") int sessionID) throws SQLException {
 
-        //JSONObject jsonObject = EKGController.getEkgControllerObj().showEKGsessionsStart(CPR);
+        return SQL.getSqlOBJ().getEKGData(sessionID);
 
-        return ;
     }
-
+/*
     @Path("EKGService")
     @GET
     public String selectFromTime(@QueryParam("from") String from, @QueryParam("to") String to) throws SQLException {
         return new Gson().toJson(SQL.getSqlOBJ().getAftaleListeDateTime(from, to));
     }
+
+ */
 }
