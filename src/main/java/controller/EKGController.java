@@ -4,8 +4,10 @@ package controller;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.EKG;
+import model.EKGListe;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EKGController {
 
@@ -29,12 +31,43 @@ public class EKGController {
     }
 
 
-    public String insertEKGdataIDatabase(Integer id, double [] datapoint) throws OurException {
+    public String insertEKGdataIDatabase(Integer id, double[] datapoint) throws OurException {
 
         SQL.getSqlOBJ().EKGdataInsertBatch(id, datapoint);
         return "Indsat i EKGData";
 
     }
+
+    public EKGListe showEKGsessionsStart(String CPR) throws SQLException {
+        System.out.println(CPR);
+
+        //String sessions = SQL.getSqlOBJ().getSessionID(CPR);
+
+        return new EKGListe();
+    }
+
+    public ArrayList<EKG> showEKGdataToChart(int sessionID) throws SQLException {
+
+
+        ArrayList<EKG> ekgData = SQL.getSqlOBJ().getEKGData(sessionID);
+
+        return ekgData;
+    }
+
+
+/*
+ public AftaleListe cprSearch(String cpr) throws SQLException, OurException {
+        if (cpr == null) {
+            return SQL.getSqlOBJ().getAftalerListe();
+        }
+        if (cprCheck(cpr)) {
+            return SQL.getSqlOBJ().cprSearch(cpr);
+        }
+       return new AftaleListe();
+    }
+ */
+
+
    /* public String insertEKGdataBatch(Integer id, double[] datapointBatch) throws OurException {
 
         SQL.getSqlOBJ().EKGdataInsertBatch(id, datapointBatch);

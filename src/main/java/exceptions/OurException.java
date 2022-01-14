@@ -11,6 +11,6 @@ public class OurException extends Exception {
         Message = message;
     }
 
-    String Message ="Error 420";
+    String Message = "Error 420";
 
 }

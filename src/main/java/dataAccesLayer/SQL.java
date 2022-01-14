@@ -3,8 +3,11 @@ package dataAccesLayer;
 import exceptions.OurException;
 import model.Aftale;
 import model.AftaleListe;
+import model.EKG;
+import model.EKGListe;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQL {
 
@@ -99,7 +102,7 @@ public class SQL {
     }
 
 
-    public void EKGdataInsert(int id, double datapoint) throws OurException {
+    public void EKGdataInsert(int id, double datapoint) {
         try {
             makeConnectionSQL();
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
@@ -115,7 +118,7 @@ public class SQL {
 
     }
 
-    public void EKGdataInsertBatch(int id, double[] datapointBatch) throws OurException {
+    public void EKGdataInsertBatch(int id, double[] datapointBatch) {
         try {
             makeConnectionSQL();
             System.out.println(System.currentTimeMillis());
@@ -139,7 +142,7 @@ public class SQL {
         }
     }
 
-    public Integer createEKGSession(String cpr) throws OurException {
+    public Integer createEKGSession(String cpr) {
         try {
             makeConnectionSQL();
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO SessionData (CPR) values(?);", Statement.RETURN_GENERATED_KEYS);
@@ -160,16 +163,23 @@ public class SQL {
         return null;
     }
 
-    public String getSessionID(String cpr) throws SQLException {
+    public EKGListe getSessions(String cpr) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
 
         PreparedStatement pp = myConn.prepareStatement("SELECT start, SessionID FROM SessionsData WHERE CPR = ?");
         pp.setString(1, cpr);
         String dato = "";
+        EKGListe ekgListe = new EKGListe();
+        int sessionID;
         try {
             ResultSet rs = pp.executeQuery();
             while (rs.next()) {
-                dato = dato + rs.getString(1);
+                EKG ekg = new EKG();
+                dato = dato + rs.getString("Start");
+                sessionID = rs.getInt("SessionID");
+                System.out.println("dato: " + dato + " SessionID: " + sessionID);
+                ekgListe.addEKGListe(ekg);
+
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -177,24 +187,26 @@ public class SQL {
 
 
         SQL.getSqlOBJ().removeConnectionSQL();
-        return dato;
+        return ekgListe;
     }
 
-    public void getEKGData(int sesID) throws SQLException{
+    public ArrayList<EKG> getEKGData(int sesID) throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
         PreparedStatement pp = myConn.prepareStatement("SELECT Value FROM EKGData WHERE SessionID = ?");
         pp.setInt(1, sesID);
-
-        try{
+        ArrayList ekgData = new ArrayList();
+        try {
             ResultSet rs = pp.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
+                double data = rs.getDouble("Value");
                 // hvordan tager man ud i batch?
             }
-        }catch (SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
         SQL.getSqlOBJ().removeConnectionSQL();
+        return ekgData;
     }
 
 

@@ -40,9 +40,10 @@ public class JWTHandler {
         }
         return key;
     }
+
     // Validering af token
     public static User validate(String authentication) {
-        if(authentication == null){
+        if (authentication == null) {
             throw new NotAuthorizedException("ingen header");
         }
         String[] tokenArray = authentication.split(" ");
@@ -56,8 +57,8 @@ public class JWTHandler {
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.convertValue(claims.get("user"), User.class);
             return user;
-        } catch (JwtException e){
-            System.out.println(e.getClass() +":  "+ e.getMessage());
+        } catch (JwtException e) {
+            System.out.println(e.getClass() + ":  " + e.getMessage());
             throw new NotAuthorizedException(e.getMessage());
         }
     }

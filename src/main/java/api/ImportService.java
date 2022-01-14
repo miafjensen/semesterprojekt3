@@ -29,10 +29,9 @@ public class ImportService {
                 return jsonobj.toString();
             }
             case 4: {
-                if (cpr.length()>5) {
-                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON(("https://grp4.it3.diplomportal.dk/data/aftaler?cpr="+cpr));
-                }
-                else{
+                if (cpr.length() > 5) {
+                    jsonobj = ImportController.getimportControllerOBJ().getImportJSON(("https://grp4.it3.diplomportal.dk/data/aftaler?cpr=" + cpr));
+                } else {
                     jsonobj = ImportController.getimportControllerOBJ().getImportJSON("https://grp4.it3.diplomportal.dk/data/aftaler");
                 }
                 return jsonobj.toString();

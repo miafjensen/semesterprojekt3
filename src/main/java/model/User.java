@@ -4,9 +4,10 @@ public class User {
     private String username;
     private String password;
 
-    public User(){
+    public User() {
 
     }
+
     public User(String user, String s) {
         setUsername(user);
     }

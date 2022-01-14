@@ -1,4 +1,3 @@
-
 //if (!localStorage.getItem("token")){window.location.href="LoginSide.html"} //nægter adgang uden login
 
 /*viser dropdown menu*/
@@ -22,12 +21,12 @@ window.onclick = function (event) {
 
 /* Fetch kald som skal resultere i at xml bliver hentet*/
 function fetchfunction(grp) {
-    document.getElementById("tekstfelt").innerHTML ="";
+    document.getElementById("tekstfelt").innerHTML = "";
     let cpr = document.getElementById("cpr").value;
     fetch("/data/import?" + new URLSearchParams({
-        grp : grp,
-        CPR : cpr
-    }),{
+        grp: grp,
+        CPR: cpr
+    }), {
         headers: {
             "Authorization": localStorage.getItem("token")
         }
@@ -35,14 +34,14 @@ function fetchfunction(grp) {
 }
 
 function displaydata(data) {
-    if(1 < data.aftaleListe.aftale.length) {
+    if (1 < data.aftaleListe.aftale.length) {
         createList(data);
-    }else{
+    } else {
         createSingle(data);
     }
 }
 
-function createSingle(data){
+function createSingle(data) {
     let container = "";
     let cpr = "CPR: " + data.aftaleListe.aftale.CPR;
     let klinikid = "KlinikID: " + data.aftaleListe.aftale.klinikID;
@@ -59,7 +58,7 @@ function createSingle(data){
     document.getElementById("tekstfelt").innerHTML = container;
 }
 
-function createList(data){
+function createList(data) {
     let container = "";
     for (let i = 0; i < data.aftaleListe.aftale.length; i++) {
         let cpr = "CPR: " + data.aftaleListe.aftale[i].CPR;
@@ -74,6 +73,6 @@ function createList(data){
 
         container += navne + tider + notat;
         console.log(container);
-        }
+    }
     document.getElementById("tekstfelt").innerHTML = container;
 }

@@ -11,8 +11,6 @@ public class Aftale {
     private String notat;
 
 
-
-
     @Override
     public String toString() {
         return "model.Aftale{" +

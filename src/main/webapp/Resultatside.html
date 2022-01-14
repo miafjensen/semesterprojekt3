@@ -47,7 +47,7 @@
 
 <!--   Skrive CPR-nummer       -->
 <div class="CPR-nummerChoose">
-    <input type="text" id="CPRnummerBoks" required name="cprNummerVælger" >
+    <input type="text" id="CPRnummerBoks" required name="cprNummerVælger">
     <label for="CPRnummerBoks">CPR</label>
 
     <button onclick="HentEkgData()" type="button">Hent EKG-data</button>
@@ -77,25 +77,18 @@
 
 
 <h3>Resultat:</h3>
-<i class="fa fa-print fa_custom" style="margin-bottom: 30px; position: center"></i> <a href="#" onclick="window.print();return false;">Print</a>
+<i class="fa fa-print fa_custom" style="margin-bottom: 30px; position: center"></i> <a href="#"
+                                                                                       onclick="window.print();return false;">Print</a>
+<div class="chartWrap">
 
-
-<div class="chartWrap" >
-
-    <div class="chartArea"></div>
     <canvas id="myChart" style="height: 369px;"></canvas>
     <section class="range-slider">
         <span class="rangeValues"></span>
-        <input value="1" min="1" max="" type="range" />
-        <input value="100" min="1" max="" type="range" />
+        <input value="1" min="1" max="" type="range"/>
+        <input value="100" min="1" max="" type="range"/>
     </section>
-</div></div>
-
-
-
-
-
 </div>
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <style type="text/css">
@@ -105,7 +98,6 @@
 </style>
 
 <div style="margin-top:50px;"></div>
-
 
 
 </body>

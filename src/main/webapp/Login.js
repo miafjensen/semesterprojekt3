@@ -5,13 +5,11 @@ visibilityListen.addEventListener('click', togglevisibiliy) //brug functionen hv
 var passlabel = document.getElementById('password')
 var btn = document.getElementById('btn')
 
-passlabel.addEventListener('keyup', (e) =>
-{
-    if(e.keyCode===13){
+passlabel.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
         btn.click();
     }
 })
-
 
 
 function togglevisibiliy() {

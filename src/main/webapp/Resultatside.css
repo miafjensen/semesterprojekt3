@@ -1,17 +1,15 @@
 
-
-
-body{
+body {
     margin: 0;
     padding: 0;
     background-color: #90D7FF;
     background-size: cover;
-    font-family:sans-serif;
-    background-position:center;
+    font-family: sans-serif;
+    background-position: center;
     text-align: center;
 }
 
-h1{
+h1 {
     margin: 0;
     padding: 0 0 20px;
     text-align: center;
@@ -20,7 +18,7 @@ h1{
 
 }
 
-h3{
+h3 {
     margin: 0;
     padding: 0 0 20px;
     text-align: center;
@@ -29,11 +27,12 @@ h3{
 
 /* chart relateret CSS*/
 
-.chartWrap{
+.chartWrap {
     position: relative;
     width: 80%;
     margin-bottom: 30px;
 }
+
 .chartWrap > canvas {
     position: absolute;
     margin-top: 100px;
@@ -47,6 +46,8 @@ section.range-slider {
     text-align: center;
     width: 100%;
 }
+
+/* nedenstående baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/ */
 section.range-slider input[type="range"] {
     pointer-events: none;
     position: absolute;
@@ -67,6 +68,7 @@ section.range-slider input[type="range"] {
     padding: 0;
 
 }
+
 section.range-slider input[type="range"]::-webkit-slider-thumb {
     pointer-events: all;
     position: relative;
@@ -84,12 +86,9 @@ section.range-slider input[type="range"]::-webkit-slider-thumb {
             color-stop(0%, #dad8da),
             color-stop(100%, #413f41)
     );
-    /* android <= 2.2 */
-    background-image: -webkit-linear-gradient(top, #dad8da 0, #413f41 100%);
-    /* older mobile safari and android > 2.2 */
-    background-image: linear-gradient(to bottom, #dad8da 0, #413f41 100%);
-    /* W3C */
+
 }
+
 section.range-slider input[type="range"]::-moz-range-thumb {
     pointer-events: all;
     position: relative;
@@ -102,6 +101,7 @@ section.range-slider input[type="range"]::-moz-range-thumb {
     background-image: linear-gradient(to bottom, #dad8da 0, #413f41 100%);
     /* W3C */
 }
+
 section.range-slider input[type="range"]::-ms-thumb {
     pointer-events: all;
     position: relative;
@@ -114,17 +114,20 @@ section.range-slider input[type="range"]::-ms-thumb {
     background-image: linear-gradient(to bottom, #dad8da 0, #413f41 100%);
     /* W3C */
 }
+
 section.range-slider input[type="range"]::-moz-range-track {
     position: relative;
     z-index: -1;
     background-color: black;
     border: 0;
 }
+
 section.range-slider input[type="range"]:last-of-type::-moz-range-track {
     -moz-appearance: none;
     background: none transparent;
     border: 0;
 }
+
 section.range-slider input[type="range"]::-moz-focus-outer {
     border: 0;
 }

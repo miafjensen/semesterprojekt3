@@ -53,7 +53,7 @@ public class DataService {
 
 
     public ArrayList<Integer> getDataArrayList() {
-        for (String string : EKGdata ) {
+        for (String string : EKGdata) {
             //kører det splittede data igennem
             dataArrayList.add(Integer.parseInt(string));
             //konverterer indhold i array til int, og tilføjes til arrayList plads for plads

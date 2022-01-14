@@ -3,10 +3,9 @@ package api;
 
 import com.google.gson.Gson;
 import controller.EKGController;
-import controller.LoginController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
-import model.LoginData;
+import org.json.JSONObject;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,7 +14,7 @@ import java.sql.SQLException;
 @Path("EKGService")
 @Produces({MediaType.TEXT_PLAIN})
 
-public class ResultatService {
+public class EKGService {
 
     //Henter data fra python til backend
     @POST
@@ -40,6 +39,15 @@ public class ResultatService {
         System.out.println("DONE");
         return EKGdata;
 
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public void visEKGOversigt(@QueryParam("CPRnummer") String CPR) throws SQLException {
+
+        //JSONObject jsonObject = EKGController.getEkgControllerObj().showEKGsessionsStart(CPR);
+
+        return ;
     }
 
     @Path("EKGService")

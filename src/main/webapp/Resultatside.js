@@ -1,9 +1,4 @@
 
-
-
-
-
-
 async function HentEkgData() {
     // Serialiser formen til js-objekt
     //let loginform = document.getElementById("loginform");
@@ -13,7 +8,7 @@ async function HentEkgData() {
 
 
     const res = await fetch("data/EKGService?" + new URLSearchParams({
-        username: user,
+        cpr: CPRnummer,
     }, {
         method: "GET"
     }));
@@ -21,7 +16,7 @@ async function HentEkgData() {
 
 
 }
-
+/*
 function hentAftaleFecth(from, to) {
     let fra = from;
     let til = to;
@@ -36,6 +31,8 @@ function hentAftaleFecth(from, to) {
     }).then(resp => resp.json()).then(data => udfyldskema(data));
 }
 
+ */
+/*
 function udfyldskema(data) {
     let timestart = "";
     let timeend = "";
@@ -61,22 +58,12 @@ function udfyldskema(data) {
     document.getElementById("autotider").innerHTML = container;
 }
 
+*/
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/ */
 // create dummy data
 
 var labels = [];

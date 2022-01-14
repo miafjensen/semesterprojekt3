@@ -40,8 +40,8 @@ public class AftaleXSDgen {
 
         JAXBContext jaxbContext = JAXBContext.newInstance(AftaleListe.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
-        marshaller.marshal(aftaleliste,System.out);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(aftaleliste, System.out);
 
         ArrayList<DOMResult> results = new ArrayList<DOMResult>();
         jaxbContext.generateSchema(new SchemaOutputResolver() {

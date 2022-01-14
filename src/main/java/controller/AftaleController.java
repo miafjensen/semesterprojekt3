@@ -37,7 +37,7 @@ public class AftaleController {
         if (cprCheck(cpr)) {
             return SQL.getSqlOBJ().cprSearch(cpr);
         }
-       return new AftaleListe();
+        return new AftaleListe();
     }
 
 

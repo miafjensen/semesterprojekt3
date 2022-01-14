@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement(name="ekgListe")
+@XmlRootElement(name = "ekgListe")
 @XmlSeeAlso(EKG.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 //@jakarta.xml.bind.annotation.XmlRootElement(name="aftaleListe")
@@ -12,17 +12,20 @@ import java.util.List;
 public class EKGListe {
 
 
-
-    @XmlElement(name="ekgSession")
+    @XmlElement(name = "ekgSession")
     //@jakarta.xml.bind.annotation.XmlElement(name="aftale")
-    List<EKG> ekgList = new ArrayList<>();
+    List<EKG> ekgListe = new ArrayList<>();
 
     public List<EKG> getEkgList() {
-        return ekgList;
+        return ekgListe;
     }
 
     public void setEkgList(List<EKG> ekgList) {
-        this.ekgList = ekgList;
+        this.ekgListe = ekgList;
+    }
+
+    public void addEKGListe(EKG ekg) {
+        ekgListe.add(ekg);
     }
 
 }
