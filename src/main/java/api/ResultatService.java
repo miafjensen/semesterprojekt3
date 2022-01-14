@@ -44,7 +44,7 @@ public class ResultatService {
 
     @Path("EKGService")
     @GET
-    public String selectFromTime(@QueryParam("") String from, @QueryParam("to") String to) throws SQLException {
+    public String selectFromTime(@QueryParam("from") String from, @QueryParam("to") String to) throws SQLException {
         return new Gson().toJson(SQL.getSqlOBJ().getAftaleListeDateTime(from, to));
     }
 }

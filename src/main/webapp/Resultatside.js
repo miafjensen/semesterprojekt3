@@ -22,7 +22,6 @@ async function HentEkgData() {
 
 }
 
-
 function hentAftaleFecth(from, to) {
     let fra = from;
     let til = to;
