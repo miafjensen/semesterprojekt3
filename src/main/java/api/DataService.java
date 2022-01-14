@@ -2,7 +2,6 @@ package api;
 
 import controller.ImportController;
 import org.json.JSONObject;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
@@ -17,10 +16,9 @@ public class DataService {
     private String input = "";
     private String[] splitData;
 
-
     @POST
     public String postEKGData(String EKGdata) {
-
+        //System.out.println(EKGdata);
         return EKGdata;
     }
 

@@ -11,8 +11,7 @@ import java.sql.SQLException;
 
 public class AftaleController {
 
-    private AftaleController() {
-    }
+    private AftaleController() {}
 
     static private final AftaleController AFTALE_CONTROLLER_OBJ = new AftaleController();
 
@@ -65,8 +64,6 @@ public class AftaleController {
             ex.setMessage("CPR skal være 10 cifre, yyyymmddxxxx");
             throw ex;
         }
-
-
     }
 
 }

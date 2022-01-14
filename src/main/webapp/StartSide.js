@@ -229,21 +229,7 @@ function noWeekend() {
     start.value = (day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getUTCDate() + " " + day.getHours() + ":" + day.getMinutes());
     end.value = (endDay.getFullYear() + "-" + (endDay.getMonth() + 1) + "-" + endDay.getUTCDate() + " " + endDay.getHours() + ":" + endDay.getMinutes());
     timefree.value = (day.getHours() + ":" + day.getMinutes() + " til " + endDay.getHours() + ":" + endDay.getMinutes() + "    d." + day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getUTCDate())
-    /*
-    if (day.getDay() === 6 || day.getDay() === 0) {
-        alert('Weekends not allowed');
-        datetime.value = "";
-        start.value = "";
-        end.value = "";
-        timefree.value = "";
-    }
-    if (day.getHours() >16 || day.getHours()<8) {
-        alert('Between 8-16');
-        datetime.value = "";
-        start.value = "";
-        end.value = "";
-        timefree.value = "";
-    } */
+
 }
 
 window.onload = function () {

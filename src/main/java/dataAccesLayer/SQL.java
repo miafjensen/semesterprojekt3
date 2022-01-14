@@ -24,14 +24,14 @@ public class SQL {
 
     private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s190600?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String DatabaseUser = "s190600";
-    private final String DatabasePassword = "Qd5UiHM09iNxfubw7OWnC"; //tomcat system startups
+    private final String DatabasePassword = "Qd5UiHM09iNxfubw7OWnC";
 
     private Connection myConn;
     public Statement myStatement;
 
     public void makeConnectionSQL() throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -80,7 +80,7 @@ public class SQL {
     }
 
 
-    public void insertAftaleSQL(Aftale aftale) throws OurException {
+    public void insertAftaleSQL(Aftale aftale){
 
         try {
             makeConnectionSQL();
@@ -96,9 +96,7 @@ public class SQL {
 
             removeConnectionSQL();
         } catch (SQLException throwables) {
-            OurException ex = new OurException();
-            ex.setMessage("Tiden er allerede optaget.");
-            throw ex;
+           throwables.printStackTrace();
         }
     }
 
