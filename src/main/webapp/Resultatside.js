@@ -1,4 +1,5 @@
 var chart = ""
+
 async function HentEkgData() {
     // Serialiser formen til js-objekt
     //let loginform = document.getElementById("loginform");
@@ -13,11 +14,14 @@ async function HentEkgData() {
         method: "GET"
     }));
 
-    let json = await res.json()
-    console.log(json)
-    let labels = Array(json.length).fill("")
+    let values = await res.json()
+    //console.log(json)
+    let labels = []
+    for (var i = 0; i < values.length; i++)
+        labels.push("" + i)
+    //Array(json.length).fill("")
 
-    if(chart?.destroy){
+    if (chart?.destroy) {
         chart?.destroy()
     }
 
@@ -29,15 +33,18 @@ async function HentEkgData() {
             labels: labels,
             datasets: [
                 {
-                    label: "",
+                    label: "EKG",
                     backgroundColor: "rgba(50,60,93,0)",
                     borderColor: "rgba(50,60,93,0.45)",
-                    data: json,
+                    data: values,
                 },
             ],
         },
         // Configuration options go here
-        options: {},
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        },
     });
 
 }
@@ -53,7 +60,8 @@ function getVals() {
     if (min > max) {
         var tmp = max;
         max = min;
-        min = tmp;}
+        min = tmp;
+    }
 
     var label = [];
     var value = [];
@@ -85,7 +93,7 @@ for (var x = 0; x < sliderSections.length; x++) {
     for (var y = 0; y < sliders.length; y++) {
         if (sliders[y].type === "range") {
             sliders[y].oninput = getVals;
-            sliders[y].max=JSON.parse(JSON.stringify(labels)).length;
+            sliders[y].max = JSON.parse(JSON.stringify(labels)).length;
             // Manually trigger event first time to display values
             sliders[y].oninput();
         }

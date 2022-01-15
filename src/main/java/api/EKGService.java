@@ -20,7 +20,7 @@ public class EKGService {
 
     //Henter data fra python til backend
     @POST
-    public String postEKGData(String EKGdata) throws OurException {
+    public String postEKGData(String EKGdata) throws OurException, SQLException {
         //System.out.println(EKGdata);
         String[] a = EKGdata.split(" : ");
         String cpr = a[0];

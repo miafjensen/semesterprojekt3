@@ -117,7 +117,7 @@ public class SQL {
 
     }
 
-    public void EKGdataInsertBatch(int id, double[] datapointBatch) {
+    public void EKGdataInsertBatch(int id, double[] datapointBatch) throws SQLException {
         try {
             makeConnectionSQL();
             System.out.println(System.currentTimeMillis());
@@ -130,15 +130,22 @@ public class SQL {
                 pp.addBatch();
             }
             System.out.println(System.currentTimeMillis());
-            pp.executeLargeBatch();
-            myConn.commit();
-            myConn.setAutoCommit(true);
+            pp.executeBatch();
+            //myConn.commit(); // kan ikke altid overføre 5000 punkter fra python, må ikke være aktiv samtidig med myConn.setAutoCommit(true);
+            //myConn.setAutoCommit(true); // virker ikke når datasæt bliver for store
             System.out.println(System.currentTimeMillis());
-            removeConnectionSQL();
             System.out.println("Batch sendt til EKGData");
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.out.println(System.currentTimeMillis());
+            System.out.println("fejl i upload til db");
         }
+        myConn.commit();
+        removeConnectionSQL();
+        System.out.println(System.currentTimeMillis());
+        System.out.println("forbindelse til SQL fjernet");
+
     }
 
     public Integer createEKGSession(String cpr) {

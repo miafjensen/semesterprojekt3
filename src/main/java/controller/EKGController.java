@@ -32,7 +32,7 @@ public class EKGController {
     }
 
 
-    public String insertEKGdataIDatabase(Integer id, double[] datapoint) throws OurException {
+    public String insertEKGdataIDatabase(Integer id, double[] datapoint) throws OurException, SQLException {
 
         SQL.getSqlOBJ().EKGdataInsertBatch(id, datapoint);
         return "Indsat i EKGData";
