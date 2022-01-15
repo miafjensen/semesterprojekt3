@@ -44,7 +44,7 @@ public class EKGService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Double> visEKGOversigt(@QueryParam("cpr") int sessionID) throws SQLException {
+    public List<Double> visEKGOversigt(@QueryParam("sesID") int sessionID) throws SQLException {
 
         return SQL.getSqlOBJ().getEKGData(sessionID);
 

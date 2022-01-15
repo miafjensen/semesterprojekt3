@@ -1,21 +1,19 @@
 var chart = ""
-let rangevalues = []
-let labels = []
+
 
 async function HentEkgData() {
-    // Serialiser formen til js-objekt
-    //let loginform = document.getElementById("loginform");
-    CPRnummer = document.getElementById("CPRnummerBoks").value;
+    sesID = document.getElementById("sesID").value; //henter sessionID fra indtastningsfeltet
 
-    console.log(CPRnummer)
+    console.log(sesID)
 
 
     const res = await fetch("data/EKGService?" + new URLSearchParams({
-        cpr: CPRnummer,
+        sesID: sesID,
     }, {
         method: "GET"
     }));
-
+    let rangevalues = []
+    let labels = []
     let values = await res.json()
     //console.log(json)
     rangevalues = values
@@ -104,7 +102,7 @@ async function HentEkgData() {
 /* nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders*/
 
 
-function findEKG() {
+function findEKGSession() {
 
 
 }

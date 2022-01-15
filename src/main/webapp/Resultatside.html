@@ -47,8 +47,17 @@
 
 <!--   Skrive CPR-nummer       -->
 <div class="CPR-nummerChoose">
+    <label for="CPRnummerBoks">CPR:</label>
     <input type="text" id="CPRnummerBoks" required name="cprNummerVælger">
-    <label for="CPRnummerBoks">CPR</label>
+
+
+    <button onclick="findEKGSession()" type="button">Find sessions</button>
+
+</div>
+
+<div class="SesIDtilEKG">
+    <label for="sesID">SessionID</label>
+    <input type="text" id="sesID" required name="sesID">
 
     <button onclick="HentEkgData()" type="button">Hent EKG-data</button>
 
