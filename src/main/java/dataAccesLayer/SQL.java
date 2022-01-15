@@ -62,11 +62,11 @@ public class SQL {
             while (rs.next()) {
                 Aftale aftale = new Aftale();
                 aftale.setCPR(rs.getString("CPR"));
-                aftale.setTimeStart(rs.getString(2));
-                aftale.setTimeEnd(rs.getString(3));
-                aftale.setNotat(rs.getString(4));
-                aftale.setID(rs.getString(5));
-                aftale.setKlinikID(rs.getString(6));
+                aftale.setTimeStart(rs.getString("TimeStart"));
+                aftale.setTimeEnd(rs.getString("TimeEnd"));
+                aftale.setNotat(rs.getString("Notat"));
+                aftale.setID(rs.getString("Id"));
+                aftale.setKlinikID(rs.getString("KlinikId"));
 
 
                 aftaleListe.addAftaler(aftale);
