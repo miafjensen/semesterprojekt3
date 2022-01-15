@@ -196,6 +196,30 @@ public class SQL {
         return ekgListe;
     }
 
+    public  EKGListe getALLSessions() throws SQLException {
+        SQL.getSqlOBJ().makeConnectionSQL();
+        EKGListe sessionListe = new EKGListe();
+
+        try{
+            PreparedStatement pp = myConn.prepareStatement("SELECT * FROM SessionData order by CPR;");
+            ResultSet rs = pp.executeQuery();
+
+            while (rs.next()){
+                EKG session = new EKG();
+                session.setDato(rs.getString("Start"));
+                session.setCPR(rs.getString("CPR"));
+                session.setSessionId(rs.getInt("SessionID"));
+
+                sessionListe.addEKGListe(session);
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        SQL.getSqlOBJ().removeConnectionSQL();
+        return sessionListe;
+
+    }
+
     public List<Double> getEKGData(int sesID) throws SQLException {
 
         List<Double> ekgData = new ArrayList<>();

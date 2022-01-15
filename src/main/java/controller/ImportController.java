@@ -1,6 +1,5 @@
 package controller;
 
-
 import model.Aftale;
 import model.AftaleListe;
 import dataAccesLayer.apiDAO;

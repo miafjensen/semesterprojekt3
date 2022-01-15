@@ -1,6 +1,5 @@
 package controller;
 
-
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.EKG;
