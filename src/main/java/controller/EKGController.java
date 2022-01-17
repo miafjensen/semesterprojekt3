@@ -38,6 +38,15 @@ public class EKGController {
 
     }
 
+
+    public EKGListe findSessions(String cpr) throws SQLException{
+        if (cpr==null){
+            return SQL.getSqlOBJ().getALLSessions();
+        }if (cprCheck(cpr)){
+            return SQL.getSqlOBJ().getSessions(cpr);
+        } return new EKGListe();
+    }
+
     /* public EKGListe showEKGsessionsStart(String CPR) throws SQLException {
         System.out.println(CPR);
 

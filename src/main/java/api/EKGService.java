@@ -1,8 +1,5 @@
 package api;
 
-
-//import com.google.gson.Gson;
-
 import controller.EKGController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
@@ -18,6 +15,25 @@ import java.util.List;
 @Produces({MediaType.TEXT_PLAIN})
 
 public class EKGService {
+    @GET
+    public EKGListe getSessions(@QueryParam("cpr") String cpr) throws SQLException{
+        return EKGController.getEkgControllerObj().findSessions(cpr);
+    }
+
+
+
+    /*
+    @Path("aftaler")
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_XML})
+public class AftaleService {
+
+    @GET
+    public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException{
+        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
+    }
+     */
+
 
     //Henter data fra python til backend
     @POST
@@ -42,20 +58,20 @@ public class EKGService {
         return EKGdata;
 
     }
+
+
     @Path("measurements")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {
-
         return SQL.getSqlOBJ().getEKGData(sessionID);
-
     }
 
 
     @Path("Sessions")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public EKGListe visAlleSession() throws SQLException{
+    public EKGListe visAlleSession() throws SQLException {
         return SQL.getSqlOBJ().getALLSessions();
     }
 

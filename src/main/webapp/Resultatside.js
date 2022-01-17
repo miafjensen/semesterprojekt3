@@ -56,16 +56,13 @@ function udfyldskema(data) {
 
 async function HentEkgData() {
     sesID = document.getElementById("sessionID").value; //henter sessionID fra indtastningsfeltet
-
     console.log(sesID)
-
 
     const res = await fetch("data/ekgSessions/measurements?sessionID=" + sesID,
     {
         headers: {
             "Authorization": localStorage.getItem("token")
-        }
-    ,
+        },
         method: "GET"
     });
     let rangevalues = []
