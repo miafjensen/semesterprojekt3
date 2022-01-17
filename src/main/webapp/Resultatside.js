@@ -1,5 +1,58 @@
 var chart = ""
 
+/* async function findAlleEKGSessions() {
+
+    const sessionsID = await fetch("data/EKGservice/Sessions?" + URLSearchParams({
+        method: "GET"
+        }));
+
+    let sessions = await sessionsID.json()
+    console.log(sessions)
+
+} */
+/*
+function hentAftaleFecth(from, to) {
+    let fra = from;
+    let til = to;
+    fetch("data/aftaler/aftalerSQL?" + new URLSearchParams({
+        from: fra,
+        to: til,
+
+    }), {
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
+    }).then(resp => resp.json()).then(data => {
+        console.log(data)
+        udfyldskema(data)
+    } );
+}
+
+function udfyldskema(data) {
+    let timestart = "";
+    let timeend = "";
+    let klinikId = "";
+    let cpr = "";
+    let container = "";
+    let note = "";
+
+    for (let i = 0; i < data.aftale.length; i++) {
+        timestart = data.aftale[i].timeStart.substring(11, 16) + "\t-\t";
+        timeend = data.aftale[i].timeEnd.substring(11, 16)
+        klinikId = ("klinikId: " + data.aftale[i].klinikID);
+        cpr = "CPR: " + data.aftale[i].cpr + "\t";
+        note = "Notat: " + data.aftale[i].notat;
+
+
+        let Tider = '<span class="autotider">' + timestart + timeend + '</span>';
+        let CPR = '<span class="autoname">' + cpr + klinikId + '</span>';
+        let Notat = '<span class="autonote">' + note + '</span><hr>';
+
+        container += Tider + CPR + Notat;
+    }
+    document.getElementById("autotider").innerHTML = container;
+}
+ */
 
 async function HentEkgData() {
     sesID = document.getElementById("sesID").value; //henter sessionID fra indtastningsfeltet
@@ -104,8 +157,9 @@ async function HentEkgData() {
 
 function findEKGSession() {
 
-
 }
+
+
 
 
 

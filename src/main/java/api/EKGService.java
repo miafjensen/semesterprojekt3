@@ -6,6 +6,7 @@ package api;
 import controller.EKGController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
+import model.EKGListe;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -49,4 +50,12 @@ public class EKGService {
         return SQL.getSqlOBJ().getEKGData(sessionID);
 
     }
+    @Path("Sessions")
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public EKGListe visAlleSession() throws SQLException{
+        return SQL.getSqlOBJ().getALLSessions();
+    }
+
 }

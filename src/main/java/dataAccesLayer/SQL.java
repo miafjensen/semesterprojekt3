@@ -22,21 +22,29 @@ public class SQL {
         return SQLOBJ;
     }
 
-    private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/s190600?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private final String DatabaseUser = "s190600";
     private final String DatabasePassword = "Qd5UiHM09iNxfubw7OWnC";
+    private final String url = "jdbc:mysql://mysql-db.caprover.diplomportal.dk:3306/" + DatabaseUser +"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
 
     private Connection myConn;
     public Statement myStatement;
 
     public void makeConnectionSQL() throws SQLException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            myConn = DriverManager.getConnection(url, DatabaseUser, DatabasePassword);
+            myStatement = myConn.createStatement();
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            System.out.println("ikke oprettet forbindelse til database");
         }
-        myConn = DriverManager.getConnection(url, DatabaseUser, DatabasePassword);
-        myStatement = myConn.createStatement();
     }
 
     public void removeConnectionSQL() {
@@ -209,6 +217,7 @@ public class SQL {
                 session.setDato(rs.getString("Start"));
                 session.setCPR(rs.getString("CPR"));
                 session.setSessionId(rs.getInt("SessionID"));
+                System.out.println(session);
 
                 sessionListe.addEKGListe(session);
             }
@@ -216,6 +225,7 @@ public class SQL {
             throwables.printStackTrace();
         }
         SQL.getSqlOBJ().removeConnectionSQL();
+        System.out.println(sessionListe);
         return sessionListe;
 
     }

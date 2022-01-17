@@ -25,7 +25,7 @@ public class LoginController {
 
     public String doLogin(LoginData loginData) {
         try {
-            // sql kald der kontrollere om brugeren eksitere
+            // sql kald der kontrollere om brugeren eksisterer
             String brugerListe = SQL.getSqlOBJ().hentBrugerListe(loginData.getUsername());
 
             // kontrol af login og generer token
@@ -71,9 +71,12 @@ public class LoginController {
         return saltint;
     }
 
-    // metode til at hashe kodeord
+    // metode til generere salt og hashe kodeord
     public static void main(String[] args) {
-        System.out.println(generateHash("1234", 1));
+
+        //int salt = getSalt();
+        //System.out.println("salt: " + getSalt());
+        System.out.println("hash: "+generateHash("1234", 2));
     }
 }
 
