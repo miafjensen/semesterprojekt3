@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Resultatside.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Nedenunder angives stylesheet der skal bruges til at lave bla. menu-baren, som skal være på alle sider -->
 
 
@@ -52,13 +52,14 @@
 
 
     <button onclick="findEKGSession()" type="button">Find sessions</button>
+
     <button onclick="findAlleEKGSessions()" type="button">Find alle sessions</button>
 
 </div>
 
 <div class="searchField" id="searchFieldArea">
 
-</div>-->
+</div>
 
     <div class="SesIDtilEKG">
         <label for="sesID">SessionID</label>
@@ -91,8 +92,7 @@
 
 
     <h3>Resultat:</h3>
-    <i class="fa fa-print fa_custom" style="margin-bottom: 30px; position: center"></i> <a href="#"
-                                                                                           onclick="window.print();return false;">Print</a>
+    <i class="fa fa-print fa_custom" style="margin-bottom: 30px; position: center"></i> <a href="#" onclick="window.print();return false;">Print</a>
     <div class="chartWrap">
 
         <canvas id="myChart"></canvas>
@@ -104,7 +104,7 @@
     </div>
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <style type="text/css">
         .fa_custom {
             color: #0099CC

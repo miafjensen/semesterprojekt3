@@ -1,6 +1,6 @@
 var chart = ""
 
-/* async function findAlleEKGSessions() {
+async function findAlleEKGSessions() {
 
     const sessionsID = await fetch("data/EKGservice/Sessions?" + URLSearchParams({
         method: "GET"
@@ -9,7 +9,7 @@ var chart = ""
     let sessions = await sessionsID.json()
     console.log(sessions)
 
-} */
+}
 /*
 function hentAftaleFecth(from, to) {
     let fra = from;
