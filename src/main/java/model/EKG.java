@@ -7,6 +7,9 @@ public class EKG {
     private Float EKGdata;
     private int sessionId;
     private String dato;
+    private String start;
+    private int sessionID;
+    public Double Values;
 
 
     public String getDato() {
@@ -40,4 +43,27 @@ public class EKG {
     public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
     }
+
+    public int getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(int sessionID) {
+        this.sessionID = sessionID;
+    }
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+    public Double getValues() {
+        return Values;
+    }
+
+    public void setValues(Double setValues) {
+        this.Values = setValues;
+    }
+
 }

@@ -49,6 +49,18 @@ public class EKGController {
         return new EKGListe();
     }
 
+    public EKGListe exportEKG(String sessionID) throws SQLException{
+
+        try {
+            int sesID = Integer.parseInt(sessionID);
+            return SQL.getSqlOBJ().exportEKG(sesID);
+        }catch (SQLException throwables){
+            System.out.println("ingen EKG-data på sessionID: " + sessionID);
+            throwables.printStackTrace();
+        }
+        return new EKGListe();
+    }
+
     /* public EKGListe showEKGsessionsStart(String CPR) throws SQLException {
         System.out.println(CPR);
 

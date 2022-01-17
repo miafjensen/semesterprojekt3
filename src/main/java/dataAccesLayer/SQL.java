@@ -181,32 +181,7 @@ public class SQL {
         return null;
     }
 
-    public EKGListe getSessions(String cpr) throws SQLException {
-        SQL.getSqlOBJ().makeConnectionSQL();
 
-        PreparedStatement pp = myConn.prepareStatement("SELECT start, SessionID FROM SessionsData WHERE CPR = ?");
-        pp.setString(1, cpr);
-        String dato = "";
-        EKGListe ekgListe = new EKGListe();
-        int sessionID;
-        try {
-            ResultSet rs = pp.executeQuery();
-            while (rs.next()) {
-                EKG ekg = new EKG();
-                dato = dato + rs.getString("Start");
-                sessionID = rs.getInt("SessionID");
-                System.out.println("dato: " + dato + " SessionID: " + sessionID);
-                ekgListe.addEKGListe(ekg);
-
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-
-        SQL.getSqlOBJ().removeConnectionSQL();
-        return ekgListe;
-    }
 
     public  EKGListe getALLSessions() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
@@ -231,6 +206,55 @@ public class SQL {
         SQL.getSqlOBJ().removeConnectionSQL();
         System.out.println(sessionListe);
         return sessionListe;
+
+    }
+    public EKGListe getSessions(String cpr) throws SQLException {
+        SQL.getSqlOBJ().makeConnectionSQL();
+        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM SessionData WHERE CPR = ?");
+        EKGListe ekgListe = new EKGListe();
+
+        try {
+            pp.setString(1, cpr);
+            ResultSet rs = pp.executeQuery();
+            while (rs.next()) {
+                EKG ekg = new EKG();
+                ekg.setSessionID(rs.getInt("SessionID"));
+                ekg.setStart(rs.getString("Start"));
+                ekg.setCPR(rs.getString("CPR"));
+
+                ekgListe.addEKGListe(ekg);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        SQL.getSqlOBJ().removeConnectionSQL();
+        return ekgListe;
+    }
+
+    public EKGListe exportEKG(int sessionID) throws SQLException{
+        SQL.getSqlOBJ().makeConnectionSQL();
+        PreparedStatement pp = myConn.prepareStatement("SELECT * FROM EKGData where SessionID = ?");
+        EKGListe ekgListe = new EKGListe();
+
+        try {
+            pp.setInt(1, sessionID);
+            ResultSet rs = pp.executeQuery();
+
+            while(rs.next()){
+                EKG ekg = new EKG();
+                ekg.setSessionID(rs.getInt("SessionID"));
+                ekg.setValues(rs.getDouble("Value"));
+
+                ekgListe.addEKGListe(ekg);
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        SQL.getSqlOBJ().removeConnectionSQL();
+        return ekgListe;
 
     }
 
@@ -328,6 +352,8 @@ public class SQL {
         SQL.getSqlOBJ().removeConnectionSQL();
         return aftaleListe;
     }
+
+
 
 
 }

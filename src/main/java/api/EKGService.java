@@ -26,6 +26,7 @@ public class EKGService {
 
 
     //Henter data fra python til backend
+    @Path("EKGdata")
     @POST
     public String postEKGData(String EKGdata) throws OurException, SQLException {
         //System.out.println(EKGdata);
@@ -49,8 +50,14 @@ public class EKGService {
 
     }
 
-
     @Path("measurements")
+    @GET
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public EKGListe exportEKG(@QueryParam("sessionID") String sessionID) throws SQLException{
+        return EKGController.getEkgControllerObj().exportEKG(sessionID);
+    }
+
+    @Path("EKGmeasurements")
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {

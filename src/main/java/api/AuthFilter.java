@@ -23,6 +23,20 @@ public class AuthFilter implements ContainerRequestFilter {
             }
             return;
         }
+        if ("ekgSessions".equals(containerRequestContext.getUriInfo().getPath())) {
+            System.out.println("tilgår aftaler");
+            if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {
+                throw new WebApplicationException("psst hvad er kodeordet?", 401);
+            }
+            return;
+        }
+        if ("ekgSessions/measurements".equals(containerRequestContext.getUriInfo().getPath())) {
+            System.out.println("tilgår aftaler");
+            if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {
+                throw new WebApplicationException("psst hvad er kodeordet?", 401);
+            }
+            return;
+        }
         //Hvis det ikke er login siden udføre vi kontrol af token
         if (!"login".equals(containerRequestContext.getUriInfo().getPath()) && !"ekgSessions".equals(containerRequestContext.getUriInfo().getPath())) {
             if (containerRequestContext.getHeaderString("Authorization") == null) {

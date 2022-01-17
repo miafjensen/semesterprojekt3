@@ -58,7 +58,7 @@ async function HentEkgData() {
     sesID = document.getElementById("sessionID").value; //henter sessionID fra indtastningsfeltet
     console.log(sesID)
 
-    const res = await fetch("data/ekgSessions/measurements?sessionID=" + sesID,
+    const res = await fetch("data/ekgSessions/EKGmeasurements?sessionID=" + sesID,
     {
         headers: {
             "Authorization": localStorage.getItem("token")

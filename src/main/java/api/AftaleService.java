@@ -16,7 +16,8 @@ public class AftaleService {
 
     @GET
     public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException{
-        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
+        return SQL.getSqlOBJ().cprSearch(cpr);
+                //AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
     }
 
     @Path("aftalerSQL")
