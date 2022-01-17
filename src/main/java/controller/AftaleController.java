@@ -40,7 +40,7 @@ public class AftaleController {
     }
 
 
-    public String createAftale(String cpr, String timestart, String timeend, String note) throws OurException {
+    public String createAftale(String cpr, String timestart, String timeend, String note) throws SQLException, OurException {
         Aftale aftale = new Aftale();
         if (cprCheck(cpr)) {
             if (note.length() < 255) {

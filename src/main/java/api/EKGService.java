@@ -12,27 +12,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Path("ekgSessions")
-@Produces({MediaType.TEXT_PLAIN})
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+@Consumes({MediaType.APPLICATION_XML})
 
 public class EKGService {
     @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public EKGListe getSessions(@QueryParam("cpr") String cpr) throws SQLException{
         return EKGController.getEkgControllerObj().findSessions(cpr);
     }
 
 
-
-    /*
-    @Path("aftaler")
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-@Consumes({MediaType.APPLICATION_XML})
-public class AftaleService {
-
-    @GET
-    public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException{
-        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
-    }
-     */
 
 
     //Henter data fra python til backend
@@ -62,7 +52,7 @@ public class AftaleService {
 
     @Path("measurements")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {
         return SQL.getSqlOBJ().getEKGData(sessionID);
     }

@@ -7,13 +7,11 @@ import java.util.List;
 @XmlRootElement(name = "ekgListe")
 @XmlSeeAlso(EKG.class)
 @XmlAccessorType(XmlAccessType.FIELD)
-//@jakarta.xml.bind.annotation.XmlRootElement(name="aftaleListe")
-//@jakarta.xml.bind.annotation.XmlSeeAlso(Aftale.class)
+
 public class EKGListe {
 
 
     @XmlElement(name = "ekgSession")
-    //@jakarta.xml.bind.annotation.XmlElement(name="aftale")
     List<EKG> ekgListe = new ArrayList<>();
 
     public List<EKG> getEkgList() {

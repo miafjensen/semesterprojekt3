@@ -139,7 +139,7 @@ public class SQL {
             }
             System.out.println(System.currentTimeMillis());
             pp.executeBatch();
-            //myConn.commit(); // kan ikke altid overføre 5000 punkter fra python, må ikke være aktiv samtidig med myConn.setAutoCommit(true);
+            myConn.commit(); // kan ikke altid overføre 5000 punkter fra python, må ikke være aktiv samtidig med myConn.setAutoCommit(true);
             //myConn.setAutoCommit(true); // virker ikke når datasæt bliver for store
             System.out.println(System.currentTimeMillis());
             System.out.println("Batch sendt til EKGData");
@@ -149,7 +149,7 @@ public class SQL {
             System.out.println(System.currentTimeMillis());
             System.out.println("fejl i upload til db");
         }
-        myConn.commit();
+        //myConn.commit();
         removeConnectionSQL();
         System.out.println(System.currentTimeMillis());
         System.out.println("forbindelse til SQL fjernet");

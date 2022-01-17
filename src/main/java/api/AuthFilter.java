@@ -14,7 +14,7 @@ public class AuthFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext containerRequestContext) {
-        System.out.println(containerRequestContext.getUriInfo().getPath());
+        //System.out.println(containerRequestContext.getUriInfo().getPath());
         /* Kontrol af private key på aftaler endpoint */
         if ("aftaler".equals(containerRequestContext.getUriInfo().getPath())) {
             System.out.println("tilgår aftaler");

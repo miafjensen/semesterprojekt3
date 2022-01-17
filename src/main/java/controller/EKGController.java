@@ -31,7 +31,7 @@ public class EKGController {
     }
 
 
-    public String insertEKGdataIDatabase(Integer id, double[] datapoint) throws OurException, SQLException {
+    public String insertEKGdataIDatabase(Integer id, double[] datapoint) throws SQLException {
 
         SQL.getSqlOBJ().EKGdataInsertBatch(id, datapoint);
         return "Indsat i EKGData";
@@ -39,12 +39,14 @@ public class EKGController {
     }
 
 
-    public EKGListe findSessions(String cpr) throws SQLException{
-        if (cpr==null){
+    public EKGListe findSessions(String cpr) throws SQLException {
+        if (cpr == null) {
             return SQL.getSqlOBJ().getALLSessions();
-        }if (cprCheck(cpr)){
+        }
+        if (cprCheck(cpr)) {
             return SQL.getSqlOBJ().getSessions(cpr);
-        } return new EKGListe();
+        }
+        return new EKGListe();
     }
 
     /* public EKGListe showEKGsessionsStart(String CPR) throws SQLException {
