@@ -2,7 +2,7 @@ var chart = ""
 
 async function findAlleEKGSessions() {
 
-    const sessionsID = await fetch("data/EKGservice/Sessions?" + URLSearchParams({
+    const sessionsID = await fetch("data/ekgSessions?" + URLSearchParams({
         method: "GET"
         }));
 
@@ -55,16 +55,19 @@ function udfyldskema(data) {
  */
 
 async function HentEkgData() {
-    sesID = document.getElementById("sesID").value; //henter sessionID fra indtastningsfeltet
+    sesID = document.getElementById("sessionID").value; //henter sessionID fra indtastningsfeltet
 
     console.log(sesID)
 
 
-    const res = await fetch("data/EKGService?" + new URLSearchParams({
-        sesID: sesID,
-    }, {
+    const res = await fetch("data/ekgSessions/measurements?sessionID=" + sesID,
+    {
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
+    ,
         method: "GET"
-    }));
+    });
     let rangevalues = []
     let labels = []
     let values = await res.json()

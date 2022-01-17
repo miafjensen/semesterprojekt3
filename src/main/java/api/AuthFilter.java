@@ -14,14 +14,17 @@ public class AuthFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext containerRequestContext) {
+        System.out.println(containerRequestContext.getUriInfo().getPath());
         /* Kontrol af private key på aftaler endpoint */
         if ("aftaler".equals(containerRequestContext.getUriInfo().getPath())) {
+            System.out.println("tilgår aftaler");
             if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {
                 throw new WebApplicationException("psst hvad er kodeordet?", 401);
             }
+            return;
         }
         //Hvis det ikke er login siden udføre vi kontrol af token
-        if (!"login".equals(containerRequestContext.getUriInfo().getPath()) && !"EKGService".equals(containerRequestContext.getUriInfo().getPath())) {
+        if (!"login".equals(containerRequestContext.getUriInfo().getPath()) && !"ekgSessions".equals(containerRequestContext.getUriInfo().getPath())) {
             if (containerRequestContext.getHeaderString("Authorization") == null) {
                 throw new WebApplicationException("Ingen Token", 401);
             }

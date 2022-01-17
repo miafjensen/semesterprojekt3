@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
 
-@Path("EKGService")
+@Path("ekgSessions")
 @Produces({MediaType.TEXT_PLAIN})
 
 public class EKGService {
@@ -42,16 +42,17 @@ public class EKGService {
         return EKGdata;
 
     }
-
+    @Path("measurements")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Double> visEKGOversigt(@QueryParam("sesID") int sessionID) throws SQLException {
+    public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {
 
         return SQL.getSqlOBJ().getEKGData(sessionID);
 
     }
-    @Path("Sessions")
 
+
+    @Path("Sessions")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public EKGListe visAlleSession() throws SQLException{
