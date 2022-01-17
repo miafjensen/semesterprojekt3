@@ -6,7 +6,8 @@
 
 /* baggrund. tog bare et random billede kan altid ændres */
 body {
-    background: url('IMG/dna-3539309_1920.jpg') no-repeat center;
+/* background: url('IMG/dna-3539309_1920.jpg') no-repeat center;*/
+    background: url('IMG/happybackground1.jpg') no-repeat center;
     background-size: cover;
     font-family: "Times New Roman", serif;
 }
