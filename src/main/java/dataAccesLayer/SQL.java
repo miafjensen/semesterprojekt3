@@ -127,33 +127,37 @@ public class SQL {
 
     public void EKGdataInsertBatch(int id, double[] datapointBatch) throws SQLException {
         try {
-            makeConnectionSQL();
-            System.out.println(System.currentTimeMillis());
-            myConn.setAutoCommit(false);
-            PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
+            try {
+                makeConnectionSQL();
+                System.out.println(System.currentTimeMillis());
+                myConn.setAutoCommit(false);
+                PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
-            for (int i = 0; i < datapointBatch.length; i++) {
-                pp.setInt(1, id);  //CPR
-                pp.setDouble(2, datapointBatch[i]);  //starttime
-                pp.addBatch();
+                for (int i = 0; i < datapointBatch.length; i++) {
+                    pp.setInt(1, id);  //CPR
+                    pp.setDouble(2, datapointBatch[i]);  //starttime
+                    pp.addBatch();
+                }
+                System.out.println(System.currentTimeMillis());
+                pp.executeBatch();
+                //myConn.commit(); // kan ikke altid overføre 5000 punkter fra python, må ikke være aktiv samtidig med myConn.setAutoCommit(true);
+                //myConn.setAutoCommit(true); // virker ikke når datasæt bliver for store
+                System.out.println(System.currentTimeMillis());
+                System.out.println("Batch sendt til EKGData");
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println(System.currentTimeMillis());
+                System.out.println("fejl i upload til db");
             }
-            System.out.println(System.currentTimeMillis());
-            pp.executeBatch();
-            myConn.commit(); // kan ikke altid overføre 5000 punkter fra python, må ikke være aktiv samtidig med myConn.setAutoCommit(true);
-            //myConn.setAutoCommit(true); // virker ikke når datasæt bliver for store
-            System.out.println(System.currentTimeMillis());
-            System.out.println("Batch sendt til EKGData");
-
-        } catch (SQLException throwables) {
+            myConn.setAutoCommit(true);
+        }catch (SQLException throwables){
             throwables.printStackTrace();
-            System.out.println(System.currentTimeMillis());
-            System.out.println("fejl i upload til db");
+            System.out.println("fejl i commit");
         }
-        //myConn.commit();
-        removeConnectionSQL();
         System.out.println(System.currentTimeMillis());
         System.out.println("forbindelse til SQL fjernet");
-
+        removeConnectionSQL();
     }
 
     public Integer createEKGSession(String cpr) {
