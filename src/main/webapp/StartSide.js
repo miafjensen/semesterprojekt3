@@ -38,7 +38,7 @@ function udfyldskema(data) {
         let CPR = '<span class="autoname">' + cpr + klinikId + '</span>';
         let Notat = '<span class="autonote">' + note + '</span><hr>';
 
-        container += Tider + CPR + Notat;
+        container = Tider + CPR + Notat;
     }
     document.getElementById("autotider").innerHTML = container;
 }
