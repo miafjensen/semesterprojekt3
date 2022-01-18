@@ -60,18 +60,4 @@ public class EKGController {
         return new EKGListe();
     }
 
-    /* public EKGListe showEKGsessionsStart(String CPR) throws SQLException {
-        System.out.println(CPR);
-
-        return new EKGListe();
-    } */
-
-    /*
-    public List<Double> showEKGdataToChart(int sessionID) throws SQLException {
-
-        List<Double> ekgData = SQL.getSqlOBJ().getEKGData(sessionID);
-
-        return ekgData;
-    }
-    */
 }

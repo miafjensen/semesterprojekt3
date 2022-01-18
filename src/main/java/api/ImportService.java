@@ -22,9 +22,9 @@ public class ImportService {
 
     @GET
     public String hentAftaler(@QueryParam("cpr") String cpr) throws UnirestException{
-        urlRoots.add("https://ekg2.diplomportal.dk/data");
-        urlRoots.add("http://ekg3.diplomportal.dk/data");
-        urlRoots.add("http://ekg4.diplomportal.dk/data");
+        urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
+        urlRoots.add("https://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
         urlRoots.add("http://130.225.170.165:8080/data");
 
         authorization.add("Bearer hemmeliglogin");
@@ -51,12 +51,12 @@ public class ImportService {
         return jsonArray.toString();
     }
 
-    @Path("sessionID")
+    @Path("ekgSessions")
     @GET
     public String importSessionID(@QueryParam("cpr") String cpr) throws UnirestException{
-        urlRoots.add("https://ekg2.diplomportal.dk/data");
-        urlRoots.add("http://ekg3.diplomportal.dk/data");
-        urlRoots.add("http://ekg4.diplomportal.dk/data");
+        urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
+        urlRoots.add("https://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
         urlRoots.add("http://130.225.170.165:8080/data");
 
         authorization.add("Bearer hemmeliglogin");
@@ -80,24 +80,24 @@ public class ImportService {
         return jsonArray.toString();
     }
 
-    @Path("EKGdata")
+    @Path("ekgSessions/measurements")
     @GET
-    public String importEkgData(@QueryParam("cpr") String cpr) throws UnirestException{
-        urlRoots.add("https://ekg2.diplomportal.dk/data");
-        urlRoots.add("http://ekg3.diplomportal.dk/data");
-        urlRoots.add("http://ekg4.diplomportal.dk/data");
-        urlRoots.add("http://130.225.170.165:8080/data");
+    public String importEkgData(@QueryParam("sessionID") String sessionID) throws UnirestException{
+        urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
+        urlRoots.add("https://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
+        //urlRoots.add("http://130.225.170.165:8080/data");
 
         authorization.add("Bearer hemmeliglogin");
         authorization.add("Bearer hemmeliglogin");
         authorization.add("Bearer hemmeliglogin");
-        authorization.add("hemmeliglogin");
+        //authorization.add("hemmeliglogin");
 
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i<urlRoots.size(); i++) {
             try {
 
-                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/ekgSessions/measurements?sessionID=" + cpr)
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/ekgSessions/measurements?sessionID=" + sessionID)
                         .header("accept", "application/xml")
                         .header("Authorization", authorization.get(i)).asString();
                 String stringHttpResponseBody = stringHttpResponse.getBody();
@@ -106,11 +106,8 @@ public class ImportService {
             }catch (UnirestException unirestException){
                 unirestException.getCause();
             }
-
         }
-
         return jsonArray.toString();
     }
-
 }
 

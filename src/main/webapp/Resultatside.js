@@ -1,6 +1,6 @@
 var chart = ""
 
-async function findAlleEKGSessions() {
+async function findEKGSessions() {
     cpr = document.getElementById("CPRBoks").value;
     console.log(cpr)
 
@@ -15,16 +15,17 @@ async function findAlleEKGSessions() {
         });
     let json = await sessionsID.json();
     console.log(json)
+    document.getElementById("tekstfelt").innerHTML += JSON.stringify(json);
     try{
-    for (let i = 0; i<json[0].ekgListe.ekgSession.length; i++) {
-        let aftale = json[1].ekgListe.ekgSession[i]
-        document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+    for (let i = 0; i<json.ekgListe.length; i++) {
+        let session = json.ekgListe[i];
+        document.getElementById("tekstfelt").innerHTML += JSON.stringify(session);
     }}catch (err){
         err.message;
     }
     try {
-        for (let i = 0; i < json[0].ekgSession.length; i++) {
-            let aftale = json[0].ekgSession[i]
+        for (let i = 0; i < json.ekgSession.length; i++) {
+            let aftale = json.ekgSession[i]
             document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
         }
     } catch (err) {
@@ -38,47 +39,6 @@ async function findAlleEKGSessions() {
     } catch (err) {
         err.message;
     }
-}
-
-//udfyldskema(sessions)
-/*
-for (let i = 0; i<json[0].sessions.ekgList.length; i++) {
-    let sessions = json[0].sessions.ekgList[i]
-    document.getElementById("searchFieldArea").innerHTML += JSON.stringify(sessions);
-}*/
-
-//let sessions = await sessionsID.json()
-//console.log(sessions)
-//udfyldskema(sessions)
-
-
-function udfyldskema(sessions) {
-    let dato = "";
-    let sessionid = "";
-    let CPR = "";
-    let container = "";
-    for (let i = 0; i < sessions.ekgList.length; i++) {
-        dato = ("  Dato: " + json.sessions.ekgList[i].start);
-        sessionid = ("  SessionID: " + sessions.ekgList[i].sessionID);
-        CPR = ("  CPR: " + sessions.ekgList[i].cpr);
-
-        container = '<span class="searchField">' + dato + CPR + sessionid + '</span>';
-        console.log("test af container: " + container)
-    }
-
-    for (let i = 0; i < sessions.ekgSession.length; i++) {
-        dato = ("  Dato: " + sessions.ekgSession[i].start);
-        sessionid = ("  SessionID: " + sessions.ekgSession[i].sessionID);
-        CPR = ("  CPR: " + sessions.ekgSession[i].cpr);
-
-        container = '<span class="searchField">' + dato + CPR + sessionid + '</span>';
-        console.log("test af container: " + container)
-    }
-
-
-    console.log("container: " + container)
-    document.getElementById("searchFieldArea").innerHTML = container;
-
 }
 
 

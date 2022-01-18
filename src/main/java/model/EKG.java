@@ -2,15 +2,11 @@ package model;
 
 public class EKG {
 
-
+    private String dato;
     private String CPR;
     private Float EKGdata;
-    private String dato;
-    private String start;
-
-
-
     private int sessionID;
+    private String start;
     public Double Values;
 
 
