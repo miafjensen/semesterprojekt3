@@ -5,6 +5,8 @@
     <title>Importside</title>
     <link rel="stylesheet" type="text/css" href="Importside.css">
     <link rel="stylesheet" type="text/css" href="Startside.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="Import.js"></script>
 </head>
 <body>
@@ -20,35 +22,35 @@
 </div>
 
 
-<input type="text" id="input">
+<input type="text" id="searchinput">
 <button onclick="findAftalerImport()"> Find Aftaler </button>
 <button onclick="findSessionIDImport()"> Find Session ID </button>
 <button onclick="findEkgDataImport()"> Find EKG measurements </button>
 
 <div class="tekstfelt" id="tekstfelt"></div>
 
-<div class="chartWrap">
+<div class="chartWrap1">
     <canvas id="gruppe2"></canvas>
-    <section class="range-slider">
-        <span class="rangeValues"></span>
+    <section class="range-slider2">
+        <span class="rangeValues2"></span>
         <input value="1" min="1" max="10000" type="range"/>
         <input value="1000" min="1" max="10000" type="range"/>
     </section>
 </div>
 
-<div class="chartWrap">
+<div class="chartWrap2">
     <canvas id="gruppe3"></canvas>
-    <section class="range-slider">
-        <span class="rangeValues"></span>
+    <section class="range-slider3">
+        <span class="rangeValues3"></span>
         <input value="1" min="1" max="10000" type="range"/>
         <input value="1000" min="1" max="10000" type="range"/>
     </section>
 </div>
 
-<div class="chartWrap">
+<div class="chartWrap3">
     <canvas id="gruppe4"></canvas>
-    <section class="range-slider">
-        <span class="rangeValues"></span>
+    <section class="range-slider4">
+        <span class="rangeValues4"></span>
         <input value="1" min="1" max="10000" type="range"/>
         <input value="1000" min="1" max="10000" type="range"/>
     </section>
