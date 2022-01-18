@@ -17,26 +17,16 @@ import java.util.ArrayList;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_FORM_URLENCODED})
 public class ImportService {
-
-    /*
-    String input = "";
-    String[] endpoints = new String[4];
-    endpoints[0]= "aftaler?cpr=" + input;
-    endpoints[1] = "aftaler";
-    endpoints[2] = "ekgSessions?cpr=" + input;
-    endpoints[3] = "ekgSessions";
-    endpoints[4] = "ekgSessions/measurements?sessionID=" + input;
-*/
+    private ArrayList<String> urlRoots = new ArrayList<>();
+    private ArrayList<String> authorization = new ArrayList<>();
 
     @GET
     public String hentAftaler(@QueryParam("cpr") String cpr) throws UnirestException{
-        ArrayList<String> urlRoots = new ArrayList<>();
-        //urlRoots.add("https://ekg2.diplomportal.dk/data");
+        urlRoots.add("https://ekg2.diplomportal.dk/data");
         urlRoots.add("http://ekg3.diplomportal.dk/data");
-        //urlRoots.add("http://ekg4.diplomportal.dk/data");
-        //urlRoots.add("http://130.225.170.165:8080/data");
+        urlRoots.add("http://ekg4.diplomportal.dk/data");
+        urlRoots.add("http://130.225.170.165:8080/data");
 
-        ArrayList<String> authorization = new ArrayList<>();
         authorization.add("Bearer hemmeliglogin");
         authorization.add("Bearer hemmeliglogin");
         authorization.add("Bearer hemmeliglogin");
@@ -44,235 +34,83 @@ public class ImportService {
 
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i<urlRoots.size(); i++) {
+            try {
 
-            HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/aftaler?cpr=" + cpr)
-                    .header("accept", "application/xml")
-                    .header("Authorization", authorization.get(i)).asString();
-            String stringHttpResponseBody = stringHttpResponse.getBody();
-            JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
-            jsonArray.put(jsonObject);
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/aftaler?cpr=" + cpr)
+                        .header("accept", "application/xml")
+                        .header("Authorization", authorization.get(i)).asString();
+                String stringHttpResponseBody = stringHttpResponse.getBody();
+                JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+                jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
+            }
 
         }
 
         return jsonArray.toString();
     }
-/*
-    @Path("hentAftaler")
+
+    @Path("sessionID")
     @GET
-    public String importerxml(@QueryParam("grp") int grp, @QueryParam("cpr") String cpr) throws SQLException, UnirestException {
+    public String importSessionID(@QueryParam("cpr") String cpr) throws UnirestException{
+        urlRoots.add("https://ekg2.diplomportal.dk/data");
+        urlRoots.add("http://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk/data");
+        urlRoots.add("http://130.225.170.165:8080/data");
 
-        JSONObject jsonobj;
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("hemmeliglogin");
 
-
-
-        switch (grp) {
-            case 1: {
-               /*
-                try{
-                if (cpr.length() > 5) {
-                    HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg2.diplomportal.dk:8080/data" + endpoints[0])
-                            .header("accept", "application/xml")
-                            .header("Authorization", "Bearer hemmeliglogin").asString();
-                    String body = stringHttpResponse.getBody();
-                    return body;
-                } else {
-                    HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg2.diplomportal.dk:8080/data" + endpoints[1])
-                            .header("accept", "application/xml")
-                            .header("Authorization", "Bearer hemmeliglogin").asString();
-                    String body = stringHttpResponse.getBody();
-                    return body;
-                }
-            }catch (UnirestException throwables){
-                throwables.printStackTrace();
-                System.out.println("fejl i import fra gruppe 2" );
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i<urlRoots.size(); i++) {
+            try {
+            HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/ekgSessions?cpr=" + cpr)
+                    .header("accept", "application/xml")
+                    .header("Authorization", authorization.get(i)).asString();
+            String stringHttpResponseBody = stringHttpResponse.getBody();
+            JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+            jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
             }
-                try{
-                    if (cpr.length() > 5) {
-                        HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg3.diplomportal.dk:8080/data" + endpoints[0])
-                                .header("accept", "application/xml")
-                                .header("Authorization", "Bearer hemmeliglogin").asString();
-                        String body = stringHttpResponse.getBody();
-                        return body;
-                    } else {
-                        HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg3.diplomportal.dk:8080/data" + endpoints[1])
-                                .header("accept", "application/xml")
-                                .header("Authorization", "Bearer hemmeliglogin").asString();
-                        String body = stringHttpResponse.getBody();
-                        return body;
-                    }
-                }catch (UnirestException throwables){
-                    throwables.printStackTrace();
-                    System.out.println("fejl i import fra gruppe 3" );
-                }
-                try{
-                    if (cpr.length() > 5) {
-                        HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg4.diplomportal.dk:8080/data" + endpoints[0])
-                                .header("accept", "application/xml")
-                                .header("Authorization", "Bearer hemmeliglogin").asString();
-                        String body = stringHttpResponse.getBody();
-                        return body;
-                    } else {
-                        HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg4.diplomportal.dk:8080/data" + endpoints[1])
-                                .header("accept", "application/xml")
-                                .header("Authorization", "Bearer hemmeliglogin").asString();
-                        String body = stringHttpResponse.getBody();
-                        return body;
-                    }
-                }catch (UnirestException throwables){
-                    throwables.printStackTrace();
-                    System.out.println("fejl i import fra gruppe 4" );
-                }
+        }
+        return jsonArray.toString();
+    }
 
-                try{
-                    if (cpr.length() > 5) {
-                        HttpResponse<String> stringHttpResponse = Unirest.get("http://130.225.170.165:8080/data" + endpoints[0])
-                                .header("accept", "application/xml")
-                                .header("Authorization", "Bearer hemmeliglogin").asString();
-                        String body = stringHttpResponse.getBody();
-                        return body;
-                    } else {
-                        HttpResponse<String> stringHttpResponse = Unirest.get("http://130.225.170.165:8080/data" + endpoints[1])
-                                .header("accept", "application/xml")
-                                .header("Authorization", "Bearer hemmeliglogin").asString();
-                        String body = stringHttpResponse.getBody();
-                        return body;
-                    }
-                }catch (UnirestException throwables){
-                    throwables.printStackTrace();
-                    System.out.println("fejl i import fra gruppe 5" );
-                }
-            }
-            case 2: {
-                {
-                    try{
-                        if (cpr.length() > 5) {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg2.diplomportal.dk:8080/data" + endpoints[2])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        } else {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg2.diplomportal.dk:8080/data" + endpoints[3])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        }
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 2" );
-                    }
-                    try{
-                        if (cpr.length() > 5) {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg3.diplomportal.dk:8080/data" + endpoints[2])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        } else {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg3.diplomportal.dk:8080/data" + endpoints[3])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        }
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 3" );
-                    }
-                    try{
-                        if (cpr.length() > 5) {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg4.diplomportal.dk:8080/data" + endpoints[2])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        } else {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg4.diplomportal.dk:8080/data" + endpoints[3])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        }
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 4" );
-                    }
-                    try{
-                        if (cpr.length() > 5) {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http://130.225.170.165:8080/data" + endpoints[2])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        } else {
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http://130.225.170.165:8080/data" + endpoints[3])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-                        }
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 5" );
-                    }
-                }
-            }
-            case 3: {
-                {
-                    try{
+    @Path("EKGdata")
+    @GET
+    public String importEkgData(@QueryParam("cpr") String cpr) throws UnirestException{
+        urlRoots.add("https://ekg2.diplomportal.dk/data");
+        urlRoots.add("http://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk/data");
+        urlRoots.add("http://130.225.170.165:8080/data");
 
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg2.diplomportal.dk:8080/data" + endpoints[4])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("hemmeliglogin");
 
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 2" );
-                    }
-                    try{
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i<urlRoots.size(); i++) {
+            try {
 
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg3.diplomportal.dk:8080/data" + endpoints[4])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 3" );
-                    }
-                    try{
-
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http:ekg4.diplomportal.dk:8080/data" + endpoints[4])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 4" );
-                    }
-                    try{
-
-                            HttpResponse<String> stringHttpResponse = Unirest.get("http://130.225.170.165:8080/data" + endpoints[4])
-                                    .header("accept", "application/xml")
-                                    .header("Authorization", "Bearer hemmeliglogin").asString();
-                            String body = stringHttpResponse.getBody();
-                            return body;
-
-                    }catch (UnirestException throwables){
-                        throwables.printStackTrace();
-                        System.out.println("fejl i import fra gruppe 5" );
-                    }
-                }
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/ekgSessions/measurements?sessionID=" + cpr)
+                        .header("accept", "application/xml")
+                        .header("Authorization", authorization.get(i)).asString();
+                String stringHttpResponseBody = stringHttpResponse.getBody();
+                JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+                jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
             }
 
         }
-        return null;
-    }*/
+
+        return jsonArray.toString();
+    }
+
 }
 

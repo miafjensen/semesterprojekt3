@@ -186,7 +186,7 @@ function resetForm() {
     document.getElementById("timefree").value = "";
     document.getElementById("textarea").value = "";
 }
-
+/*
 function noWeekend() {
     let datetime = document.getElementById('datetime');
 
@@ -232,7 +232,7 @@ function noWeekend() {
     timefree.value = (day.getHours() + ":" + day.getMinutes() + " til " + endDay.getHours() + ":" + endDay.getMinutes() + "    d." + day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getUTCDate())
 
 }
-
+*/
 window.onload = function () {
     showTime()
 }

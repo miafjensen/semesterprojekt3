@@ -5,6 +5,7 @@
     <title>Importside</title>
     <link rel="stylesheet" type="text/css" href="Importside.css">
     <link rel="stylesheet" type="text/css" href="Startside.css">
+    <script src="Import.js"></script>
 </head>
 <body>
 <div class="main">
@@ -20,26 +21,27 @@
 
 
 <input type="text" id="cpr">
-<input type="button" onclick="findAftalerImport()" >
+<button onclick="findAftalerImport()"> Find Aftaler </button>
+<button onclick="findSessionIDImport()"> Find Session ID </button>
+<button onclick="findEkgDataImport()"> Find Session ID </button>
 
 
-<div class="dropdown">
+
+<!--<div class="dropdown">
     <button onclick="myFunction()" class="dropdownbtn">Vælg data</button>
     <div id="myDropdown" class="dropdown-content">
         <label value="gruppe 1" onclick="fetchfunction('1');">Aftaler</label>
         <label value="gruppe 2" onclick="fetchfunction('2');">Session ID</label>
         <label value="gruppe 3" onclick="fetchfunction('3');">EKG data</label>
     </div>
-</div>
+</div> -->
 
 
 <!-- <button class="button1" onclick="window.location.replace('StartSide.html');">Go back</button> -->
-
-</body>
-
 <div class="tekstfelt" id="tekstfelt"></div>
 
-<script src="Import.js"></script>
+
+</body>
 </html>
 
 

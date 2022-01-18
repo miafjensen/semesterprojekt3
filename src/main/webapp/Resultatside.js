@@ -12,15 +12,45 @@ async function findAlleEKGSessions() {
                 "Accept": "application/json"
             },
             method: "GET"
-        }).then(resp => resp.json()).then(sessions => {
-        console.log(sessions)
-        udfyldskema(sessions)
-    } );
-
-    //let sessions = await sessionsID.json()
-    console.log(sessions)
-    udfyldskema(sessions)
+        });
+    let json = await sessionsID.json();
+    console.log(json)
+    try{
+    for (let i = 0; i<json[0].ekgListe.ekgSession.length; i++) {
+        let aftale = json[1].ekgListe.ekgSession[i]
+        document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+    }}catch (err){
+        err.message;
+    }
+    try {
+        for (let i = 0; i < json[0].ekgSession.length; i++) {
+            let aftale = json[0].ekgSession[i]
+            document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+        }
+    } catch (err) {
+        err.message;
+    }
+    try {
+        for (let i = 0; i < json[0].ekgListe.length; i++) {
+            let aftale = json[0].ekgListe[i]
+            document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+        }
+    } catch (err) {
+        err.message;
+    }
 }
+
+//udfyldskema(sessions)
+/*
+for (let i = 0; i<json[0].sessions.ekgList.length; i++) {
+    let sessions = json[0].sessions.ekgList[i]
+    document.getElementById("searchFieldArea").innerHTML += JSON.stringify(sessions);
+}*/
+
+//let sessions = await sessionsID.json()
+//console.log(sessions)
+//udfyldskema(sessions)
+
 
 function udfyldskema(sessions) {
     let dato = "";
@@ -28,7 +58,7 @@ function udfyldskema(sessions) {
     let CPR = "";
     let container = "";
     for (let i = 0; i < sessions.ekgList.length; i++) {
-        dato = ("  Dato: " + sessions.ekgList[i].start);
+        dato = ("  Dato: " + json.sessions.ekgList[i].start);
         sessionid = ("  SessionID: " + sessions.ekgList[i].sessionID);
         CPR = ("  CPR: " + sessions.ekgList[i].cpr);
 

@@ -1,10 +1,15 @@
 package api;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import controller.EKGController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.EKGListe;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.XML;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,8 +30,30 @@ public class EKGService {
     @GET
     @Path("searchCPR")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    /*
     public EKGListe getCPRSessions(@QueryParam("cpr") String cpr) throws SQLException{
         return EKGController.getEkgControllerObj().findSessions(cpr);
+    }
+    */
+    public String importSessionID(@QueryParam("cpr") String cpr) throws UnirestException {
+
+        String urlRoots = "http://130.225.170.165:8080/data";
+        String authorization = "hemmeliglogin";
+
+        JSONArray jsonArray = new JSONArray();
+
+            try {
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots + "/ekgSessions?cpr=" + cpr)
+                        .header("accept", "application/xml")
+                        .header("Authorization", authorization).asString();
+                String stringHttpResponseBody = stringHttpResponse.getBody();
+                JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+                jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
+            }
+
+        return jsonArray.toString();
     }
 
 
