@@ -1,5 +1,22 @@
 //if (!localStorage.getItem("token")){window.location.href="LoginSide.html"} //nægter adgang uden login
 
+async function findAftalerImport(){
+    let cpr = document.getElementById("cpr").value;
+    let result = await fetch("data/import?cpr=" + cpr, {
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
+    });
+    let json = await result.json();
+    console.log(json)
+    for (let i = 0; i<json[0].aftaleListe.aftale.length; i++) {
+        let aftale = json[0].aftaleListe.aftale[i]
+        document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+    }
+
+
+}
+
 /*viser dropdown menu*/
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
@@ -21,18 +38,6 @@ window.onclick = function (event) {
 
 /* Fetch kald som skal resultere i at xml bliver hentet*/
 function fetchfunction(grp) {
-    document.getElementById("tekstfelt").innerHTML = "";
-    let cpr = document.getElementById("cpr").value;
-    fetch("/data/import?" + new URLSearchParams({
-        grp: grp,
-        CPR: cpr
-    }), {
-        headers: {
-            "Authorization": localStorage.getItem("token")
-        }
-    }).then(resp => resp.json()).then(data => displaydata(data));
-}
-function fetchValue(i) {
     document.getElementById("tekstfelt").innerHTML = "";
     let cpr = document.getElementById("cpr").value;
     fetch("/data/import?" + new URLSearchParams({
