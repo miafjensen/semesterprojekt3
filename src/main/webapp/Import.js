@@ -32,6 +32,18 @@ function fetchfunction(grp) {
         }
     }).then(resp => resp.json()).then(data => displaydata(data));
 }
+function fetchValue(i) {
+    document.getElementById("tekstfelt").innerHTML = "";
+    let cpr = document.getElementById("cpr").value;
+    fetch("/data/import?" + new URLSearchParams({
+        grp: grp,
+        CPR: cpr
+    }), {
+        headers: {
+            "Authorization": localStorage.getItem("token")
+        }
+    }).then(resp => resp.json()).then(data => displaydata(data));
+}
 
 function displaydata(data) {
     if (1 < data.aftaleListe.aftale.length) {

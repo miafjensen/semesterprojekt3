@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -51,7 +52,7 @@ public class LoginController {
         return false;
     }
 
-    public static String generateHash(String pass, int salt) {
+    public static String generateHash(String pass, int salt) { //metode til at genere hash
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             pass += String.valueOf(salt);
@@ -63,7 +64,7 @@ public class LoginController {
         return pass;
     }
 
-    public static int getSalt() {
+    public static int getSalt() { // metode til at genere salt
         byte[] salt = new byte[20];
         SecureRandom sr = new SecureRandom();
         sr.nextBytes(salt);
@@ -71,12 +72,26 @@ public class LoginController {
         return saltint;
     }
 
-    // metode til generere salt og hashe kodeord
+    // metode at oprette ny bruger hcor der genereres salt, kodeord hashes og indsættes i database
     public static void main(String[] args) {
 
-        //int salt = getSalt();
-        //System.out.println("salt: " + getSalt());
-        System.out.println("hash: "+generateHash("1234", 2));
+        String brugernavn = "brugernavn"; // indtast ønsket brugernavn
+        String password = "password"; // indtast ønsket password
+
+        int salt = getSalt();
+        System.out.println("salt: " + getSalt());
+        String hash = generateHash(password, salt);
+        System.out.println("hash: " + hash);
+
+        try{
+            SQL.getSqlOBJ().createNewUser(brugernavn, hash, salt); // data indsættes i database
+
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            System.out.println("fejl i oprettelse af bruger");
+        }
+
+
     }
 }
 

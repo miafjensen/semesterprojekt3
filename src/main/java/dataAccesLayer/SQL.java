@@ -181,6 +181,21 @@ public class SQL {
         return null;
     }
 
+    public void createNewUser (String brugernavn, String password, int salt) throws SQLException {
+        makeConnectionSQL();
+        PreparedStatement pp = myConn.prepareStatement("INSERT INTO LoginOplysninger (username, password, salt) values (?,?,?);");
+        try {
+            pp.setString(1, brugernavn);
+            pp.setString(2, password);
+            pp.setInt(3, salt);
+
+            pp.execute();
+            removeConnectionSQL();
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            System.out.println("fejl i oprettelse af bruger");
+        }
+    }
 
 
     public  EKGListe getALLSessions() throws SQLException {

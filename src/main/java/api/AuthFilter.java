@@ -16,17 +16,6 @@ public class AuthFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext containerRequestContext) {
         //System.out.println(containerRequestContext.getUriInfo().getPath());
         /* Kontrol af private key på aftaler endpoint */
-        if (!"login".equals(containerRequestContext.getUriInfo().getPath()) && !"ekgSessions/EKGdata".equals(containerRequestContext.getUriInfo().getPath())) {
-            if (containerRequestContext.getHeaderString("Authorization") == null) {
-                throw new WebApplicationException("Ingen Token", 401);
-            }
-            try {
-                User user = JWTHandler.validate(containerRequestContext.getHeaderString("Authorization"));
-            } catch (Exception e) {
-                throw new WebApplicationException("Invalid Token", 401);
-            }
-
-        }
         if ("aftaler".equals(containerRequestContext.getUriInfo().getPath())) {
             System.out.println("tilgår aftaler");
             if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {
@@ -49,7 +38,17 @@ public class AuthFilter implements ContainerRequestFilter {
             return;
         }
         //Hvis det ikke er login siden udføre vi kontrol af token
+        if (!"login".equals(containerRequestContext.getUriInfo().getPath()) && !"ekgSessions/EKGdata".equals(containerRequestContext.getUriInfo().getPath()) && !"import".equals((containerRequestContext.getUriInfo().getPath()))) {
+            if (containerRequestContext.getHeaderString("Authorization") == null) {
+                throw new WebApplicationException("Ingen Token", 401);
+            }
+            try {
+                User user = JWTHandler.validate(containerRequestContext.getHeaderString("Authorization"));
+            } catch (Exception e) {
+                throw new WebApplicationException("Invalid Token", 401);
+            }
 
+        }
 
     }
 }
