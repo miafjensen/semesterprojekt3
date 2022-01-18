@@ -1,4 +1,7 @@
 //if (!localStorage.getItem("token")){window.location.href="LoginSide.html"} //nægter adgang uden login
+let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
+if (!tok){window.location.href="LoginSide.html"}      //hvis token mangler, vil man bliver navigeret til loginsiden
+
 let chart2 = ""
 let chart3 = ""
 let chart4 = ""

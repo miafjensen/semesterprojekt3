@@ -169,7 +169,7 @@ public class SQL {
             pp.executeUpdate();
             ResultSet a = pp.getGeneratedKeys();
             a.next();
-            Integer id = a.getInt("SessionID");
+            Integer id = a.getInt(1);
             System.out.println(id);
 
             removeConnectionSQL();

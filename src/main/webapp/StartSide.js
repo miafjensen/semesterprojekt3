@@ -1,5 +1,5 @@
-//let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
-//if (!tok){window.location.href="LoginSide.html"}      //hvis token mangler, vil man bliver navigeret til loginsiden
+let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
+if (!tok){window.location.href="LoginSide.html"}      //hvis token mangler, vil man bliver navigeret til loginsiden
 
 function hentAftaleFecth(from, to) {
     let fra = from;

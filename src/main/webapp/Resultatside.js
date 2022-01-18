@@ -1,3 +1,7 @@
+let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
+if (!tok) {
+    window.location.href = "LoginSide.html"
+}      //hvis token mangler, vil man bliver navigeret til loginsiden
 var chart = ""
 
 async function findEKGSessions() {
@@ -14,31 +18,50 @@ async function findEKGSessions() {
             method: "GET"
         });
     let json = await sessionsID.json();
+    let session = [];
+    let start = "";
+    let sessionID = "";
+    let CPR = "";
+    let container;
     console.log(json)
-    document.getElementById("tekstfelt").innerHTML += JSON.stringify(json);
-    try{
-    for (let i = 0; i<json.ekgListe.length; i++) {
-        let session = json.ekgListe[i];
-        document.getElementById("tekstfelt").innerHTML += JSON.stringify(session);
-    }}catch (err){
+    //document.getElementById("searchFieldArea").innerHTML += JSON.stringify(json);
+    try {
+        for (let i = 0; i < json.ekgListe.length; i++) {
+            session = json.ekgListe[i];
+            sessionID = json.ekgListe[i].sessionID
+            CPR = json.ekgListe[i].cpr
+            start = json.ekgListe[i].start
+            container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
+            document.getElementById("searchFieldArea").innerHTML += JSON.stringify(container);
+        }
+    } catch (err) {
         err.message;
     }
     try {
         for (let i = 0; i < json.ekgSession.length; i++) {
-            let aftale = json.ekgSession[i]
-            document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+            session = json.ekgSession[i]
+            sessionID = json.ekgSession[i].sessionID
+            CPR = json.ekgSession[i].cpr
+            start = json.ekgSession[i].start
+            container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
+            document.getElementById("searchFieldArea").innerHTML += JSON.stringify(container);
         }
     } catch (err) {
         err.message;
     }
+    /*
     try {
         for (let i = 0; i < json[0].ekgListe.length; i++) {
-            let aftale = json[0].ekgListe[i]
-            document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+            sessionID = json[0].ekgListe[i].sessionID
+            CPR = json[0].ekgListe[i].cpr
+            start = json[0].ekgListe[i].start
+            container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
+            document.getElementById("searchFieldArea").innerHTML += JSON.stringify(container);
         }
     } catch (err) {
         err.message;
-    }
+    } */
+
 }
 
 
@@ -85,7 +108,7 @@ async function HentEkgData() {
         },
     });
 
-    /* nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders*/
+    // nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders
     function getVals() {
         // Get slider values
         var parent = this.parentNode;
