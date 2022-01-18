@@ -22,7 +22,12 @@ public class EKGService {
         return EKGController.getEkgControllerObj().findSessions(cpr);
     }
 
-
+    @GET
+    @Path("searchCPR")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public EKGListe getCPRSessions(@QueryParam("cpr") String cpr) throws SQLException{
+        return EKGController.getEkgControllerObj().findSessions(cpr);
+    }
 
 
     //Henter data fra python til backend
@@ -62,6 +67,7 @@ public class EKGService {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {
         return SQL.getSqlOBJ().getEKGData(sessionID);
+
     }
 
 

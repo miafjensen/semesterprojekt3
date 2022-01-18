@@ -5,9 +5,11 @@ public class EKG {
 
     private String CPR;
     private Float EKGdata;
-    private int sessionId;
     private String dato;
     private String start;
+
+
+
     private int sessionID;
     public Double Values;
 
@@ -36,14 +38,6 @@ public class EKG {
         this.EKGdata = EKGdata;
     }
 
-    public int getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public int getSessionID() {
         return sessionID;
     }
@@ -51,6 +45,7 @@ public class EKG {
     public void setSessionID(int sessionID) {
         this.sessionID = sessionID;
     }
+
     public String getStart() {
         return start;
     }
@@ -58,6 +53,7 @@ public class EKG {
     public void setStart(String start) {
         this.start = start;
     }
+
     public Double getValues() {
         return Values;
     }

@@ -46,24 +46,20 @@
 </div>
 
 <!--   Skrive CPR-nummer       -->
+
 <div class="CPR-nummerChoose">
-    <label for="CPRnummerBoks">CPR:</label>
-    <input type="text" id="CPRnummerBoks" required name="cprNummerVælger">
+    <label for="CPRBoks">CPR:</label>
+    <input type="text" id="CPRBoks">
 
-
-    <button onclick="findEKGSession()" type="button">Find sessions</button>
-
-    <button onclick="findAlleEKGSessions()" type="button">Find alle sessions</button>
-
+    <button onclick="findAlleEKGSessions()" type="button">Find sessions</button>
+    <!--<button onclick="findAlleEKGSessions()" type="button">Find alle sessions</button>-->
 </div>
+<div class="searchField" id="searchFieldArea"></div>
 
-<div class="searchField" id="searchFieldArea">
-
-</div>
 
     <div class="SesIDtilEKG">
         <label for="sessionID">SessionID</label>
-        <input type="text" id="sessionID" required name="sessionID">
+        <input type="text" id="sessionID" required>
 
         <button onclick="HentEkgData()" type="button">Hent EKG-data</button>
 

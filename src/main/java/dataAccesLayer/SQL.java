@@ -34,7 +34,7 @@ public class SQL {
         try {
 
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -114,8 +114,8 @@ public class SQL {
             makeConnectionSQL();
             PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
-            pp.setInt(1, id);  //CPR
-            pp.setDouble(2, datapoint);  //starttime
+            pp.setInt(1, id);  //SessionID
+            pp.setDouble(2, datapoint);  //data fra python
             pp.execute();
 
             removeConnectionSQL();
@@ -134,8 +134,8 @@ public class SQL {
                 PreparedStatement pp = myConn.prepareStatement("INSERT INTO EKGData (SessionID, Value) values(?,?);");
 
                 for (int i = 0; i < datapointBatch.length; i++) {
-                    pp.setInt(1, id);  //CPR
-                    pp.setDouble(2, datapointBatch[i]);  //starttime
+                    pp.setInt(1, id);  //SessionID
+                    pp.setDouble(2, datapointBatch[i]);  //data fra Python
                     pp.addBatch();
                 }
                 System.out.println(System.currentTimeMillis());
@@ -185,27 +185,27 @@ public class SQL {
 
     public  EKGListe getALLSessions() throws SQLException {
         SQL.getSqlOBJ().makeConnectionSQL();
-        EKGListe sessionListe = new EKGListe();
+        EKGListe ekgListe = new EKGListe();
 
         try{
             PreparedStatement pp = myConn.prepareStatement("SELECT * FROM SessionData order by CPR;");
             ResultSet rs = pp.executeQuery();
 
             while (rs.next()){
-                EKG session = new EKG();
-                session.setDato(rs.getString("Start"));
-                session.setCPR(rs.getString("CPR"));
-                session.setSessionId(rs.getInt("SessionID"));
-                System.out.println(session);
+                EKG ekg = new EKG();
+                ekg.setDato(rs.getString("Start"));
+                ekg.setCPR(rs.getString("CPR"));
+                ekg.setSessionID(rs.getInt("SessionID"));
+                System.out.println(ekg);
 
-                sessionListe.addEKGListe(session);
+                ekgListe.addEKGListe(ekg);
             }
         }catch (SQLException throwables){
             throwables.printStackTrace();
         }
         SQL.getSqlOBJ().removeConnectionSQL();
-        System.out.println(sessionListe);
-        return sessionListe;
+        System.out.println(ekgListe);
+        return ekgListe;
 
     }
     public EKGListe getSessions(String cpr) throws SQLException {
@@ -290,12 +290,12 @@ public class SQL {
 
             while (rs.next()) {
                 Aftale aftale = new Aftale();
-                aftale.setCPR(String.valueOf(rs.getInt(2)));
-                aftale.setTimeStart(rs.getString(3));
-                aftale.setTimeEnd(rs.getString(4));
-                aftale.setNotat(rs.getString(5));
-                aftale.setID(rs.getString(1));
-                aftale.setKlinikID(rs.getString(6));
+                aftale.setCPR(String.valueOf(rs.getString("CPR")));
+                aftale.setTimeStart(rs.getString("TimeStart"));
+                aftale.setTimeEnd(rs.getString("TimeEnd"));
+                aftale.setNotat(rs.getString("Notat"));
+                aftale.setID(rs.getString("Id"));
+                aftale.setKlinikID(rs.getString("KlinikId"));
 
                 aftaleListe.addAftaler(aftale);
             }
@@ -316,9 +316,9 @@ public class SQL {
         try {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                svar = svar + rs.getString(1);
-                svar = svar + "|" + rs.getString(2);
-                svar = svar + "|" + rs.getString(3);
+                svar = svar + rs.getString("username");
+                svar = svar + "|" + rs.getString("password");
+                svar = svar + "|" + rs.getString("salt");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -337,12 +337,12 @@ public class SQL {
 
             while (rs.next()) {
                 Aftale aftale = new Aftale();
-                aftale.setCPR(String.valueOf(rs.getInt(1)));
-                aftale.setTimeStart(rs.getString(2));
-                aftale.setTimeEnd(rs.getString(3));
-                aftale.setNotat(rs.getString(4));
-                aftale.setID(rs.getString(5));
-                aftale.setKlinikID(rs.getString(6));
+                aftale.setCPR(String.valueOf(rs.getString("CPR")));
+                aftale.setTimeStart(rs.getString("TimeStart"));
+                aftale.setTimeEnd(rs.getString("TimeEnd"));
+                aftale.setNotat(rs.getString("Notat"));
+                aftale.setID(rs.getString("Id"));
+                aftale.setKlinikID(rs.getString("KlinikId"));
 
                 aftaleListe.addAftaler(aftale);
             }

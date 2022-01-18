@@ -8,13 +8,23 @@
 <body>
 <input type="text" id="cpr">
 <div class="dropdown">
-    <button onclick="myFunction()" class="dropdownbtn">Dropdown</button>
+    <button onclick="myFunction()" class="dropdownbtn">Vælg gruppe</button>
     <div id="myDropdown" class="dropdown-content">
-        <label value="gruppe1">Test 1</label>
-        <label value="gruppe2">Test 2</label>
-        <label value="gruppe3">Test 3</label>
+        <label value="gruppe1">Gruppe 1</label>
+        <label value="gruppe2">Gruppe 2</label>
+        <label value="gruppe3">Gruppe 3</label>
         <label value="gruppe4" onclick="fetchfunction('4');">Gruppe 4</label>
-        <label value="gruppe">Test 5</label>
+        <label value="gruppe">Gruppe 5</label>
+    </div>
+
+</div>
+<div class="dropdown">
+    <button onclick="myFunction()" class="dropdownbtn">Vælg funktion</button>
+
+    <div id="searchType" class="dropdown-content">
+        <label value="0">Find Aftaler</label>
+        <label value="2">Find EKG SessionID</label>
+        <label value="4">Find EKG data </label>
     </div>
 </div>
 <button class="button1" onclick="window.location.replace('StartSide.html');">Go back</button>

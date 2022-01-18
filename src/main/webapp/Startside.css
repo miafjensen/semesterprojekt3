@@ -122,9 +122,9 @@ body {
 
 /*DETTE ER FOR SKEMA*/
 .schema {
-    position: absolute;
+    position: relative;
     left: 10%;
-    width: 45%;
+    width: 570px;
     height: 40rem;
     justify-content: center;
     align-items: center;

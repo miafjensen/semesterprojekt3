@@ -14,11 +14,11 @@ public class EKGListe {
     @XmlElement(name = "ekgSession")
     List<EKG> ekgListe = new ArrayList<>();
 
-    public List<EKG> getEkgList() {
+    public List<EKG> getEkgListe() {
         return ekgListe;
     }
 
-    public void setEkgList(List<EKG> ekgList) {
+    public void setEkgListe(List<EKG> ekgList) {
         this.ekgListe = ekgList;
     }
 
