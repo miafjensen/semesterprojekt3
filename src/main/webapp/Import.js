@@ -116,267 +116,278 @@ async function findEkgDataImport() {
         }
     });
     let json = await result.json();
-    if (json[0].measurements.measurment.length > 0) {
-        try {
-            let labels2 = [];
-            let values2 = json[0].measurements.measurment
-            for (var i = 0; i < values2.length; i++)
-                labels2.push("" + i)
 
-            if (chart2?.destroy) {
-                chart2?.destroy()
-            }
+    try {
+        if (json[0].measurements.measurment.length > 0) {
+            try {
+                let labels2 = [];
+                let values2 = json[0].measurements.measurment
+                for (var i = 0; i < values2.length; i++)
+                    labels2.push("" + i)
 
-            chart2 = new Chart(document.getElementById("gruppe2").getContext("2d"), {
-                // The type of chart we want to create
-                type: "line",
-                // The data for our dataset
-                data: {
-                    labels: labels2,
-                    datasets: [
-                        {
-                            label: "EKG gruppe 2",
-                            backgroundColor: "rgba(50,60,93,0)",
-                            borderColor: "rgba(50,60,93,0.45)",
-                            data: values2,
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                },
-            });
-
-            /* nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders*/
-            function getVals2() {
-                // Get slider values
-                var parent = this.parentNode;
-                var slides = parent.getElementsByTagName("input");
-                var min = parseFloat(slides[0].value);
-                var max = parseFloat(slides[1].value);
-                // Neither slider will clip the other, so make sure we determine which is larger
-                if (min > max) {
-                    var tmp = max;
-                    max = min;
-                    min = tmp;
+                if (chart2?.destroy) {
+                    chart2?.destroy()
                 }
 
-                var label2 = [];
-                var value2 = [];
+                chart2 = new Chart(document.getElementById("gruppe2").getContext("2d"), {
+                    // The type of chart we want to create
+                    type: "line",
+                    // The data for our dataset
+                    data: {
+                        labels: labels2,
+                        datasets: [
+                            {
+                                label: "EKG gruppe 2",
+                                backgroundColor: "rgba(50,60,93,0)",
+                                borderColor: "rgba(50,60,93,0.45)",
+                                data: values2,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    },
+                });
 
-                label2 = JSON.parse(JSON.stringify(labels2)).slice(min, max);
-                value2 = JSON.parse(JSON.stringify(values2)).slice(min, max);
-                chart2.data.labels = label2;
-                chart2.data.datasets[0].data = value2;
-                chart2.update();
+                // nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders
+                function getVals2() {
+                    // Get slider values
+                    var parent = this.parentNode;
+                    var slides = parent.getElementsByTagName("input");
+                    var min = parseFloat(slides[0].value);
+                    var max = parseFloat(slides[1].value);
+                    // Neither slider will clip the other, so make sure we determine which is larger
+                    if (min > max) {
+                        var tmp = max;
+                        max = min;
+                        min = tmp;
+                    }
 
-                var displayElement = parent.getElementsByClassName("rangeValues2")[0];
-                displayElement.innerHTML = "Min : " + min + " Max : " + max;
-            }
+                    var label2 = [];
+                    var value2 = [];
 
-            // Initialize Sliders
-            var sliderSections = document.getElementsByClassName("range-slider2");
-            for (var x = 0; x < sliderSections.length; x++) {
-                var sliders2 = sliderSections[x].getElementsByTagName("input");
-                for (var y = 0; y < sliders2.length; y++) {
-                    if (sliders2[y].type === "range") {
-                        sliders2[y].oninput = getVals2;
-                        sliders2[y].max = JSON.parse(JSON.stringify(labels2)).length;
-                        // Manually trigger event first time to display values
-                        sliders2[y].oninput();
+                    label2 = JSON.parse(JSON.stringify(labels2)).slice(min, max);
+                    value2 = JSON.parse(JSON.stringify(values2)).slice(min, max);
+                    chart2.data.labels = label2;
+                    chart2.data.datasets[0].data = value2;
+                    chart2.update();
+
+                    var displayElement = parent.getElementsByClassName("rangeValues2")[0];
+                    displayElement.innerHTML = "Min : " + min + " Max : " + max;
+                }
+
+                // Initialize Sliders
+                var sliderSections = document.getElementsByClassName("range-slider2");
+                for (var x = 0; x < sliderSections.length; x++) {
+                    var sliders2 = sliderSections[x].getElementsByTagName("input");
+                    for (var y = 0; y < sliders2.length; y++) {
+                        if (sliders2[y].type === "range") {
+                            sliders2[y].oninput = getVals2;
+                            sliders2[y].max = JSON.parse(JSON.stringify(labels2)).length;
+                            // Manually trigger event first time to display values
+                            sliders2[y].oninput();
+                        }
                     }
                 }
+            } catch (err) {
+                err.message
             }
-        } catch (err) {
-            err.message
+        } else {
+            console.log(json[0])
         }
-    }
-    if (json[1].measurements.measurment.length > 0) {
-        try {
-            let labels3 = [];
-            let values3 = json[1].measurements.measurment
-            for (var i = 0; i < values3.length; i++)
-                labels3.push("" + i)
+        if (json[1].measurements.measurment.length > 0) {
+            try {
+                let labels3 = [];
+                let values3 = json[1].measurements.measurment
+                for (var i = 0; i < values3.length; i++)
+                    labels3.push("" + i)
 
-            if (chart3?.destroy) {
-                chart3?.destroy()
-            }
-
-            chart3 = new Chart(document.getElementById("gruppe3").getContext("2d"), {
-                // The type of chart we want to create
-                type: "line",
-                // The data for our dataset
-                data: {
-                    labels: labels3,
-                    datasets: [
-                        {
-                            label: "EKG gruppe 3",
-                            backgroundColor: "rgba(50,60,93,0)",
-                            borderColor: "rgba(50,60,93,0.45)",
-                            data: values3,
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                },
-            });
-
-            // nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders
-            function getVals3() {
-                // Get slider values
-                var parent = this.parentNode;
-                var slides = parent.getElementsByTagName("input");
-                var min = parseFloat(slides[0].value);
-                var max = parseFloat(slides[1].value);
-                // Neither slider will clip the other, so make sure we determine which is larger
-                if (min > max) {
-                    var tmp = max;
-                    max = min;
-                    min = tmp;
+                if (chart3?.destroy) {
+                    chart3?.destroy()
                 }
 
-                var label3 = [];
-                var value3 = [];
+                chart3 = new Chart(document.getElementById("gruppe3").getContext("2d"), {
+                    // The type of chart we want to create
+                    type: "line",
+                    // The data for our dataset
+                    data: {
+                        labels: labels3,
+                        datasets: [
+                            {
+                                label: "EKG gruppe 3",
+                                backgroundColor: "rgba(50,60,93,0)",
+                                borderColor: "rgba(50,60,93,0.45)",
+                                data: values3,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    },
+                });
 
-                label3 = JSON.parse(JSON.stringify(labels3)).slice(min, max);
-                value3 = JSON.parse(JSON.stringify(values3)).slice(min, max);
-                chart3.data.labels = label3;
-                chart3.data.datasets[0].data = value3;
-                chart3.update();
+                // nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders
+                function getVals3() {
+                    // Get slider values
+                    var parent = this.parentNode;
+                    var slides = parent.getElementsByTagName("input");
+                    var min = parseFloat(slides[0].value);
+                    var max = parseFloat(slides[1].value);
+                    // Neither slider will clip the other, so make sure we determine which is larger
+                    if (min > max) {
+                        var tmp = max;
+                        max = min;
+                        min = tmp;
+                    }
 
-                var displayElement = parent.getElementsByClassName("rangeValues3")[0];
-                displayElement.innerHTML = "Min : " + min + " Max : " + max;
-            }
+                    var label3 = [];
+                    var value3 = [];
 
-            // Initialize Sliders
-            var sliderSections = document.getElementsByClassName("range-slider3");
-            for (var x = 0; x < sliderSections.length; x++) {
-                var sliders3 = sliderSections[x].getElementsByTagName("input");
-                for (var y = 0; y < sliders3.length; y++) {
-                    if (sliders3[y].type === "range") {
-                        sliders3[y].oninput = getVals3;
-                        sliders3[y].max = JSON.parse(JSON.stringify(labels3)).length;
-                        // Manually trigger event first time to display values
-                        sliders3[y].oninput();
+                    label3 = JSON.parse(JSON.stringify(labels3)).slice(min, max);
+                    value3 = JSON.parse(JSON.stringify(values3)).slice(min, max);
+                    chart3.data.labels = label3;
+                    chart3.data.datasets[0].data = value3;
+                    chart3.update();
+
+                    var displayElement = parent.getElementsByClassName("rangeValues3")[0];
+                    displayElement.innerHTML = "Min : " + min + " Max : " + max;
+                }
+
+                // Initialize Sliders
+                var sliderSections = document.getElementsByClassName("range-slider3");
+                for (var x = 0; x < sliderSections.length; x++) {
+                    var sliders3 = sliderSections[x].getElementsByTagName("input");
+                    for (var y = 0; y < sliders3.length; y++) {
+                        if (sliders3[y].type === "range") {
+                            sliders3[y].oninput = getVals3;
+                            sliders3[y].max = JSON.parse(JSON.stringify(labels3)).length;
+                            // Manually trigger event first time to display values
+                            sliders3[y].oninput();
+                        }
                     }
                 }
-            }
 
-        } catch (err) {
-            err.message
+            } catch (err) {
+                err.message
+            }
+        } else {
+            console.log(json[1])
         }
-    }
-    if (json[2].ekgData.measurement.length > 0) {
-        try {
+        if (json[2].ekgData.measurement.length > 0) {
+            try {
 
-            let labels4 = [];
-            let values4 = json[2].ekgData.measurement
-            for (var i = 0; i < values4.length; i++)
-                labels4.push("" + i)
+                let labels4 = [];
+                let values4 = json[2].ekgData.measurement
+                for (var i = 0; i < values4.length; i++)
+                    labels4.push("" + i)
 
-            if (chart4?.destroy) {
-                chart4?.destroy()
-            }
-
-            chart4 = new Chart(document.getElementById("gruppe4").getContext("2d"), {
-                // The type of chart we want to create
-                type: "line",
-                // The data for our dataset
-                data: {
-                    labels: labels4,
-                    datasets: [
-                        {
-                            label: "EKG gruppe 4",
-                            backgroundColor: "rgba(50,60,93,0)",
-                            borderColor: "rgba(50,60,93,0.45)",
-                            data: values4,
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                },
-            });
-
-            // nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders
-            function getVals4() {
-                // Get slider values
-                var parent = this.parentNode;
-                var slides4 = parent.getElementsByTagName("input");
-                var min = parseFloat(slides4[0].value);
-                var max = parseFloat(slides4[1].value);
-                // Neither slider will clip the other, so make sure we determine which is larger
-                if (min > max) {
-                    var tmp = max;
-                    max = min;
-                    min = tmp;
+                if (chart4?.destroy) {
+                    chart4?.destroy()
                 }
 
-                var label4 = [];
-                var value4 = [];
+                chart4 = new Chart(document.getElementById("gruppe4").getContext("2d"), {
+                    // The type of chart we want to create
+                    type: "line",
+                    // The data for our dataset
+                    data: {
+                        labels: labels4,
+                        datasets: [
+                            {
+                                label: "EKG gruppe 4",
+                                backgroundColor: "rgba(50,60,93,0)",
+                                borderColor: "rgba(50,60,93,0.45)",
+                                data: values4,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    },
+                });
 
-                label4 = JSON.parse(JSON.stringify(labels4)).slice(min, max);
-                value4 = JSON.parse(JSON.stringify(values4)).slice(min, max);
-                chart4.data.labels = label4;
-                chart4.data.datasets[0].data = value4;
-                chart4.update();
+                // nedenstående er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/  til range sliders
+                function getVals4() {
+                    // Get slider values
+                    var parent = this.parentNode;
+                    var slides4 = parent.getElementsByTagName("input");
+                    var min = parseFloat(slides4[0].value);
+                    var max = parseFloat(slides4[1].value);
+                    // Neither slider will clip the other, so make sure we determine which is larger
+                    if (min > max) {
+                        var tmp = max;
+                        max = min;
+                        min = tmp;
+                    }
 
-                var displayElement4 = parent.getElementsByClassName("rangeValues4")[0];
-                displayElement4.innerHTML = "Min : " + min + " Max : " + max;
-            }
+                    var label4 = [];
+                    var value4 = [];
 
-            // Initialize Sliders
-            var sliderSections4 = document.getElementsByClassName("range-slider4");
-            for (var x = 0; x < sliderSections4.length; x++) {
-                var sliders4 = sliderSections4[x].getElementsByTagName("input");
-                for (var y = 0; y < sliders4.length; y++) {
-                    if (sliders4[y].type === "range") {
-                        sliders4[y].oninput = getVals4;
-                        sliders4[y].max = JSON.parse(JSON.stringify(labels4)).length;
-                        // Manually trigger event first time to display values
-                        sliders4[y].oninput();
+                    label4 = JSON.parse(JSON.stringify(labels4)).slice(min, max);
+                    value4 = JSON.parse(JSON.stringify(values4)).slice(min, max);
+                    chart4.data.labels = label4;
+                    chart4.data.datasets[0].data = value4;
+                    chart4.update();
+
+                    var displayElement4 = parent.getElementsByClassName("rangeValues4")[0];
+                    displayElement4.innerHTML = "Min : " + min + " Max : " + max;
+                }
+
+                // Initialize Sliders
+                var sliderSections4 = document.getElementsByClassName("range-slider4");
+                for (var x = 0; x < sliderSections4.length; x++) {
+                    var sliders4 = sliderSections4[x].getElementsByTagName("input");
+                    for (var y = 0; y < sliders4.length; y++) {
+                        if (sliders4[y].type === "range") {
+                            sliders4[y].oninput = getVals4;
+                            sliders4[y].max = JSON.parse(JSON.stringify(labels4)).length;
+                            // Manually trigger event first time to display values
+                            sliders4[y].oninput();
+                        }
                     }
                 }
+            } catch (err) {
+                err.message
             }
-        } catch (err) {
-            err.message
-        }
-        console.log(json)
+            console.log(json)
 
+
+        } else {
+            console.log(json[2])
+        }
+    } catch (err) {
+        err.message
         /*
-         try {document.getElementById("tekstfelt").innerHTML += "<br/>Measurements fra gruppe 2:<br/>";
-             //values = json[0].measurements
-             for (let i = 0; i < json[0].measurements.measurment.length; i++) {
-                 let aftale1 = json[0].measurements.measurment[i]
+     try {document.getElementById("tekstfelt").innerHTML += "<br/>Measurements fra gruppe 2:<br/>";
+         //values = json[0].measurements
+         for (let i = 0; i < json[0].measurements.measurment.length; i++) {
+             let aftale1 = json[0].measurements.measurment[i]
 
-                 console.log(values)
-                 document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale1);
-             }document.getElementById("tekstfelt").innerHTML += "<br/>";
-         } catch (err) {
-             err.message
-         }
-         try {document.getElementById("tekstfelt").innerHTML += "<br/>Measurements fra gruppe 3:<br/>";
-             for (let i = 0; i < json[1].measurements.measurment.length; i++) {
-                 let aftale2 = json[1].measurements.measurment[i]
-                 document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale2);
-             }document.getElementById("tekstfelt").innerHTML += "<br/>";
-         } catch (err) {
-             err.message
-         }
-         try {document.getElementById("tekstfelt").innerHTML += "<br/>Measurements fra gruppe 4:<br/>";
-             for (let i = 0; i < json[2].ekgData.measurement.length; i++) {
-                 let aftale = json[2].ekgData.measurement[i]
-                 document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
-             }document.getElementById("tekstfelt").innerHTML += "<br/>";
-         } catch (err) {
-             err.message
-         }*/
-
-
+             console.log(values)
+             document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale1);
+         }document.getElementById("tekstfelt").innerHTML += "<br/>";
+     } catch (err) {
+         err.message
+     }
+     try {document.getElementById("tekstfelt").innerHTML += "<br/>Measurements fra gruppe 3:<br/>";
+         for (let i = 0; i < json[1].measurements.measurment.length; i++) {
+             let aftale2 = json[1].measurements.measurment[i]
+             document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale2);
+         }document.getElementById("tekstfelt").innerHTML += "<br/>";
+     } catch (err) {
+         err.message
+     }
+     try {document.getElementById("tekstfelt").innerHTML += "<br/>Measurements fra gruppe 4:<br/>";
+         for (let i = 0; i < json[2].ekgData.measurement.length; i++) {
+             let aftale = json[2].ekgData.measurement[i]
+             document.getElementById("tekstfelt").innerHTML += JSON.stringify(aftale);
+         }document.getElementById("tekstfelt").innerHTML += "<br/>";
+     } catch (err) {
+         err.message
+     }
+        */
     }
 }
 
