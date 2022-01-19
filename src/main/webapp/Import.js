@@ -1,14 +1,16 @@
 /**
 
- * @author ${USER}
+ * @author ${Mia}
 
- * @Date ${DATE}
+ * @Date ${jan 2022}
 
  */
 let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
 if (!tok) {
     window.location.href = "LoginSide.html"
 }      //hvis token mangler, vil man bliver navigeret til loginsiden
+
+//variabler til json udskrift
 let timestart = "";
 let timeend = "";
 let klinikId = "";
@@ -17,6 +19,7 @@ let container = "";
 let note = "";
 let id = "";
 
+//variabler til de forskellige charts
 let chart2 = ""
 let chart3 = ""
 let chart4 = ""
@@ -31,7 +34,7 @@ async function findAftalerImport() {
     });
     let json = await result.json();
     console.log(json)
-
+    //Aftaler fra gruppe 2 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Aftaler fra gruppe 2 på cpr:" + cpr + "<br/>";
         for (let i = 0; i < json[0].aftaleListe.aftale.length; i++) {
@@ -52,6 +55,7 @@ async function findAftalerImport() {
     } catch (err) {
         err.message
     }
+    //Aftaler fra gruppe 3 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Aftaler fra gruppe 3 på cpr:" + cpr + "<br/>";
         for (let i = 0; i < json[1].aftaleListe.aftale.length; i++) {
@@ -72,6 +76,7 @@ async function findAftalerImport() {
     } catch (err) {
         err.message
     }
+    //Aftaler fra gruppe 4 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Aftaler fra gruppe 4 på cpr:" + cpr + "<br/>";
         for (let i = 0; i < json[2].aftaleListe.aftale.length; i++) {
@@ -92,11 +97,22 @@ async function findAftalerImport() {
     } catch (err) {
         err.message
     }
+    //Aftaler fra gruppe 5 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Aftaler fra gruppe 5 på cpr:" + cpr + "<br/>";
         for (let i = 0; i < json[3].aftaleListe.aftale.length; i++) {
-            let session = json[3].aftaleListe.aftale[i]
-            document.getElementById("tekstfelt").innerHTML += JSON.stringify(session);
+            timestart = " Starttid: " + json[0].aftaleListe.aftale[i].timeStart + "\t";
+            timeend = " Sluttid" + json[0].aftaleListe.aftale[i].timeEnd + "\t";
+            klinikId = " KlinikId: " + json[0].aftaleListe.aftale[i].klinikID + "\t";
+            CPR = " CPR: " + json[0].aftaleListe.aftale[i].CPR + "\t";
+            note = " Notat: " + json[0].aftaleListe.aftale[i].notat + "\t";
+            id = " ID: " + json[0].aftaleListe.aftale[i].ID + "\t"
+
+            container = timestart + timeend + id + "<br/>" + note + "<br/>";
+            //console.log(container)
+            document.getElementById("tekstfelt").innerHTML += container;
+            //let session = json[3].aftaleListe.aftale[i]
+            //document.getElementById("tekstfelt").innerHTML += JSON.stringify(session);
         }
         document.getElementById("tekstfelt").innerHTML += "<br/>";
     } catch (err) {
@@ -116,6 +132,7 @@ async function findSessionIDImport() {
     });
     let json = await result.json();
     console.log(json)
+    //Sessions fra gruppe 2 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 2 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[0].sessions.ekgSession.length; i++) {
@@ -133,6 +150,7 @@ async function findSessionIDImport() {
     } catch (err) {
         err.message
     }
+    //Sessions fra gruppe 3 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 3 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[1].sessions.ekgSession.length; i++) {
@@ -150,13 +168,14 @@ async function findSessionIDImport() {
     } catch (err) {
         err.message
     }
+    //Sessions fra gruppe 4 på cpr -- virker ikke altid
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 4 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[2].ekgSessionList.ekgSession.length; i++) {
             timestart = " Starttid: " + json[2].ekgSessionList.ekgSession[i].timestart;
             id = " sessionID: " + json[2].ekgSessionList.ekgSession[i].session;
 
-            container = /*timestart + "<br/>" +*/ id + "<br/>" + "<br/>";
+            container = timestart + id  + "<br/>";
             //console.log(container)
             document.getElementById("tekstfelt").innerHTML += container;
             //let data = json[2].ekgSessionList.ekgSession[i]
@@ -167,6 +186,7 @@ async function findSessionIDImport() {
         err.message
     }
     /*
+    //Sessions fra gruppe 5 på cpr
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 5 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[3].ekgListe.ekgSession.length; i++) {
@@ -186,7 +206,7 @@ async function findSessionIDImport() {
      */
 
 }
-
+//EKG chart til gruppe 2 data
 async function findEkgGrp2Import() {
     let sessionID = document.getElementById("searchinput").value;
     let result = await fetch("data/import/ekgSessions/measurements?sessionID=" + sessionID, {
@@ -200,18 +220,15 @@ async function findEkgGrp2Import() {
         if (json[0].measurements.measurment.length > 0) {
             try {
                 let labels2 = [];
-                let values2 = json[0].measurements.measurment
-                for (var i = 0; i < values2.length; i++)
+                let values2 = json[0].measurements.measurment //definere hvilket array der bruges som data
+                for (var i = 0; i < values2.length; i++) //giver labels et nummer som navn svarende til længden af datasættet
                     labels2.push("" + i)
 
-                if (chart2?.destroy) {
+                if (chart2?.destroy) { //tømmer chart hvis den allerede er fyldt inden der oprettes et nyt
                     chart2?.destroy()
                 }
-
                 chart2 = new Chart(document.getElementById("gruppe2").getContext("2d"), {
-                    // The type of chart we want to create
                     type: "line",
-                    // The data for our dataset
                     data: {
                         labels: labels2,
                         datasets: [
@@ -293,7 +310,7 @@ async function findEkgGrp2Import() {
         */
     }
 }
-
+//EKG chart til gruppe 3 data, stort set magen til ovenstående
 async function findEkgGrp3Import() {
     let sessionID = document.getElementById("searchinput").value;
     let result = await fetch("data/import/ekgSessions/measurements?sessionID=" + sessionID, {
@@ -397,7 +414,7 @@ async function findEkgGrp3Import() {
              */
     }
 }
-
+//EKG chart til gruppe 3 data, stort set magen til ovenstående
 async function findEkgGrp4Import() {
     let sessionID = document.getElementById("searchinput").value;
     let result = await fetch("data/import/ekgSessions/measurements?sessionID=" + sessionID, {
@@ -505,7 +522,6 @@ async function findEkgGrp4Import() {
     }
 }
 
-// charts med  range sliders er baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/
 function logud() {
     sessionStorage.setItem("username", "");
     window.location.replace("LoginSide.html");

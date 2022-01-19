@@ -1,3 +1,7 @@
+<!--
+@Author ${tidligere kode fra IT3 grp4 med modifikationer af Magnus og Mia}
+@Date ${jan 2022}
+-->
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -33,29 +37,25 @@
     <button onclick="refresh()" class="button1"> <span class="material-icons-outlined">
 refresh
 </span></button>
-    <!--Pop-up journal-->
+    <!--Pop-up opret ny aftale-->
     <button onclick="openForm()" class="button1">Tilføj ny aftale</button>
 </div>
 
-<!--test kommentar -->
+
 <!--DETTE ER FOR AUTOGENNERET TIDER -->
 <div class="autotidersted" id="autosted">
     <div class="autotiderbar" id="autotiderbar">Tider på dagen:</div>
     <div class="autotider" id="autotider"></div>
 </div>
 
-<!-- journal -->
+<!-- opret ny aftale -->
 <div class="form-popup" id="myForm">
-    <div class="form-container" >
+    <div class="form-container">
         <h1>Aftale</h1>
         <span>
             <label for="cpr">CPR</label></span>
         <span>
             <input type="text" id="cpr" name="cpr" placeholder="CPR" required class="box"></span>
-        <!--<span>
-            <label for="navn">Fornavn og efternavn</label></span>
-        <span>
-            <input type="text" id="navn" name="name" placeholder="Fornavn og efternavn" required class="box"></span>-->
         <label for="datetime">V&#230lg tid</label>
 
         <input type="datetime-local" id="datetime" onfocusout="noWeekend()" required>

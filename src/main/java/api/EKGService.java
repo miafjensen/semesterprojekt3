@@ -1,9 +1,6 @@
 /**
-
  * @author ${Magnus & Mia}
-
  * @Date ${jan 2022}
-
  */
 package api;
 
@@ -17,6 +14,7 @@ import model.EKGListe;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
@@ -31,9 +29,44 @@ public class EKGService {
     // bruges til export og i resultat.js
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public EKGListe getSessions(@QueryParam("cpr") String cpr) throws SQLException{
+    public EKGListe getSessions(@QueryParam("cpr") String cpr) throws SQLException {
         return EKGController.getEkgControllerObj().findSessions(cpr);
     }
+
+
+    //Henter data fra python til backend
+    @Path("EKGdata")
+    @POST
+    public String postEKGData(String EKGdata) throws SQLException {
+        return EKGController.getEkgControllerObj().postEKGdata(EKGdata);
+    }
+
+    //bruges til export
+    @Path("measurements")
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public EKGListe exportEKG(@QueryParam("sessionID") String sessionID) {
+        return EKGController.getEkgControllerObj().exportEKG(sessionID);
+    }
+
+    //bruges i resultat.js til chart
+    @Path("EKGmeasurements")
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {
+        return SQL.getSqlOBJ().getEKGData(sessionID);
+
+    }
+
+    /*
+    @Path("Sessions")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public EKGListe visAlleSession() throws SQLException {
+        return SQL.getSqlOBJ().getALLSessions();
+    }
+
+    */
 
     /*
     @GET
@@ -59,40 +92,5 @@ public class EKGService {
 
         return jsonArray.toString();
     }
-*/
-
-    //Henter data fra python til backend
-    @Path("EKGdata")
-    @POST
-    public String postEKGData(String EKGdata) throws SQLException {
-        return EKGController.getEkgControllerObj().postEKGdata(EKGdata);
-    }
-
-    //bruges til export
-    @Path("measurements")
-    @GET
-    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public EKGListe exportEKG(@QueryParam("sessionID") String sessionID) {
-        return EKGController.getEkgControllerObj().exportEKG(sessionID);
-    }
-
-    //bruges i resultat.js til chart
-    @Path("EKGmeasurements")
-    @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Double> visEKGOversigt(@QueryParam("sessionID") int sessionID) throws SQLException {
-        return SQL.getSqlOBJ().getEKGData(sessionID);
-
-    }
-
- /*
-    @Path("Sessions")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public EKGListe visAlleSession() throws SQLException {
-        return SQL.getSqlOBJ().getALLSessions();
-    }
-
-  */
-
+    */
 }

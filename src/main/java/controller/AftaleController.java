@@ -1,8 +1,8 @@
 /**
 
- * @author ${Magnus & Mia}
+ * @author ${IT3 grp 4, tilpasset af Magnus & Mia}
 
- * @Date ${DATE}
+ * @Date ${jan 2022}
 
  */
 package controller;

@@ -1,8 +1,8 @@
 /**
 
- * @author ${USER}
+ * @author ${Magnus & Mia}
 
- * @Date ${DATE}
+ * @Date ${jan 2022}
 
  */
 package model;

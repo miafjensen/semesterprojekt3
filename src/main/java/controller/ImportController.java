@@ -24,11 +24,11 @@ public class ImportController {
         return IMPORT_CONTROLLER_OBJ;
     }
 
-    private ArrayList<String> urlRoots = new ArrayList<>();
-    private ArrayList<String> authorization = new ArrayList<>();
-
 
     public String hentAftaler(String cpr) throws UnirestException {
+        ArrayList<String> urlRoots = new ArrayList<>();
+        ArrayList<String> authorization = new ArrayList<>();
+
         urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
         urlRoots.add("https://ekg3.diplomportal.dk/data");
         urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
@@ -60,6 +60,9 @@ public class ImportController {
 
 
     public String importSessionID(String cpr) throws UnirestException{
+        ArrayList<String> urlRoots = new ArrayList<>();
+        ArrayList<String> authorization = new ArrayList<>();
+
         urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
         urlRoots.add("https://ekg3.diplomportal.dk/data");
         urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
@@ -88,6 +91,9 @@ public class ImportController {
 
 
     public String importEkgData(String sessionID) throws UnirestException{
+        ArrayList<String> urlRoots = new ArrayList<>();
+        ArrayList<String> authorization = new ArrayList<>();
+
         urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
         urlRoots.add("https://ekg3.diplomportal.dk/data");
         urlRoots.add("http://ekg4.diplomportal.dk:8080/data");

@@ -1,3 +1,11 @@
+/**
+
+ * @author ${tidligere kode fra IT3 grp4 med justeringer af Caroline og Mia}
+
+ * @Date ${jan 2022}
+
+ */
+
 * {
     box-sizing: border-box;
 }
@@ -78,7 +86,8 @@ body {
     display: inline-block;
     color: white;
 }
-.seperate{
+
+.seperate {
     display: block;
     position: relative;
     width: 90%;
@@ -91,6 +100,7 @@ body {
     margin-top: 30px;
     margin-bottom: 60px;
 }
+
 /*AUTO TIDER*/
 .autotidersted {
     position: absolute;

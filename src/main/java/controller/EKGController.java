@@ -23,14 +23,6 @@ public class EKGController {
         return EKG_CONTROLLER_OBJ;
     }
 
-    // boolsk værdi til kontrol af cpr'er
-    public boolean cprCheck(String name) {
-        try {
-            return name.length() == 10;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     //indsætter ekg-data i db fra python
     public String insertEKGdataIDatabase(Integer id, double[] datapoint) throws SQLException {
@@ -63,10 +55,7 @@ public class EKGController {
 
     //henter sessions fra db i resultatside.js
     public EKGListe findSessions(String cpr) throws SQLException {
-        if (cpr == null) {
-            return SQL.getSqlOBJ().getALLSessions();
-        }
-        if (cprCheck(cpr)) {
+        if (cpr!= null) {
             return SQL.getSqlOBJ().getSessions(cpr);
         }
         return new EKGListe();

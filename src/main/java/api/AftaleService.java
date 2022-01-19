@@ -1,6 +1,6 @@
 /**
 
- * @author ${Magnus & Mia}
+ * @author ${IT3 grp4 og tilpasset af Magnus & Mia}
 
  * @Date ${jan 2022}
 

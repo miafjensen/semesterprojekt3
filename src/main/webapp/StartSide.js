@@ -1,3 +1,12 @@
+/**
+
+ * @author ${tidligere kode fra IT3 grp4 med modifikationer af Magnus og Mia}
+
+ * @Date ${jan 2022}
+
+ */
+
+
 let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
 if (!tok){window.location.href="LoginSide.html"}      //hvis token mangler, vil man bliver navigeret til loginsiden
 
@@ -26,6 +35,8 @@ function udfyldskema(data) {
     let container = "";
     let note = "";
     try {
+        // to næsten ens metoder til at printe fordi json array skifter mellem to forskellige navne uden kendt årsag
+        //dette er til array aftale
         for (let i = 0; i < data.aftale.length; i++) {
             timestart = data.aftale[i].timeStart.substring(11, 16) + "\t-\t";
             timeend = data.aftale[i].timeEnd.substring(11, 16)
@@ -45,7 +56,8 @@ function udfyldskema(data) {
     }catch (err){
         err.message
     }
-    try {
+    //dette er til array aftaler
+    try{
         for (let i = 0; i < data.aftaler.length; i++) {
             timestart = data.aftaler[i].timeStart.substring(11, 16) + "\t-\t";
             timeend = data.aftaler[i].timeEnd.substring(11, 16)
@@ -203,13 +215,12 @@ function submitForm() {
 
 function resetForm() {
     document.getElementById("cpr").value = "";
-    //document.getElementById("navn").value = "";
     document.getElementById("timeStart").value = "";
     document.getElementById("timeEnd").value = "";
     document.getElementById("timefree").value = "";
     document.getElementById("textarea").value = "";
 }
-/*
+
 function noWeekend() {
     let datetime = document.getElementById('datetime');
 
@@ -255,13 +266,10 @@ function noWeekend() {
     timefree.value = (day.getHours() + ":" + day.getMinutes() + " til " + endDay.getHours() + ":" + endDay.getMinutes() + "    d." + day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getUTCDate())
 
 }
-*/
+
 window.onload = function () {
     showTime()
 }
-
-//var timeApi = 'http://worldtimeapi.org/api/timezone/Europe/Copenhagen';
-
 
 function showTime() {
     var date = new Date();
@@ -273,10 +281,9 @@ function showTime() {
         minut = "0" + minut;
     }
 
-    document.getElementById("MyClockDisplay").innerText = `${dato} kl. ${time}:${minut}` //kl. " + time + ":" + minut; // +":"+sekunder;
-    //document.getElementById("MyClockDisplay").textContent = "kl. " + time + ":" + minut; //+":"+sekunder;
+    document.getElementById("MyClockDisplay").innerText = `${dato} kl. ${time}:${minut}`
 
-    setTimeout(showTime, 10000,); //Tiden kan ændres, hvis vi er begrænset på processernes kapacitet
+    setTimeout(showTime, 100000,); //Tiden kan ændres, hvis vi er begrænset på processernes kapacitet
 }
 
 function refresh() {

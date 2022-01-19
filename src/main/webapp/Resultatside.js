@@ -1,9 +1,17 @@
+/**
+
+ * @author ${ Mia }
+
+ * @Date ${jan 2022}
+
+ */
+
 let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
 if (!tok) {
     window.location.href = "LoginSide.html"
 }      //hvis token mangler, vil man bliver navigeret til loginsiden
 var chart = ""
-
+//bruger samme metode som til import fra andre grupper i import.js, derfor ikke authorization via token
 async function findEKGSessions() {
     cpr = document.getElementById("CPRBoks").value;
     console.log(cpr)
@@ -18,16 +26,16 @@ async function findEKGSessions() {
             method: "GET"
         });
     let json = await sessionsID.json();
-    //let session = [];
     let Start;
     let sessionID;
     let container;
     console.log(json)
-    //document.getElementById("searchFieldArea").innerHTML += JSON.stringify(json);
+
+    // to næsten ens metoder til at printe fordi json array skifter mellem to forskellige navne uden kendt årsag
+    //dette er til array ekgListe
     try {
         document.getElementById("searchFieldArea").innerHTML += "Session tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json.ekgListe.length; i++) {
-            //session = json.ekgListe[i];
             sessionID = (" SessionID: " + json.ekgListe[i].sessionID)
             Start = (" Dato: " + json.ekgListe[i].start)
             container = Start + sessionID + "<br/>";
@@ -36,30 +44,17 @@ async function findEKGSessions() {
     } catch (err) {
         err.message;
     }
+    //dette er til array ekgSession
     try {
         for (let i = 0; i < json.ekgSession.length; i++) {
-            session = json.ekgSession[i]
-            sessionID = json.ekgSession[i].sessionID
-            CPR = json.ekgSession[i].cpr
-            start = json.ekgSession[i].start
-            container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
+            sessionID = (" SessionID: " + json.ekgSession[i].sessionID)
+            Start = (" Dato: " + json.ekgSession[i].start)
+            container = Start + sessionID + "<br/>";
             document.getElementById("searchFieldArea").innerHTML += container;
         }
     } catch (err) {
         err.message;
     }
-    /*
-    try {
-        for (let i = 0; i < json[0].ekgListe.length; i++) {
-            sessionID = json[0].ekgListe[i].sessionID
-            CPR = json[0].ekgListe[i].cpr
-            start = json[0].ekgListe[i].start
-            container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
-            document.getElementById("searchFieldArea").innerHTML += JSON.stringify(container);
-        }
-    } catch (err) {
-        err.message;
-    } */
 
 }
 
@@ -77,19 +72,17 @@ async function HentEkgData() {
         });
 
     let labels = []
-    let values = await res.json()
+    let values = await res.json() //data fra array til chart
     //console.log(json)
-    for (var i = 0; i < values.length; i++)
+    for (var i = 0; i < values.length; i++) //data navngives med label, som et nummer der svarer til pladsen i array
         labels.push("" + i)
-
+//tømmer chart hvis det allerede indeholder data fra tidligere sessionID
     if (chart?.destroy) {
         chart?.destroy()
     }
 
     chart = new Chart(document.getElementById("myChart").getContext("2d"), {
-        // The type of chart we want to create
         type: "line",
-        // The data for our dataset
         data: {
             labels: labels,
             datasets: [
@@ -102,6 +95,7 @@ async function HentEkgData() {
             ],
         },
         options: {
+            //disse sørger for at canvas tilpasser sig div
             responsive: true,
             maintainAspectRatio: false
         },
@@ -114,7 +108,7 @@ async function HentEkgData() {
         var slides = parent.getElementsByTagName("input");
         var min = parseFloat(slides[0].value);
         var max = parseFloat(slides[1].value);
-        // Neither slider will clip the other, so make sure we determine which is larger
+
         if (min > max) {
             var tmp = max;
             max = min;
@@ -142,7 +136,6 @@ async function HentEkgData() {
             if (sliders[y].type === "range") {
                 sliders[y].oninput = getVals;
                 sliders[y].max = JSON.parse(JSON.stringify(labels)).length;
-                // Manually trigger event first time to display values
                 sliders[y].oninput();
             }
         }

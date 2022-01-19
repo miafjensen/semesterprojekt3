@@ -1,6 +1,6 @@
 /**
 
- * @author ${Mia}
+ * @author ${IT3 grp4 & Mia}
 
  * @Date ${DATE}
 
@@ -10,14 +10,12 @@ package controller;
 import dataAccesLayer.SQL;
 import model.LoginData;
 import model.User;
-
 import javax.ws.rs.WebApplicationException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -78,12 +76,19 @@ public class LoginController {
         int saltint = salt[4];
         return saltint;
     }
+    /**
+
+     * @author ${Mia}
+
+     * @Date ${DATE}
+
+     */
 
     // metode at oprette ny bruger hvor der genereres salt, kodeord hashes og indsættes i database
     public static void main(String[] args) {
 
         String brugernavn = "brugernavn"; // indtast ønsket brugernavn
-        String password = "password"; // indtast ønsket password
+        String password = "kodeord"; // indtast ønsket password
 
         int salt = getSalt();
         System.out.println("salt: " + getSalt());

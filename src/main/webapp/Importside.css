@@ -1,10 +1,11 @@
 /**
 
- * @author ${USER}
+ * @author ${Mia}
 
- * @Date ${DATE}
+ * @Date ${jan 2022}
 
  */
+
 /* baggrund */
 body {
     font-family: "Times New Roman", serif;
@@ -61,15 +62,15 @@ body {
      margin-left: 10%;
  }
 
+/* nedenstående baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/ */
 
+/* tilhører chart til gruppe 2 data */
 section.range-slider2 {
     position: relative;
-    /*float: left;*/
     text-align: center;
     width: 100%;
 }
 
-/* nedenstående baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/ */
 section.range-slider2 input[type="range"] {
     pointer-events: none;
     position: absolute;
@@ -153,6 +154,8 @@ section.range-slider2 input[type="range"]:last-of-type::-moz-range-track {
 section.range-slider2 input[type="range"]::-moz-focus-outer {
     border: 0;
 }
+
+/* tilhører chart til gruppe 3 data */
 section.range-slider3 {
     position: relative;
     /*float: left;*/
@@ -160,7 +163,6 @@ section.range-slider3 {
     width: 100%;
 }
 
-/* nedenstående baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/ */
 section.range-slider3 input[type="range"] {
     pointer-events: none;
     position: absolute;
@@ -244,6 +246,8 @@ section.range-slider3 input[type="range"]:last-of-type::-moz-range-track {
 section.range-slider3 input[type="range"]::-moz-focus-outer {
     border: 0;
 }
+
+/* tilhører chart til gruppe 4 data */
 section.range-slider4 {
     position: relative;
     /*float: left;*/
@@ -251,7 +255,6 @@ section.range-slider4 {
     width: 100%;
 }
 
-/* nedenstående baseret på eksempel fra https://jsfiddle.net/gh7qb4ud/1/ */
 section.range-slider4 input[type="range"] {
     pointer-events: none;
     position: absolute;

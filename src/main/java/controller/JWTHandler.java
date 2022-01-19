@@ -1,6 +1,6 @@
 /**
 
- * @author ${USER}
+ * @author ${Tidligere kode fra grp4}
 
  * @Date ${DATE}
 
