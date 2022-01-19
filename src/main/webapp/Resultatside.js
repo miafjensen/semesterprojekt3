@@ -43,7 +43,7 @@ async function findEKGSessions() {
             CPR = json.ekgSession[i].cpr
             start = json.ekgSession[i].start
             container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
-            document.getElementById("searchFieldArea").innerHTML += JSON.stringify(container);
+            document.getElementById("searchFieldArea").innerHTML += container;
         }
     } catch (err) {
         err.message;

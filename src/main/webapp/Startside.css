@@ -82,14 +82,14 @@ body {
     display: block;
     position: relative;
     width: 90%;
-    height: 15px;
+    height: 2px;
     left: 5%;
     padding: 8px 4px 4px;
-    background: grey;
+    background: rgba(128, 128, 128, 0);
     border-radius: 10px;
     color: black;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 60px;
 }
 /*AUTO TIDER*/
 .autotidersted {
