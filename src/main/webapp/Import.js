@@ -101,25 +101,23 @@ async function findAftalerImport() {
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Aftaler fra gruppe 5 på cpr:" + cpr + "<br/>";
         for (let i = 0; i < json[3].aftaleListe.aftale.length; i++) {
-            timestart = " Starttid: " + json[0].aftaleListe.aftale[i].timeStart + "\t";
-            timeend = " Sluttid" + json[0].aftaleListe.aftale[i].timeEnd + "\t";
-            klinikId = " KlinikId: " + json[0].aftaleListe.aftale[i].klinikID + "\t";
-            CPR = " CPR: " + json[0].aftaleListe.aftale[i].CPR + "\t";
-            note = " Notat: " + json[0].aftaleListe.aftale[i].notat + "\t";
-            id = " ID: " + json[0].aftaleListe.aftale[i].ID + "\t"
+            timestart = " Starttid: " + json[3].aftaleListe.aftale[i].timeStart;
+            timeend = " Sluttid" + json[3].aftaleListe.aftale[i].timeEnd;
+            klinikId = " KlinikId: " + json[3].aftaleListe.aftale[i].klinikID;
+            CPR = " CPR: " + json[3].aftaleListe.aftale[i].CPR;
+            note = " Notat: " + json[3].aftaleListe.aftale[i].notat;
+            id = " ID: " + json[3].aftaleListe.aftale[i].ID;
 
-            container = timestart + timeend + id + "<br/>" + note + "<br/>";
+            container = timestart + "<br/>" + timeend + "<br/>" + id + klinikId + "<br/>" + note + "<br/>";
             //console.log(container)
             document.getElementById("tekstfelt").innerHTML += container;
-            //let session = json[3].aftaleListe.aftale[i]
+            //let session = json[1].aftaleListe.aftale[i]
             //document.getElementById("tekstfelt").innerHTML += JSON.stringify(session);
         }
         document.getElementById("tekstfelt").innerHTML += "<br/>";
     } catch (err) {
         err.message
     }
-
-
 }
 
 
