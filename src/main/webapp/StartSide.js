@@ -25,23 +25,46 @@ function udfyldskema(data) {
     let cpr = "";
     let container = "";
     let note = "";
+    try {
+        for (let i = 0; i < data.aftale.length; i++) {
+            timestart = data.aftale[i].timeStart.substring(11, 16) + "\t-\t";
+            timeend = data.aftale[i].timeEnd.substring(11, 16)
+            klinikId = ("klinikId: " + data.aftale[i].klinikID);
+            cpr = "CPR: " + data.aftale[i].cpr + "\t";
+            note = "Notat: " + data.aftale[i].notat;
 
-    for (let i = 0; i < data.aftale.length; i++) {
-        timestart = data.aftale[i].timeStart.substring(11, 16) + "\t-\t";
-        timeend = data.aftale[i].timeEnd.substring(11, 16)
-        klinikId = ("klinikId: " + data.aftale[i].klinikID);
-        cpr = "CPR: " + data.aftale[i].cpr + "\t";
-        note = "Notat: " + data.aftale[i].notat;
 
+            let Tider = '<span class="autotider">' + timestart + timeend + '</span>';
+            let CPR = '<span class="autoname">' + cpr + klinikId + '</span>';
+            let Notat = '<span class="autonote">' + note + '</span><hr>';
 
-        let Tider = '<span class="autotider">' + timestart + timeend + '</span>';
-        let CPR = '<span class="autoname">' + cpr + klinikId + '</span>';
-        let Notat = '<span class="autonote">' + note + '</span><hr>';
-
-        container = Tider + CPR + Notat;
-        console.log(container)
+            container = Tider + CPR + Notat;
+            console.log(container)
+        }
+        document.getElementById("autotider").innerHTML = container;
+    }catch (err){
+        err.message
     }
-    document.getElementById("autotider").innerHTML = container;
+    try {
+        for (let i = 0; i < data.aftaler.length; i++) {
+            timestart = data.aftaler[i].timeStart.substring(11, 16) + "\t-\t";
+            timeend = data.aftaler[i].timeEnd.substring(11, 16)
+            klinikId = ("klinikId: " + data.aftaler[i].klinikID);
+            cpr = "CPR: " + data.aftaler[i].cpr + "\t";
+            note = "Notat: " + data.aftaler[i].notat;
+
+
+            let Tider = '<span class="autotider">' + timestart + timeend + '</span>';
+            let CPR = '<span class="autoname">' + cpr + klinikId + '</span>';
+            let Notat = '<span class="autonote">' + note + '</span><hr>';
+
+            container = Tider + CPR + Notat;
+            console.log(container)
+        }
+        document.getElementById("autotider").innerHTML = container;
+    }catch (err){
+        err.message
+    }
 }
 
 //Kalendar

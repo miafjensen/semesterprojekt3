@@ -3,14 +3,13 @@ let tok = localStorage.getItem("token");        //kræver token for at kunne til
 if (!tok) {
     window.location.href = "LoginSide.html"
 }      //hvis token mangler, vil man bliver navigeret til loginsiden
-let timestart;
-let timeend;
-let klinikId;
-let CPR;
-let container;
-let note;
-let id;
-let markers;
+let timestart = "";
+let timeend = "";
+let klinikId = "";
+let CPR = "";
+let container = "";
+let note = "";
+let id = "";
 
 let chart2 = ""
 let chart3 = ""
@@ -115,8 +114,8 @@ async function findSessionIDImport() {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 2 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[0].sessions.ekgSession.length; i++) {
             timestart = " Starttid: " + json[0].sessions.ekgSession[i].timeStart;
-            note = " Kommentar: " + json[0].sessions.ekgSession.comment;
-            id = " sessionID: " + json[0].sessions.ekgSession.sessionID;
+            note = " Kommentar: " + json[0].sessions.ekgSession[i].comment;
+            id = " sessionID: " + json[0].sessions.ekgSession[i].sessionID;
 
             container = timestart + "<br/>" + id + "<br/>" + note + "<br/>";
             //console.log(container)
@@ -132,8 +131,8 @@ async function findSessionIDImport() {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 3 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[1].sessions.ekgSession.length; i++) {
             timestart = " Starttid: " + json[1].sessions.ekgSession[i].timeStart;
-            note = " Kommentar: " + json[1].sessions.ekgSession.comment;
-            id = " sessionID: " + json[1].sessions.ekgSession.sessionID;
+            note = " Kommentar: " + json[1].sessions.ekgSession[i].comment;
+            id = " sessionID: " + json[1].sessions.ekgSession[i].sessionID;
 
             container = timestart + "<br/>" + id + "<br/>" + note + "<br/>";
             //console.log(container)
@@ -148,7 +147,7 @@ async function findSessionIDImport() {
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Sessions fra gruppe 4 tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json[2].ekgSessionList.ekgSession.length; i++) {
-            //timestart = " Starttid: " + json[2].ekgSessionList.ekgSession[i].timestart;
+            timestart = " Starttid: " + json[2].ekgSessionList.ekgSession[i].timestart;
             id = " sessionID: " + json[2].ekgSessionList.ekgSession[i].session;
 
             container = /*timestart + "<br/>" +*/ id + "<br/>" + "<br/>";
