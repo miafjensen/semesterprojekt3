@@ -19,17 +19,24 @@
         <button class="button1" onclick="window.location.replace('StartSide.html')">Startside</button>
         <button class="button1" onclick="logud()">Log ud</button>
     </div>
+    <h1>Import </h1>
 </div>
 
-
-<input type="text" id="searchinput">
-<button onclick="findAftalerImport()"> Find Aftaler </button>
-<button onclick="findSessionIDImport()"> Find Session ID </button>
-<button onclick="findEkgDataImport()"> Find EKG measurements </button>
+<div class="import">
+    <div class="child">
+    <label for="searchinput">Indtast cpr eller sessionID:</label><br/>
+    <input type="text" id="searchinput"><br/>
+    <button onclick="findAftalerImport()"> Find Aftaler</button>
+    <button onclick="findSessionIDImport()"> Find Session ID</button>
+    <button onclick="findEkgGrp2Import()"> Find EKG measurements fra gruppe 2</button>
+    <button onclick="findEkgGrp3Import()"> Find EKG measurements fra gruppe 3</button>
+    <button onclick="findEkgGrp4Import()"> Find EKG measurements fra gruppe 4</button>
+</div></div>
 
 <div class="tekstfelt" id="tekstfelt"></div>
-
+<div class="seperate"></div>
 <div class="chartWrap1">
+    <h3>EKG fra gruppe 2</h3>
     <canvas id="gruppe2"></canvas>
     <section class="range-slider2">
         <span class="rangeValues2"></span>
@@ -37,8 +44,9 @@
         <input value="1000" min="1" max="10000" type="range"/>
     </section>
 </div>
-
+<div class="seperate"></div>
 <div class="chartWrap2">
+    <h3>EKG fra gruppe 3</h3>
     <canvas id="gruppe3"></canvas>
     <section class="range-slider3">
         <span class="rangeValues3"></span>
@@ -46,8 +54,9 @@
         <input value="1000" min="1" max="10000" type="range"/>
     </section>
 </div>
-
+<div class="seperate"></div>
 <div class="chartWrap3">
+    <h3>EKG fra gruppe 4</h3>
     <canvas id="gruppe4"></canvas>
     <section class="range-slider4">
         <span class="rangeValues4"></span>
@@ -55,7 +64,7 @@
         <input value="1000" min="1" max="10000" type="range"/>
     </section>
 </div>
-
+<div class="seperate"></div>
 
 </body>
 </html>

@@ -18,21 +18,20 @@ async function findEKGSessions() {
             method: "GET"
         });
     let json = await sessionsID.json();
-    let session = [];
-    let start = "";
-    let sessionID = "";
-    let CPR = "";
+    //let session = [];
+    let Start;
+    let sessionID;
     let container;
     console.log(json)
     //document.getElementById("searchFieldArea").innerHTML += JSON.stringify(json);
     try {
+        document.getElementById("searchFieldArea").innerHTML += "Session tilhørende cpr: " + cpr + "<br/>";
         for (let i = 0; i < json.ekgListe.length; i++) {
-            session = json.ekgListe[i];
-            sessionID = json.ekgListe[i].sessionID
-            CPR = json.ekgListe[i].cpr
-            start = json.ekgListe[i].start
-            container = "sessionID: " + sessionID + "  dato: " + start + "  cpr: " + CPR + "<br/>";
-            document.getElementById("searchFieldArea").innerHTML += JSON.stringify(container);
+            //session = json.ekgListe[i];
+            sessionID = (" SessionID: " + json.ekgListe[i].sessionID)
+            Start = (" Dato: " + json.ekgListe[i].start)
+            container = Start + sessionID + "<br/>";
+            document.getElementById("searchFieldArea").innerHTML += container;
         }
     } catch (err) {
         err.message;
@@ -66,7 +65,7 @@ async function findEKGSessions() {
 
 
 async function HentEkgData() {
-    sesID = document.getElementById("sessionID").value; //henter sessionID fra indtastningsfeltet
+    sesID = document.getElementById("sesID").value; //henter sessionID fra indtastningsfeltet
     console.log(sesID)
 
     const res = await fetch("data/ekgSessions/EKGmeasurements?sessionID=" + sesID,

@@ -84,7 +84,19 @@ body {
     display: inline-block;
     color: white;
 }
-
+.seperate{
+    display: block;
+    position: relative;
+    width: 90%;
+    height: 15px;
+    left: 5%;
+    padding: 8px 4px 4px;
+    background: grey;
+    border-radius: 10px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 /*AUTO TIDER*/
 .autotidersted {
     position: absolute;
