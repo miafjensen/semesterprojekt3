@@ -1,37 +1,117 @@
+/**
+
+ * @author ${Mia (& Magnus)}
+
+ * @Date ${jan 2022}
+
+ */
 package controller;
-/*
-import model.Aftale;
-import model.AftaleListe;
-import dataAccesLayer.apiDAO;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.XML;
+
+import java.util.ArrayList;
 
 public class ImportController {
 
-    private ImportController() {
+    private ImportController(){}
+    static private final ImportController IMPORT_CONTROLLER_OBJ = new ImportController();
+    static public ImportController getImportControllerObj(){
+        return IMPORT_CONTROLLER_OBJ;
     }
 
-    static private final ImportController importControllerOBJ = new ImportController();
+    private ArrayList<String> urlRoots = new ArrayList<>();
+    private ArrayList<String> authorization = new ArrayList<>();
 
-    static public ImportController getimportControllerOBJ() {
-        return importControllerOBJ;
-    }
 
-    public AftaleListe getImportAftaleListe(String http, String liste, String listearray) {
+    public String hentAftaler(String cpr) throws UnirestException {
+        urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
+        urlRoots.add("https://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
+        urlRoots.add("http://130.225.170.165:8080/data");
 
-        AftaleListe aftaleListe = new AftaleListe();
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("hemmeliglogin");
 
-        JSONArray p = apiDAO.getApiDAOOBJ().getJsonOBJ(http).getJSONObject(liste).getJSONArray(listearray);
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i<urlRoots.size(); i++) {
+            try {
 
-        for (int i = 0; i < p.length(); i++) {
-            //aftaleListe.addAftaler(new Gson().fromJson(String.valueOf(p.getJSONObject(i)), Aftale.class));
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/aftaler?cpr=" + cpr)
+                        .header("accept", "application/xml")
+                        .header("Authorization", authorization.get(i)).asString();
+                String stringHttpResponseBody = stringHttpResponse.getBody();
+                JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+                jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
+            }
+
         }
 
-        return aftaleListe;
+        return jsonArray.toString();
     }
 
-    public JSONObject getImportJSON(String http) {
-        return apiDAO.getApiDAOOBJ().getJsonOBJ(http);
+
+    public String importSessionID(String cpr) throws UnirestException{
+        urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
+        urlRoots.add("https://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
+        urlRoots.add("http://130.225.170.165:8080/data");
+
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("hemmeliglogin");
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i<urlRoots.size(); i++) {
+            try {
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/ekgSessions?cpr=" + cpr)
+                        .header("accept", "application/xml")
+                        .header("Authorization", authorization.get(i)).asString();
+                String stringHttpResponseBody = stringHttpResponse.getBody();
+                JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+                jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
+            }
+        }
+        return jsonArray.toString();
+    }
+
+
+    public String importEkgData(String sessionID) throws UnirestException{
+        urlRoots.add("http://ekg2.diplomportal.dk:8080/data");
+        urlRoots.add("https://ekg3.diplomportal.dk/data");
+        urlRoots.add("http://ekg4.diplomportal.dk:8080/data");
+        //urlRoots.add("http://130.225.170.165:8080/data");
+
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        authorization.add("Bearer hemmeliglogin");
+        //authorization.add("hemmeliglogin");
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i<urlRoots.size(); i++) {
+            try {
+
+                HttpResponse<String> stringHttpResponse = Unirest.get(urlRoots.get(i) + "/ekgSessions/measurements?sessionID=" + sessionID)
+                        .header("accept", "application/xml")
+                        .header("Authorization", authorization.get(i)).asString();
+                String stringHttpResponseBody = stringHttpResponse.getBody();
+                JSONObject jsonObject = XML.toJSONObject(stringHttpResponseBody);
+                jsonArray.put(jsonObject);
+            }catch (UnirestException unirestException){
+                unirestException.getCause();
+            }
+        }
+        return jsonArray.toString();
     }
 }
- */

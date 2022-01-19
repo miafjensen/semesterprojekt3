@@ -36,7 +36,7 @@ public class JWTHandler {
     }
 
     private static Key getKey() {
-//Generate a secret key, if there is none specified in the environment - only use fixed key in development for debugging
+    //Generate a secret key, if there is none specified in the environment - only use fixed key in development for debugging
         if (key == null) {
             if (System.getenv("JWT_SECRET_KEY") != null && System.getenv("JWT_SECRET_KEY") != "") {
                 String string = System.getenv("JWT_SECRET_KEY");

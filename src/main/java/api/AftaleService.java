@@ -1,8 +1,8 @@
 /**
 
- * @author ${USER}
+ * @author ${Magnus & Mia}
 
- * @Date ${DATE}
+ * @Date ${jan 2022}
 
  */
 package api;
@@ -11,7 +11,6 @@ import controller.AftaleController;
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.AftaleListe;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ import java.sql.SQLException;
 @Consumes({MediaType.APPLICATION_XML})
 public class AftaleService {
 
-    @GET
+    @GET //bruges til export
     public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException{
         return AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
     }

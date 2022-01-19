@@ -1,19 +1,16 @@
 /**
 
- * @author ${USER}
+ * @author ${Magnus & Mia}
 
  * @Date ${DATE}
 
  */
 package controller;
 
-
 import dataAccesLayer.SQL;
 import exceptions.OurException;
 import model.Aftale;
 import model.AftaleListe;
-
-
 import java.sql.SQLException;
 
 public class AftaleController {
@@ -29,13 +26,13 @@ public class AftaleController {
     // boolsk værdi til kontrol af cpr'er
     public boolean cprCheck(String name) {
         try {
-            double test = Double.parseDouble(name);
             return name.length() == 10;
         } catch (Exception e) {
             return false;
         }
     }
     //laver liste over Aftaler ved cpr søgning
+    //bruges til export
     public AftaleListe cprSearch(String cpr) throws SQLException{
         if (cpr == null) {
             return SQL.getSqlOBJ().getAftalerListe();
@@ -46,8 +43,8 @@ public class AftaleController {
         return new AftaleListe();
     }
 
-
-    public String createAftale(String cpr, String timestart, String timeend, String note) throws SQLException, OurException {
+    //Opretter aftaler fra startsidens pop-up form
+    public String createAftale(String cpr, String timestart, String timeend, String note) throws OurException {
         Aftale aftale = new Aftale();
         if (cprCheck(cpr)) {
             if (note.length() < 255) {

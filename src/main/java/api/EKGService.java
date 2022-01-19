@@ -1,8 +1,8 @@
 /**
 
- * @author ${USER}
+ * @author ${Magnus & Mia}
 
- * @Date ${DATE}
+ * @Date ${jan 2022}
 
  */
 package api;
@@ -27,21 +27,19 @@ import java.util.List;
 @Consumes({MediaType.APPLICATION_XML})
 
 public class EKGService {
+
+    // bruges til export og i resultat.js
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public EKGListe getSessions(@QueryParam("cpr") String cpr) throws SQLException{
         return EKGController.getEkgControllerObj().findSessions(cpr);
     }
 
+    /*
     @GET
     @Path("searchCPR")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    /*
-    public EKGListe getCPRSessions(@QueryParam("cpr") String cpr) throws SQLException{
-        return EKGController.getEkgControllerObj().findSessions(cpr);
-    }
-    */
-    public String importSessionID(@QueryParam("cpr") String cpr) throws UnirestException {
+        public String importSessionID(@QueryParam("cpr") String cpr) {
 
         String urlRoots = "http://130.225.170.165:8080/data";
         String authorization = "hemmeliglogin";
@@ -61,40 +59,24 @@ public class EKGService {
 
         return jsonArray.toString();
     }
-
+*/
 
     //Henter data fra python til backend
     @Path("EKGdata")
     @POST
-    public String postEKGData(String EKGdata) throws OurException, SQLException {
-        //System.out.println(EKGdata);
-        String[] a = EKGdata.split(" : ");
-        String cpr = a[0];
-        System.out.println(cpr); //Sådan gør man yeees
-        String ekgString = a[1];
-        String[] ekgData = ekgString.split(",");
-        int id = SQL.getSqlOBJ().createEKGSession(cpr);
-        double datapointBatch[] = new double[ekgData.length];
-
-        for (int i = 0; i < ekgData.length; i++) {
-            double datapoint = Double.parseDouble(ekgData[i]);
-            datapointBatch[i] = datapoint;
-        }
-        //System.out.println(ekgData[i]);
-        EKGController.getEkgControllerObj().insertEKGdataIDatabase(id, datapointBatch);
-
-        System.out.println("DONE");
-        return EKGdata;
-
+    public String postEKGData(String EKGdata) throws SQLException {
+        return EKGController.getEkgControllerObj().postEKGdata(EKGdata);
     }
 
+    //bruges til export
     @Path("measurements")
     @GET
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public EKGListe exportEKG(@QueryParam("sessionID") String sessionID) throws SQLException{
+    public EKGListe exportEKG(@QueryParam("sessionID") String sessionID) {
         return EKGController.getEkgControllerObj().exportEKG(sessionID);
     }
 
+    //bruges i resultat.js til chart
     @Path("EKGmeasurements")
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -103,12 +85,14 @@ public class EKGService {
 
     }
 
-
+ /*
     @Path("Sessions")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public EKGListe visAlleSession() throws SQLException {
         return SQL.getSqlOBJ().getALLSessions();
     }
+
+  */
 
 }

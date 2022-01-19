@@ -1,6 +1,6 @@
 /**
 
- * @author ${USER}
+ * @author ${Mia}
 
  * @Date ${DATE}
 
@@ -79,7 +79,7 @@ public class LoginController {
         return saltint;
     }
 
-    // metode at oprette ny bruger hcor der genereres salt, kodeord hashes og indsættes i database
+    // metode at oprette ny bruger hvor der genereres salt, kodeord hashes og indsættes i database
     public static void main(String[] args) {
 
         String brugernavn = "brugernavn"; // indtast ønsket brugernavn
