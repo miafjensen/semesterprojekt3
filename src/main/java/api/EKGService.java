@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package api;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -10,7 +17,6 @@ import model.EKGListe;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;

@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;

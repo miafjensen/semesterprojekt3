@@ -1,13 +1,17 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package controller;
 
 import dataAccesLayer.SQL;
-import exceptions.OurException;
-import model.EKG;
 import model.EKGListe;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
+
 
 public class EKGController {
 
@@ -48,7 +52,7 @@ public class EKGController {
         return new EKGListe();
     }
 
-    public EKGListe exportEKG(String sessionID) throws SQLException{
+    public EKGListe exportEKG(String sessionID){
 
         try {
             int sesID = Integer.parseInt(sessionID);

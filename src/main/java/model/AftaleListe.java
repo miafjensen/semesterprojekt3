@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package model;
 
 import javax.xml.bind.annotation.*;

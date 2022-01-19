@@ -1,16 +1,20 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package api;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import controller.ImportController;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Path("import")

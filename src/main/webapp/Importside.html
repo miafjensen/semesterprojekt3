@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="da">
 <head>
     <meta charset="UTF-8">
@@ -21,18 +22,23 @@
     </div>
     <h1>Import </h1>
 </div>
-
+<!-- område til import funktionerne -->
 <div class="import">
     <div class="child">
     <label for="searchinput">Indtast cpr eller sessionID:</label><br/>
     <input type="text" id="searchinput"><br/>
+        <!-- til at hente Aftaler fra alle de andre grupper -->
     <button onclick="findAftalerImport()"> Find Aftaler</button>
+        <!-- til at hente sessions fra alle de andre grupper -->
     <button onclick="findSessionIDImport()"> Find Session ID</button>
+        <!-- til at hente EKG data fra gruppe 2 -->
     <button onclick="findEkgGrp2Import()"> Find EKG measurements fra gruppe 2</button>
+        <!-- til at hente EKG data fra gruppe 3 -->
     <button onclick="findEkgGrp3Import()"> Find EKG measurements fra gruppe 3</button>
+        <!-- til at hente EKG data fra gruppe 4 -->
     <button onclick="findEkgGrp4Import()"> Find EKG measurements fra gruppe 4</button>
 </div></div>
-
+<!-- område til EKGdiagram fra gruppe 2 -->
 <div class="tekstfelt" id="tekstfelt"></div>
 <div class="seperate"></div>
 <div class="chartWrap1">
@@ -45,6 +51,7 @@
     </section>
 </div>
 <div class="seperate"></div>
+<!-- område til EKGdiagram fra gruppe 3 -->
 <div class="chartWrap2">
     <h3>EKG fra gruppe 3</h3>
     <canvas id="gruppe3"></canvas>
@@ -55,6 +62,7 @@
     </section>
 </div>
 <div class="seperate"></div>
+<!-- område til EKGdiagram fra gruppe 4 -->
 <div class="chartWrap3">
     <h3>EKG fra gruppe 4</h3>
     <canvas id="gruppe4"></canvas>

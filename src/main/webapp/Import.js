@@ -1,4 +1,10 @@
-//if (!localStorage.getItem("token")){window.location.href="LoginSide.html"} //nægter adgang uden login
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 let tok = localStorage.getItem("token");        //kræver token for at kunne tilgå siden
 if (!tok) {
     window.location.href = "LoginSide.html"
@@ -15,6 +21,7 @@ let chart2 = ""
 let chart3 = ""
 let chart4 = ""
 
+// importere Aftaler via importservice
 async function findAftalerImport() {
     let cpr = document.getElementById("searchinput").value;
     let result = await fetch("data/import?cpr=" + cpr, {
@@ -85,7 +92,6 @@ async function findAftalerImport() {
     } catch (err) {
         err.message
     }
-    /*
     try {
         document.getElementById("tekstfelt").innerHTML += "<br/>Aftaler fra gruppe 5 på cpr:" + cpr + "<br/>";
         for (let i = 0; i < json[3].aftaleListe.aftale.length; i++) {
@@ -96,7 +102,7 @@ async function findAftalerImport() {
     } catch (err) {
         err.message
     }
-     */
+
 
 }
 

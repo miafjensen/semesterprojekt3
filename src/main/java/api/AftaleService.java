@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package api;
 
 import controller.AftaleController;
@@ -16,8 +23,7 @@ public class AftaleService {
 
     @GET
     public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException{
-        return SQL.getSqlOBJ().cprSearch(cpr);
-                //AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
+        return AftaleController.getAftaleControllerOBJ().cprSearch(cpr);
     }
 
     @Path("aftalerSQL")

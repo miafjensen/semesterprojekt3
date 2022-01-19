@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package exceptions;
 
 public class OurException extends Exception {

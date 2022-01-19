@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package controller;
 
 
@@ -19,7 +26,7 @@ public class AftaleController {
         return AFTALE_CONTROLLER_OBJ;
     }
 
-    // bolsk værdi til kontrol af cpr'er
+    // boolsk værdi til kontrol af cpr'er
     public boolean cprCheck(String name) {
         try {
             double test = Double.parseDouble(name);
@@ -28,7 +35,7 @@ public class AftaleController {
             return false;
         }
     }
-
+    //laver liste over Aftaler ved cpr søgning
     public AftaleListe cprSearch(String cpr) throws SQLException{
         if (cpr == null) {
             return SQL.getSqlOBJ().getAftalerListe();

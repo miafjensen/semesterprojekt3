@@ -1,3 +1,10 @@
+/**
+
+ * @author ${USER}
+
+ * @Date ${DATE}
+
+ */
 package exceptions;
 
 import javax.ws.rs.core.Response;
