@@ -18,7 +18,7 @@ import java.sql.SQLException;
 @Path("aftaler")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_XML})
-public class AftaleService {
+public class  AftaleService {
 
     @GET //bruges til export
     public AftaleListe getPatient(@QueryParam("cpr") String cpr) throws SQLException{

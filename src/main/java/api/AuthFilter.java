@@ -21,8 +21,7 @@ public class AuthFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext containerRequestContext) {
         //System.out.println(containerRequestContext.getUriInfo().getPath());
-        // Kontrol af private key på aftaler endpoint
-        // Filter til tilladelse af import af aftaler udefra
+        // Filter til tilladelse af export af aftaler udefra
         if ("aftaler".equals(containerRequestContext.getUriInfo().getPath())) {
             System.out.println("tilgår aftaler");
             if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {
@@ -30,7 +29,7 @@ public class AuthFilter implements ContainerRequestFilter {
             }
             return;
         }
-        // Filter til tilladelse af import af sessionID udefra
+        // Filter til tilladelse af export af sessionID udefra
         if ("ekgSessions".equals(containerRequestContext.getUriInfo().getPath())) {
             System.out.println("tilgår aftaler");
             if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {
@@ -38,7 +37,7 @@ public class AuthFilter implements ContainerRequestFilter {
             }
             return;
         }
-        // Filter til tilladelse af import af ekg-data udefra
+        // Filter til tilladelse af export af ekg-data udefra
         if ("ekgSessions/measurements".equals(containerRequestContext.getUriInfo().getPath())) {
             System.out.println("tilgår aftaler");
             if (!containerRequestContext.getHeaderString("Authorization").equals("hemmeliglogin")) {

@@ -273,7 +273,7 @@ window.onload = function () {
 
 function showTime() {
     var date = new Date();
-    let dato = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    let dato = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
     var time = date.getHours();
     var minut = date.getMinutes();
 
@@ -283,7 +283,7 @@ function showTime() {
 
     document.getElementById("MyClockDisplay").innerText = `${dato} kl. ${time}:${minut}`
 
-    setTimeout(showTime, 100000,); //Tiden kan ændres, hvis vi er begrænset på processernes kapacitet
+    setTimeout(showTime, 10000,); //Tiden kan ændres, hvis vi er begrænset på processernes kapacitet
 }
 
 function refresh() {

@@ -25,7 +25,7 @@ let chart3 = ""
 let chart4 = ""
 
 // importere Aftaler via importservice
-async function findAftalerImport() {
+async function findAftalerImport(){
     let cpr = document.getElementById("searchinput").value;
     let result = await fetch("data/import?cpr=" + cpr, {
         headers: {
